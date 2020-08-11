@@ -7,15 +7,19 @@
 
     <ImageView
         android:scaleType="center"
-        android:background="@drawable/splash_bg"
+        android:background="@drawable/splash_background"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:contentDescription="@string/todo" />
 
     <ImageView
         app:layout_constraintVertical_chainStyle="packed"
-        android:id="@+id/splash_logo"
         android:src="@drawable/amplogo1"
-        android:layout_width="match_parent"
+        android:id="@+id/splash_logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="200dp"
+        android:scaleType="centerCrop"
         android:layout_height="100dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/splash_intro"
@@ -23,9 +27,9 @@
 
     <TextView
         android:gravity="center"
-        android:textSize="15sp"
+        android:textSize="20sp"
         android:textColor="@android:color/white"
-        android:text="Think about the best ! Welcome"
+        android:text="@string/splash_intro"
         android:id="@+id/splash_intro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
