@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">AMP</string>
+    <string name="todo">TODO</string>
+    <string name="sign_up">عضویت</string>
+    <string name="create_a_new_account">ایجاد حساب کاربری جدید</string>
+    <string name="full_name">نام و نام خانوادگی</string>
+    <string name="email">ایمیل</string>
+    <string name="pass1">کلمه عبور</string>
+    <string name="pass2">تکرار کلمه عبور</string>
+    <string name="join">عضویت</string>
+    <string name="have_account">حساب کاربری دارید؟</string>
+    <string name="login">وارد شوید!</string>
+    <string name="splash_intro">به بهترین ها فکر کنید! خوش آمدید</string>
+    <string name="enterText">ورود</string>
+    <string name="enterText2">ورود به حساب کاربری</string>
+    <string name="userName">نام کاربری (ایمیل)</string>
+    <string name="password">کلمه عبور</string>
+    <string name="text4">حساب کاربری ندارید؟</string>
+    <string name="text5">عضو شوید!</string>
+
 </resources>
