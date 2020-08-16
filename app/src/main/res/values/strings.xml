@@ -17,5 +17,16 @@
     <string name="password">کلمه عبور</string>
     <string name="text4">حساب کاربری ندارید؟</string>
     <string name="text5">عضو شوید!</string>
+    <string name="profile_ch_2">علاقه مندی ها</string>
+    <string name="profile_ch_1">نوشته ها</string>
+    <string name="profile_tx1">علی خرامان</string>
+    <string name="profile_tx2">طراح رابط و تجربه کاربری</string>
+    <string name="profile_tx3">123</string>
+    <string name="profile_tx4">نوشته</string>
+    <string name="profile_tx5">2745</string>
+    <string name="profile_tx6">دنبال کننده</string>
+    <string name="profile_bt_fl">دنبال کردن</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
