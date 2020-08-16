@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/frag3"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layoutDirection="rtl"
     android:layout_width="match_parent"
@@ -235,15 +236,6 @@
             android:backgroundTint="@color/backgroundColor"/>
 
     </com.google.android.material.chip.ChipGroup>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/profile_chip_group"
-        app:layout_constraintEnd_toEndOf="@id/profile_gl_2"
-        app:layout_constraintStart_toStartOf="@id/profile_gl_1">
-
-    </androidx.recyclerview.widget.RecyclerView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
