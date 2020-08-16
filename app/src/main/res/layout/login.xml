@@ -121,6 +121,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
+        app:cornerRadius="10dp"
         android:id="@+id/login_box_3"
         android:layout_width="0dp"
         android:layout_height="60dp"
