@@ -17,5 +17,7 @@
     <string name="password">کلمه عبور</string>
     <string name="text4">حساب کاربری ندارید؟</string>
     <string name="text5">عضو شوید!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
