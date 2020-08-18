@@ -40,6 +40,7 @@
             app:layout_constraintEnd_toStartOf="@id/article_page_gl_2">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_margin="4dp"
                     android:id="@+id/inside_layout"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_width="match_parent"
@@ -52,12 +53,15 @@
                         android:id="@+id/home_page_gl_1_2"
                         app:layout_constraintGuide_percent="0.85"/>
 
-                    <ImageView
+                    <com.pkmmte.view.CircularImageView
                         android:id="@+id/article_iv_1"
-                        android:layout_margin="3dp"
-                        android:src="@android:color/holo_blue_dark"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_margin="4dp"
+                        app:border="true"
+                        app:border_width="1dp"
+                        android:src="@drawable/test_pic"
+                        app:border_color="@android:color/black"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         android:contentDescription="@string/todo" />
@@ -158,9 +162,11 @@
             android:layout_marginTop="5dp"
             android:layoutDirection="rtl"
             app:layout_constraintTop_toBottomOf="@id/article_tv_4"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            app:layout_constraintEnd_toEndOf="@id/article_cv_1">
+            app:layout_constraintStart_toEndOf="@id/article_page_gl_1"
+            app:layout_constraintEnd_toStartOf="@id/article_page_gl_2"
+            >
 
         <com.google.android.material.chip.ChipGroup
 
@@ -264,6 +270,19 @@
             app:layout_constraintEnd_toEndOf="@id/article_cv_1"
             android:text="دیدگاه کاربران"
             />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
+            android:id="@+id/article_page_recycle_2"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:reverseLayout="false"
+            app:layout_constraintTop_toBottomOf="@id/article_tv_6"
+            app:layout_constraintEnd_toStartOf="@id/article_page_gl_2"
+            tools:listitem="@layout/coment_cv" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
