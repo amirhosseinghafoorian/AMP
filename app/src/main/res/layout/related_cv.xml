@@ -9,6 +9,7 @@
     android:focusable="true"
     android:clickable="true"
     app:cardCornerRadius="20dp"
+    android:layout_margin="2dp"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -63,12 +64,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:constraint_referenced_ids="article_tv_3"
+            app:constraint_referenced_ids="related_tv_1"
             app:barrierDirection="bottom"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:fontFamily="@font/vazir_bold"
-            android:id="@+id/article_tv_3"
+            android:id="@+id/related_tv_1"
             android:layout_margin="2dp"
             android:textColor="@android:color/black"
             android:textSize="20sp"

@@ -127,8 +127,8 @@
 
                 <ImageView
                     android:src="@android:color/holo_blue_dark"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     app:layout_constraintStart_toEndOf="@id/home_page_gl_1_2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -215,8 +215,8 @@
 
                 <ImageView
                     android:src="@android:color/holo_blue_dark"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     app:layout_constraintStart_toEndOf="@id/home_page_gl_2_2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -302,8 +302,8 @@
 
                 <ImageView
                     android:src="@android:color/holo_blue_dark"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     app:layout_constraintStart_toEndOf="@id/home_page_gl_3_2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -370,8 +370,6 @@
             app:reverseLayout="false"
             app:layout_constraintEnd_toStartOf="@id/home_page_gl_2"
             tools:listitem="@layout/related_cv" />
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
