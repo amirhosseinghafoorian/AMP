@@ -33,8 +33,8 @@ class home_fr : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        home_tv_1.setText(param1)
-        home_tv_2.setText(param2)
+//        home_tv_1.setText(param1)
+//        home_tv_2.setText(param2)
 
     }
 

@@ -6,21 +6,23 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.related_cv.view.*
+import kotlinx.android.synthetic.main.summary_cv.view.*
 
-class MyAdapter(
-    val list: MutableList<MyDataItem>
+class SummaryCvAdapter(
+    val list: MutableList<RelatedCvDataItem>
 ) :
-    RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+    RecyclerView.Adapter<SummaryCvAdapter.MyViewHolder>() {
 
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var textView: TextView = itemView.related_tv_1
+        var mainText: TextView = itemView.summary_tv_3
+        var userFullName: TextView = itemView.summary_tv_1
+        var days: TextView = itemView.summary_tv_2
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        // create a new view
         val textView =
-            LayoutInflater.from(parent.context).inflate(R.layout.related_cv, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.summary_cv, parent, false)
         return MyViewHolder(textView)
     }
 
@@ -28,7 +30,11 @@ class MyAdapter(
 
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.textView.text = list[position].title
+        holder.mainText.text = list[position].text
+        holder.userFullName.text = list[position].name
+        holder.days.text = list[position].days
     }
+
+
 
 }
