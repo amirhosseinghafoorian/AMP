@@ -8,9 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="Ets" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox" >
-        <item name="boxCornerRadiusBottomStart">200dp</item>
-    </style>
 
 
 </resources>

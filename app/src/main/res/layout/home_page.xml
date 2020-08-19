@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#E9E9E9"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/home_page_gl_1"
+            app:layout_constraintGuide_percent="0.025"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/home_page_gl_2"
+            app:layout_constraintGuide_percent="0.975"/>
+
+        <com.google.android.material.tabs.TabLayout
+            android:layoutDirection="rtl"
+            android:id="@+id/TL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@android:color/white"
+            app:tabBackground="@color/colorPrimary"
+            app:tabContentStart="0dp">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="برای شما"
+                />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="بورس"
+                />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="سهام"
+                />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="اقتصاد"
+                />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="سرمایه گذاری"
+                />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="مالی"
+                />
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            app:layout_constraintVertical_chainStyle="packed"
+            android:id="@+id/home_box_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/home_page_gl_1"
+            app:layout_constraintEnd_toStartOf="@id/home_page_gl_2"
+            app:layout_constraintTop_toBottomOf="@id/TL"
+            android:textColor="@android:color/black"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:hintTextColor="@color/colorPrimary"
+            android:hint="@string/full_name"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
+            android:id="@+id/home_page_recycle_2"
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:reverseLayout="false"
+            app:layout_constraintTop_toBottomOf="@id/home_box_1"
+            app:layout_constraintRight_toLeftOf="@id/home_page_gl_2"
+            app:layout_constraintLeft_toRightOf="@id/home_page_gl_1"
+            tools:listitem="@layout/summary_cv" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:text="برترین مقالات"
+            android:layout_margin="5dp"
+            android:layout_width="0dp"
+            android:id="@+id/TV"
+            app:layout_constraintStart_toEndOf="@id/home_page_gl_1"
+            app:layout_constraintEnd_toStartOf="@id/home_page_gl_2"
+            app:layout_constraintTop_toBottomOf="@id/home_page_recycle_2"
+            android:layout_height="wrap_content"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
+            android:id="@+id/home_page_recycle_1"
+            android:layout_width="0dp"
+            android:orientation="horizontal"
+            android:scrollbars="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:reverseLayout="false"
+            app:layout_constraintTop_toBottomOf="@id/TV"
+            app:layout_constraintRight_toLeftOf="@id/home_page_gl_2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            tools:listitem="@layout/related_cv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
