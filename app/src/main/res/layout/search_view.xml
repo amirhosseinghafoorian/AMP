@@ -6,26 +6,10 @@
     android:background="@android:color/darker_gray"
     android:layoutDirection="rtl">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.975" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.025" />
-
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="@id/guideline"
-        app:layout_constraintStart_toStartOf="@id/guideline2"
         app:layout_constraintTop_toTopOf="parent"
         app:startIconDrawable="@drawable/ic_baseline_search_24"
         >
@@ -35,8 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="جستجو مقاله"/>
-
-
     </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

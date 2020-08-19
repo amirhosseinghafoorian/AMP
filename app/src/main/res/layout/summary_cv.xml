@@ -40,7 +40,7 @@
             android:id="@+id/summary_iv_1"
             app:border="true"
             app:border_width="1dp"
-            android:src="@drawable/test_pic"
+            android:src="@drawable/ic_baseline_person_24"
             app:border_color="@android:color/black"
             android:layout_width="48dp"
             android:layout_height="48dp"
