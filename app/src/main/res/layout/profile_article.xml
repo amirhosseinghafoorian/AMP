@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.circularreveal.cardview.CircularRevealCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layoutDirection="rtl"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:background="@android:color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/cv_gl_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.2"/>
+
+
+
+        <com.pkmmte.view.CircularImageView
+            android:id="@+id/profile_iv"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_baseline_person_24"
+            app:border="true"
+            app:border_color="#1B731F"
+            app:border_width="4dp"
+            android:layout_margin="5dp"
+            app:layout_constraintBottom_toBottomOf="@id/barrier"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cv_gl_1"
+            />
+
+        <TextView
+            android:id="@+id/cv_tx1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="سارینا آجیلی"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@id/profile_iv"
+            app:layout_constraintStart_toEndOf="@id/cv_gl_1"
+            />
+
+        <TextView
+            android:id="@+id/tag_tx2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3 روز پیش"
+            app:layout_constraintTop_toBottomOf="@id/cv_tx1"
+            app:layout_constraintStart_toEndOf="@id/cv_gl_1"
+            />
+
+        <ImageView
+            android:id="@+id/more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_more_vert_24"
+            app:layout_constraintTop_toTopOf="@id/profile_iv"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_bookmark_border_24"
+            app:layout_constraintTop_toTopOf="@id/profile_iv"
+            app:layout_constraintEnd_toStartOf="@id/more"/>
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="profile_iv,tag_tx2"/>
+
+        <TextView
+            android:id="@+id/cv_tx3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="4dp"
+            android:text="@string/testtext"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:lines="2"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/barrier"/>
+
+        <TextView
+            android:id="@+id/cv_tx4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="4dp"
+            android:text="@string/testtext2"
+            android:lines="3"
+            app:layout_constraintTop_toBottomOf="@id/cv_tx3"/>
+
+        <ImageView
+            android:id="@+id/fav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_favorite_border_24"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cv_tx4" />
+
+        <TextView
+            android:id="@+id/cv_tx5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="18sp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="4dp"
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintTop_toBottomOf="@id/cv_tx4"
+            app:layout_constraintStart_toEndOf="@id/fav"/>
+
+        <ImageView
+            android:id="@+id/com"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_chat_bubble_outline_24"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="4dp"
+            app:layout_constraintTop_toBottomOf="@id/cv_tx4"
+            app:layout_constraintEnd_toStartOf="@id/cv_tx6"/>
+
+        <TextView
+            android:id="@+id/cv_tx6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="18sp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="4dp"
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cv_tx4"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</com.google.android.material.circularreveal.cardview.CircularRevealCardView>

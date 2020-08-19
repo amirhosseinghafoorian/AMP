@@ -131,7 +131,7 @@
                 />
 
             <TextView
-                android:id="@+id/tag_tx1"
+                android:id="@+id/cv_tx1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/profile_tx1"
@@ -151,7 +151,7 @@
                 android:text="@string/profile_tx2"
                 android:textSize="10sp"
                 app:layout_constraintStart_toStartOf="@id/profile_cv_gl_3"
-                app:layout_constraintTop_toBottomOf="@id/tag_tx1"
+                app:layout_constraintTop_toBottomOf="@id/cv_tx1"
                 />
 
             <TextView

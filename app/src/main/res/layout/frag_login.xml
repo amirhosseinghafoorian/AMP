@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layoutDirection="rtl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -64,7 +66,7 @@
         android:id="@+id/login_intro_1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/sapce"
         android:text="@string/enterText"
         android:textSize="30sp"
         android:textColor="@android:color/black"
@@ -90,6 +92,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/userName"
+        app:startIconDrawable="@drawable/ic_baseline_person_24"
+        app:startIconTint="@color/backgroundColor"
         app:layout_constraintEnd_toStartOf="@+id/login_gl_4"
         app:layout_constraintStart_toStartOf="@+id/login_gl_3"
         app:layout_constraintTop_toTopOf="@+id/login_gl_5"
@@ -109,6 +113,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/password"
+        app:endIconMode="password_toggle"
+        app:endIconTint="@android:color/darker_gray"
+        app:startIconDrawable="@drawable/ic_baseline_lock_24"
+        app:startIconTint="@color/backgroundColor"
         app:layout_constraintBottom_toTopOf="@id/login_box_3"
         app:layout_constraintEnd_toStartOf="@+id/login_gl_4"
         app:layout_constraintStart_toStartOf="@+id/login_gl_3"
@@ -139,9 +147,10 @@
         android:layout_height="wrap_content"
         android:text="@string/text4"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@id/login_intro_4"
-        app:layout_constraintBottom_toTopOf="@+id/login_gl_2"
-        app:layout_constraintEnd_toStartOf="@+id/login_gl_4" />
+        android:layout_marginStart="25dp"
+        app:layout_constraintStart_toEndOf="@+id/login_gl_3"
+        app:layout_constraintTop_toBottomOf="@id/login_gl_6"
+        app:layout_constraintBottom_toTopOf="@id/login_gl_2"/>
 
     <TextView
         android:id="@+id/login_intro_4"
@@ -150,10 +159,10 @@
         android:text="@string/text5"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
-        android:layout_marginEnd="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/login_gl_2"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintLeft_toRightOf="@id/login_gl_3"
-        app:layout_constraintRight_toLeftOf="@id/login_intro_3" />
+        android:layout_marginStart="5dp"
+        app:layout_constraintTop_toBottomOf="@id/login_gl_6"
+        app:layout_constraintStart_toEndOf="@id/login_intro_3"
+        app:layout_constraintBottom_toTopOf="@id/login_gl_2"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,5 +28,7 @@
     <string name="profile_bt_fl">دنبال کردن</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="testtext">یک بازی سرگرم کننده در سبک کژوال است که شما را به اعماق دریا می‌برد تا در نقش یک گربه، به صید ماهی بپردازید</string>
+    <string name="testtext2">مدت‌ها است که شایعاتی از مدل ارزان‌تر ایکس ‌باکس سری ایکس به‌گوش می‌رسد که ایکس‌باکس سری اس نام دارد. البته این کنسول هنوز به‌صورت رسمی معرفی نشده و احتمال می‌رود در جریان رویداد انتهای ماه اوت مایکروسافت، به‌صورت رسمی معرفی شود</string>
 
 </resources>

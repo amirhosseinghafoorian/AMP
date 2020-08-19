@@ -115,7 +115,7 @@
                 app:layout_constraintStart_toStartOf="@id/tag_cv_gl_3"/>
 
             <TextView
-                android:id="@+id/tag_tx1"
+                android:id="@+id/cv_tx1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="سارینا آجیلی"
@@ -134,7 +134,7 @@
                 android:layout_height="wrap_content"
                 android:text="3 روز پیش"
                 app:layout_constraintStart_toStartOf="@id/tag_cv_gl_3"
-                app:layout_constraintTop_toBottomOf="@id/tag_tx1"
+                app:layout_constraintTop_toBottomOf="@id/cv_tx1"
                 />
 
             <ImageView

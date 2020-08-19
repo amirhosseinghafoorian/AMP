@@ -47,8 +47,9 @@ class BlankFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         login_box_3.setOnClickListener(){
-          val action = BlankFragmentDirections.actionBlankFragmentToSignupFragment()
-           it.findNavController().navigate(action)
+
+            val action = BlankFragmentDirections.actionBlankFragmentToSignupFragment(amin = "asdaasd")
+           findNavController().navigate(action)
         }
     }
 
