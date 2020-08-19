@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/frag3"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layoutDirection="rtl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundColor">
+    android:background="@color/backgroundColor"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <!--    <com.google.android.material.appbar.AppBarLayout-->
     <!--        android:layout_width="match_parent"-->
@@ -32,55 +34,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintGuide_percent="0.025" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/profile_gl_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/profile_gl_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.05" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/profile_gl_4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.28" />
+        app:layout_constraintGuide_percent="0.975" />
 
     <com.google.android.material.circularreveal.cardview.CircularRevealCardView
         android:id="@+id/profile_cv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@id/profile_gl_1"
-        app:layout_constraintTop_toBottomOf="@id/profile_gl_3"
-        app:layout_constraintEnd_toEndOf="@id/profile_gl_2"
-        app:layout_constraintBottom_toBottomOf="@id/profile_gl_4">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/profile_gl_2">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/profile_cv_gl_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.025"/>
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/profile_cv_gl_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.975"/>
+            android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/profile_cv_gl_3"
@@ -89,70 +63,58 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.2"/>
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/profile_cv_gl_4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.6"/>
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/profile_cv_gl_5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.05"/>
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/profile_cv_gl_6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.95"/>
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/profile_cv_gl_7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.45"/>
-
             <com.pkmmte.view.CircularImageView
+                android:id="@+id/profile_iv"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/ic_baseline_person_24"
                 app:border="true"
                 app:border_color="#1B731F"
                 app:border_width="4dp"
-                app:layout_constraintBottom_toBottomOf="@id/profile_cv_gl_4"
-                app:layout_constraintEnd_toEndOf="@id/profile_cv_gl_1"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginStart="4dp"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="@id/profile_cv_gl_3"
-                />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/profile_cv_gl_3"/>
 
             <TextView
                 android:id="@+id/cv_tx1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/profile_tx1"
-                android:textSize="18sp"
                 android:textColor="@android:color/black"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginStart="4dp"
                 app:layout_constraintStart_toStartOf="@id/profile_cv_gl_3"
-                app:layout_constraintTop_toTopOf="@id/profile_cv_gl_5"
-                app:layout_constraintBottom_toTopOf="@id/tag_tx2"
-                />
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
-                android:id="@+id/tag_tx2"
+                android:id="@+id/cv_tx2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/profile_tx2"
                 android:textSize="10sp"
+
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginStart="4dp"
                 app:layout_constraintStart_toStartOf="@id/profile_cv_gl_3"
                 app:layout_constraintTop_toBottomOf="@id/cv_tx1"
                 />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="profile_iv,cv_tx2"/>
 
             <TextView
                 android:id="@+id/profile_tx3"
@@ -160,20 +122,26 @@
                 android:layout_height="wrap_content"
                 android:text="@string/profile_tx3"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@id/profile_cv_gl_1"
-                app:layout_constraintTop_toBottomOf="@id/profile_cv_gl_4"
-                app:layout_constraintBottom_toTopOf="@id/profile_tx4"
-                app:layout_constraintStart_toStartOf="@id/profile_cv_gl_3"/>
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginStart="4dp"
+                app:layout_constraintTop_toBottomOf="@id/profile_iv"
+                app:layout_constraintEnd_toEndOf="@id/profile_tx4"
+                app:layout_constraintStart_toStartOf="@id/profile_tx4"
+                app:layout_constraintBottom_toTopOf="@id/profile_tx4"/>
 
             <TextView
                 android:id="@+id/profile_tx4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/profile_tx4"
-                app:layout_constraintBottom_toBottomOf="@id/profile_cv_gl_6"
-                app:layout_constraintEnd_toEndOf="@id/profile_cv_gl_1"
-                app:layout_constraintStart_toStartOf="@id/profile_cv_gl_3"
-                app:layout_constraintTop_toBottomOf="@id/profile_tx3" />
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginStart="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/profile_cv_gl_3"
+                app:layout_constraintStart_toStartOf="parent"/>
 
             <TextView
                 android:id="@+id/profile_tx5"
@@ -181,31 +149,32 @@
                 android:layout_height="wrap_content"
                 android:text="@string/profile_tx5"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@id/profile_cv_gl_3"
-                app:layout_constraintTop_toBottomOf="@id/profile_cv_gl_4"
+                app:layout_constraintTop_toTopOf="@id/profile_tx3"
                 app:layout_constraintBottom_toTopOf="@id/profile_tx6"
-                app:layout_constraintStart_toStartOf="@id/profile_cv_gl_7"/>
+                app:layout_constraintStart_toStartOf="@id/profile_tx6"
+                app:layout_constraintEnd_toEndOf="@id/profile_tx6"/>
 
             <TextView
                 android:id="@+id/profile_tx6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/profile_tx6"
-                app:layout_constraintEnd_toStartOf="@+id/profile_cv_gl_3"
-                app:layout_constraintTop_toBottomOf="@id/profile_tx5"
-                app:layout_constraintBottom_toBottomOf="@id/profile_cv_gl_6"
-                app:layout_constraintStart_toStartOf="@id/profile_cv_gl_7"/>
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginStart="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/profile_cv_gl_3"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/profile_bt_fl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="#286de6"
                 android:text="@string/profile_bt_fl"
                 app:cornerRadius="5dp"
-                android:backgroundTint="#286de6"
-                app:layout_constraintBottom_toBottomOf="@id/profile_cv_gl_6"
-                app:layout_constraintEnd_toStartOf="@id/profile_cv_gl_2"
-                />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -217,7 +186,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/profile_gl_1"
         app:layout_constraintEnd_toEndOf="@id/profile_gl_2"
-        app:layout_constraintTop_toTopOf="@id/profile_gl_4">
+        app:layout_constraintTop_toBottomOf="@id/profile_cv"
+        android:layout_marginTop="10dp">
 
         <com.google.android.material.chip.Chip
             android:id="@+id/profile_ch_1"
@@ -237,13 +207,14 @@
     </com.google.android.material.chip.ChipGroup>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/profile_recycler"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/profile_chip_group"
+        app:layout_constraintStart_toStartOf="@id/profile_gl_1"
         app:layout_constraintEnd_toEndOf="@id/profile_gl_2"
-        app:layout_constraintStart_toStartOf="@id/profile_gl_1">
-
-    </androidx.recyclerview.widget.RecyclerView>
+        android:orientation="vertical"
+        tools:listitem="@layout/profile_article"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

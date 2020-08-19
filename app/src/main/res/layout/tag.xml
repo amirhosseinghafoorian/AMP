@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layoutDirection="rtl">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tag_gl_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.025" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tag_gl_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.975" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tag_gl_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tag_gl_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+        android:id="@+id/tag_cv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/tag_gl_1"
+        app:layout_constraintTop_toBottomOf="@id/tag_gl_3"
+        app:layout_constraintEnd_toEndOf="@id/tag_gl_2"
+        app:layout_constraintBottom_toBottomOf="@id/tag_gl_4">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/tag_cv_gl_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.05"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/tag_cv_gl_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.95"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/tag_cv_gl_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.22"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/tag_cv_gl_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.6"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/tag_cv_gl_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.05"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/tag_cv_gl_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.95"/>
+
+
+<!--            <ImageView-->
+<!--                android:id="@+id/tag_iv"-->
+<!--                android:layout_width="50dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:background="@color/colorAccent"-->
+<!--                app:layout_constraintBottom_toBottomOf="@id/tag_cv_gl_4"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/tag_cv_gl_2"-->
+<!--                app:layout_constraintTop_toTopOf="@id/tag_cv_gl_5"-->
+<!--                app:layout_constraintStart_toStartOf="@id/tag_cv_gl_3"-->
+<!--                >-->
+
+<!--            </ImageView>-->
+
+            <com.pkmmte.view.CircularImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_baseline_person_24"
+                app:border="true"
+                app:border_color="#1B731F"
+                app:border_width="4dp"
+                app:layout_constraintBottom_toBottomOf="@id/tag_cv_gl_4"
+                app:layout_constraintEnd_toEndOf="@id/tag_cv_gl_1"
+                app:layout_constraintTop_toTopOf="@id/tag_cv_gl_5"
+                app:layout_constraintStart_toStartOf="@id/tag_cv_gl_3"/>
+
+            <TextView
+                android:id="@+id/cv_tx1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="سارینا آجیلی"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="@id/tag_cv_gl_3"
+                app:layout_constraintTop_toTopOf="@id/tag_cv_gl_5"
+                app:layout_constraintBottom_toTopOf="@id/tag_tx2"
+                />
+
+            <TextView
+                android:id="@+id/tag_tx2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3 روز پیش"
+                app:layout_constraintStart_toStartOf="@id/tag_cv_gl_3"
+                app:layout_constraintTop_toBottomOf="@id/cv_tx1"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/tag_cv_gl_5"
+                app:layout_constraintStart_toStartOf="@id/tag_cv_gl_1"/>
+
+            <TextView
+                android:id="@+id/tag_tx3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:lines="2"
+                android:text=" یک بازی سرگرم کننده در سبک کژوال است که شما را به اعماق دریا می‌برد تا در نقش یک گربه، به صید ماهی بپردازید"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@id/tag_cv_gl_4"
+                app:layout_constraintStart_toStartOf="@id/tag_cv_gl_1"
+                app:layout_constraintEnd_toEndOf="@id/tag_cv_gl_2"
+                app:layout_constraintBottom_toTopOf="@id/tag_cv_gl_6"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
