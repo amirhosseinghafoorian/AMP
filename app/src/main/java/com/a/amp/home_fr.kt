@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.home_page.*
-import kotlinx.android.synthetic.main.login.*
 import kotlinx.android.synthetic.main.signup.*
 
 private const val ARG_PARAM1 = "param1"

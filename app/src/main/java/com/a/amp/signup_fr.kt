@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.get
 import kotlinx.android.synthetic.main.signup.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -31,8 +30,8 @@ class signup_fr : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        signup_box_5.setOnClickListener{
-            val test_fr = login_fr.newInstance(signup_box_1.editText?.text.toString(),signup_box_3.editText?.text.toString())
+        signup_btn_1.setOnClickListener{
+            val test_fr = login_fr.newInstance(signup_et_1.editText?.text.toString(),signup_et_3.editText?.text.toString())
             test_fr.arguments
             val fragmentTransaction = fragmentManager?.beginTransaction()
             // replace the FrameLayout with new Fragment

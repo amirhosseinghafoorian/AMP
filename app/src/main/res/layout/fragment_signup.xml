@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layoutDirection="rtl"
-    android:id="@+id/frag2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -9,49 +8,49 @@
     <androidx.constraintlayout.widget.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/gl_1_signup"
+        android:id="@+id/signup_gl_1"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.02"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/gl_2_signup"
+        android:id="@+id/signup_gl_2"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.9"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/gl_3_signup"
+        android:id="@+id/signup_gl_3"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.1"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/gl_4_signup"
+        android:id="@+id/signup_gl_4"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.9"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/gl_5_signup"
+        android:id="@+id/signup_gl_5"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.35"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/gl_6_signup"
+        android:id="@+id/signup_gl_6"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.87"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/gl_7_signup"
+        android:id="@+id/signup_gl_7"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.25"/>
 
@@ -61,9 +60,9 @@
         android:id="@+id/signup_logo"
         android:layout_width="150dp"
         android:layout_height="70dp"
-        app:layout_constraintStart_toEndOf="@id/gl_3_signup"
-        app:layout_constraintEnd_toStartOf="@id/gl_4_signup"
-        app:layout_constraintTop_toBottomOf="@id/gl_1_signup"
+        app:layout_constraintStart_toEndOf="@id/signup_gl_3"
+        app:layout_constraintEnd_toStartOf="@id/signup_gl_4"
+        app:layout_constraintTop_toBottomOf="@id/signup_gl_1"
         app:layout_constraintBottom_toTopOf="@id/signup_intro_1"
         android:contentDescription="@string/todo" />
 
@@ -71,9 +70,9 @@
         android:id="@+id/signup_intro_1"
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/signup_logo"
-        app:layout_constraintStart_toEndOf="@id/gl_3_signup"
-        app:layout_constraintEnd_toStartOf="@id/gl_4_signup"
-        app:layout_constraintBottom_toTopOf="@id/gl_7_signup"
+        app:layout_constraintStart_toEndOf="@id/signup_gl_3"
+        app:layout_constraintEnd_toStartOf="@id/signup_gl_4"
+        app:layout_constraintBottom_toTopOf="@id/signup_gl_7"
         android:textColor="@android:color/black"
         android:textSize="25sp"
         android:layout_width="0dp"
@@ -84,48 +83,47 @@
         android:id="@+id/signup_intro_2"
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/signup_intro_1"
-        app:layout_constraintStart_toEndOf="@id/gl_3_signup"
-        app:layout_constraintEnd_toStartOf="@id/gl_4_signup"
+        app:layout_constraintStart_toEndOf="@id/signup_gl_3"
+        app:layout_constraintEnd_toStartOf="@id/signup_gl_4"
         android:textSize="15sp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/create_a_new_account"/>
 
     <TextView
-        android:id="@+id/signup_intro_3"
-        android:gravity="start"
-        app:layout_constraintTop_toBottomOf="@id/gl_2_signup"
-        app:layout_constraintStart_toEndOf="@id/signup_intro_4"
-        app:layout_constraintEnd_toStartOf="@id/gl_4_signup"
-        android:textSize="15sp"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:id="@+id/signup_tv_1"
+        app:layout_constraintTop_toBottomOf="@id/signup_gl_2"
+        app:layout_constraintStart_toEndOf="@id/signup_gl_3"
+        app:layout_constraintEnd_toStartOf="@id/signup_tv_2"
+        android:textSize="18sp"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:text="@string/have_account"/>
 
     <TextView
-        android:layout_marginEnd="5dp"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        android:id="@+id/signup_intro_4"
-        android:gravity="end"
-        app:layout_constraintTop_toBottomOf="@id/gl_2_signup"
-        app:layout_constraintStart_toEndOf="@id/gl_3_signup"
-        app:layout_constraintEnd_toStartOf="@id/signup_intro_3"
-        android:textSize="15sp"
+        android:layout_marginStart="4dp"
+        android:id="@+id/signup_tv_2"
+        app:layout_constraintTop_toBottomOf="@id/signup_gl_2"
+        app:layout_constraintStart_toEndOf="@id/signup_tv_1"
+        app:layout_constraintEnd_toStartOf="@id/signup_gl_4"
+        android:textSize="18sp"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:textColor="@color/colorPrimary"
         android:text="@string/login"/>
 
     <com.google.android.material.textfield.TextInputLayout
         app:layout_constraintVertical_chainStyle="packed"
-        android:id="@+id/signup_box_1"
+        android:id="@+id/signup_et_1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:startIconDrawable="@drawable/ic_baseline_person_24"
-        app:layout_constraintStart_toEndOf="@id/gl_3_signup"
-        app:layout_constraintEnd_toStartOf="@id/gl_4_signup"
-        app:layout_constraintTop_toBottomOf="@id/gl_5_signup"
-        app:layout_constraintBottom_toTopOf="@id/signup_box_2"
+        app:startIconTint="@color/backgroundColor"
+        app:layout_constraintStart_toEndOf="@id/signup_gl_3"
+        app:layout_constraintEnd_toStartOf="@id/signup_gl_4"
+        app:layout_constraintTop_toBottomOf="@id/signup_gl_5"
+        app:layout_constraintBottom_toTopOf="@id/signup_et_2"
         android:textColor="@android:color/black"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:boxStrokeColor="@color/colorPrimary"
@@ -133,41 +131,45 @@
         android:hint="@string/full_name"
         >
         <com.google.android.material.textfield.TextInputEditText
+            android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/signup_box_2"
+        android:id="@+id/signup_et_2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
         android:hint="@string/email"
+        app:startIconTint="@color/backgroundColor"
         app:startIconDrawable="@drawable/ic_baseline_mail_outline_24"
-        app:layout_constraintStart_toEndOf="@id/gl_3_signup"
-        app:layout_constraintEnd_toStartOf="@id/gl_4_signup"
-        app:layout_constraintTop_toBottomOf="@id/signup_box_1"
-        app:layout_constraintBottom_toTopOf="@id/signup_box_3"
+        app:layout_constraintStart_toEndOf="@id/signup_gl_3"
+        app:layout_constraintEnd_toStartOf="@id/signup_gl_4"
+        app:layout_constraintTop_toBottomOf="@id/signup_et_1"
+        app:layout_constraintBottom_toTopOf="@id/signup_et_3"
         app:boxStrokeColor="@color/colorPrimary"
         app:hintTextColor="@color/colorPrimary"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         >
         <com.google.android.material.textfield.TextInputEditText
+            android:inputType="textEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/signup_box_3"
+        android:id="@+id/signup_et_3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:startIconDrawable="@drawable/ic_baseline_lock_24"
-        app:layout_constraintStart_toEndOf="@id/gl_3_signup"
-        app:layout_constraintEnd_toStartOf="@id/gl_4_signup"
-        app:layout_constraintTop_toBottomOf="@id/signup_box_2"
-        app:layout_constraintBottom_toTopOf="@id/signup_box_4"
+        app:startIconTint="@color/backgroundColor"
+        app:layout_constraintStart_toEndOf="@id/signup_gl_3"
+        app:layout_constraintEnd_toStartOf="@id/signup_gl_4"
+        app:layout_constraintTop_toBottomOf="@id/signup_et_2"
+        app:layout_constraintBottom_toTopOf="@id/signup_et_4"
         android:textColor="@android:color/black"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:boxStrokeColor="@color/colorPrimary"
@@ -175,20 +177,24 @@
         android:hint="@string/pass1"
         >
         <com.google.android.material.textfield.TextInputEditText
+            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/signup_box_4"
+        android:id="@+id/signup_et_4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:endIconMode="password_toggle"
+        app:endIconTint="@android:color/darker_gray"
         app:startIconDrawable="@drawable/ic_baseline_lock_24"
-        app:layout_constraintStart_toEndOf="@id/gl_3_signup"
-        app:layout_constraintEnd_toStartOf="@id/gl_4_signup"
-        app:layout_constraintTop_toBottomOf="@id/signup_box_3"
-        app:layout_constraintBottom_toTopOf="@id/signup_box_5"
+        app:startIconTint="@color/backgroundColor"
+        app:layout_constraintStart_toEndOf="@id/signup_gl_3"
+        app:layout_constraintEnd_toStartOf="@id/signup_gl_4"
+        app:layout_constraintTop_toBottomOf="@id/signup_et_3"
+        app:layout_constraintBottom_toTopOf="@id/signup_btn_1"
         android:textColor="@android:color/black"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:boxStrokeColor="@color/colorPrimary"
@@ -196,19 +202,20 @@
         android:hint="@string/pass2"
         >
         <com.google.android.material.textfield.TextInputEditText
+            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/signup_box_5"
+        android:id="@+id/signup_btn_1"
         android:layout_width="0dp"
         android:layout_height="60dp"
-        app:layout_constraintStart_toEndOf="@id/gl_3_signup"
-        app:layout_constraintEnd_toStartOf="@id/gl_4_signup"
-        app:layout_constraintTop_toBottomOf="@id/signup_box_4"
-        app:layout_constraintBottom_toTopOf="@id/gl_6_signup"
+        app:layout_constraintStart_toEndOf="@id/signup_gl_3"
+        app:layout_constraintEnd_toStartOf="@id/signup_gl_4"
+        app:layout_constraintTop_toBottomOf="@id/signup_et_4"
+        app:layout_constraintBottom_toTopOf="@id/signup_gl_6"
         android:text="@string/join"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:textColorHint="@android:color/white"

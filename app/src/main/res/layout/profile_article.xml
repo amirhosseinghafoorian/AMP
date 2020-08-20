@@ -21,8 +21,6 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.2"/>
 
-
-
         <com.pkmmte.view.CircularImageView
             android:id="@+id/profile_iv"
             android:layout_width="40dp"

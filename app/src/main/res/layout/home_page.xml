@@ -90,6 +90,7 @@
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:hint="جستجو مقاله"
+                android:maxLines="1"
                 android:background="@drawable/et_corner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

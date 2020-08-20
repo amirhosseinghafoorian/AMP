@@ -6,8 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import kotlinx.android.synthetic.main.login.*
-import kotlinx.android.synthetic.main.signup.*
+
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -26,25 +25,25 @@ class login_fr : Fragment() {
         Toast.makeText(context, "$param1 and $param2", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.login, container, false)
-    }
+//    override fun onCreateView(
+//        inflater: LayoutInflater, container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View? {
+////        return inflater.inflate(R.layout.login, container, false)
+//    }
 
     override fun onStart() {
         super.onStart()
-        login_box_1.editText?.setText(param1)
-        login_box_2.editText?.setText(param2)
-        login_box_3.setOnClickListener{
-            val test_fr = home_fr.newInstance(login_box_1.editText?.text.toString(),login_box_2.editText?.text.toString())
-            test_fr.arguments
-            val fragmentTransaction = fragmentManager?.beginTransaction()
-            fragmentTransaction?.replace(R.id.frame, test_fr)
-            fragmentTransaction?.addToBackStack("fr3")
-            fragmentTransaction?.commit()
-        }
+//        login_et_1.editText?.setText(param1)
+//        login_et_2.editText?.setText(param2)
+//        login_btn_1.setOnClickListener{
+//            val test_fr = home_fr.newInstance(login_et_1.editText?.text.toString(),login_et_2.editText?.text.toString())
+//            test_fr.arguments
+//            val fragmentTransaction = fragmentManager?.beginTransaction()
+//            fragmentTransaction?.replace(R.id.frame, test_fr)
+//            fragmentTransaction?.addToBackStack("fr3")
+//            fragmentTransaction?.commit()
+//        }
     }
 
     companion object {

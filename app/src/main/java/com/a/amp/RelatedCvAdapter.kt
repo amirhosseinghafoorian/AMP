@@ -17,6 +17,11 @@ class RelatedCvAdapter(
         var mainText: TextView = itemView.related_tv_1
         var userFullName: TextView = itemView.related_tv_2
         var days: TextView = itemView.related_tv_3
+        init {
+            itemView.setOnClickListener{
+                
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
