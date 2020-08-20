@@ -224,6 +224,8 @@
             app:cornerRadius="10dp"
             android:textSize="17sp"
             android:text="ارسال دیدگاه"
+            app:icon="@drawable/ic_baseline_send_24"
+            app:iconGravity="textEnd"
             android:layout_width="0dp"
             android:layout_height="60dp"
             app:layout_constraintStart_toStartOf="@id/article_page_gl_1"

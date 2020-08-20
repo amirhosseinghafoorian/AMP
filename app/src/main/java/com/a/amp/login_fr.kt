@@ -41,7 +41,7 @@ class login_fr : Fragment() {
             val test_fr = home_fr.newInstance(login_box_1.editText?.text.toString(),login_box_2.editText?.text.toString())
             test_fr.arguments
             val fragmentTransaction = fragmentManager?.beginTransaction()
-            fragmentTransaction?.replace(R.id.frame, test_fr)
+//            fragmentTransaction?.replace(R.id.frame, test_fr)
             fragmentTransaction?.addToBackStack("fr3")
             fragmentTransaction?.commit()
         }
