@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#E9E9E9"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/article_gl_1"
+            app:layout_constraintGuide_percent="0.025"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/article_gl_2"
+            app:layout_constraintGuide_percent="0.975"/>
+
+        <com.google.android.material.card.MaterialCardView
+            app:rippleColor="@color/colorPrimary"
+            android:id="@+id/article_cv_1"
+            android:layout_margin="4dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp"
+            android:checkable="true"
+            android:focusable="true"
+            android:clickable="true"
+            app:cardElevation="2dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/article_gl_1"
+            app:layout_constraintEnd_toStartOf="@id/article_gl_2">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_margin="4dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/article_gl_3"
+                    app:layout_constraintGuide_percent="0.85"/>
+
+                <com.pkmmte.view.CircularImageView
+                    android:id="@+id/article_iv_1"
+                    android:layout_margin="4dp"
+                    app:border="true"
+                    app:border_width="2dp"
+                    android:src="@drawable/ic_baseline_person_24"
+                    app:border_color="@android:color/black"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="@string/todo" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/article_tv_1"
+                    android:layout_margin="4dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="17sp"
+                    android:text="@string/enterText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    app:layout_constraintEnd_toStartOf="@id/article_gl_3"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/article_tv_2"
+                    android:layout_marginEnd="4dp"
+                    android:textSize="12sp"
+                    android:text="@string/email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    app:layout_constraintEnd_toStartOf="@id/article_gl_3"
+                    app:layout_constraintTop_toBottomOf="@id/article_tv_1"
+                    />
+
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/article_br_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:constraint_referenced_ids="article_tv_2,article_iv_1"
+                    app:barrierDirection="bottom"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:fontFamily="@font/vazir_bold"
+                    android:id="@+id/article_tv_3"
+                    android:layout_margin="4dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:text="@string/enterText2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lines="2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/article_br_1"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/article_tv_7"
+                    android:layout_margin="4dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/article_tv_3"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/article_tv_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:lineSpacingExtra="8sp"
+            app:layout_constraintTop_toBottomOf="@id/article_cv_1"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="@id/article_cv_1"
+            android:text="کلید واژه ها"
+            />
+
+        <HorizontalScrollView
+            android:id="@+id/article_sv_1"
+            android:layout_marginTop="4dp"
+            android:layoutDirection="rtl"
+            app:layout_constraintTop_toBottomOf="@id/article_tv_4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toEndOf="@id/article_gl_1"
+            app:layout_constraintEnd_toStartOf="@id/article_gl_2"
+            >
+
+            <com.google.android.material.chip.ChipGroup
+
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                app:singleLine="true">
+
+                <com.google.android.material.chip.Chip
+                    app:chipBackgroundColor="@android:color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:rippleColor="@color/colorPrimary"
+                    android:text="سرمایه گذاری"/>
+
+                <com.google.android.material.chip.Chip
+                    app:chipBackgroundColor="@android:color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:rippleColor="@color/colorPrimary"
+                    android:text="سهام"/>
+
+                <com.google.android.material.chip.Chip
+                    app:chipBackgroundColor="@android:color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:rippleColor="@color/colorPrimary"
+                    android:text="اقتصاد"/>
+
+                <com.google.android.material.chip.Chip
+                    app:chipBackgroundColor="@android:color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:rippleColor="@color/colorPrimary"
+                    android:text="apple"/>
+
+                <com.google.android.material.chip.Chip
+                    app:chipBackgroundColor="@android:color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:rippleColor="@color/colorPrimary"
+                    android:text="تکنولوژی"/>
+
+                <com.google.android.material.chip.Chip
+                    app:chipBackgroundColor="@android:color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:rippleColor="@color/colorPrimary"
+                    android:text="network"/>
+
+            </com.google.android.material.chip.ChipGroup>
+        </HorizontalScrollView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/article_btn_1"
+            app:cornerRadius="10dp"
+            android:textSize="17sp"
+            android:text="ارسال دیدگاه"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            app:layout_constraintStart_toStartOf="@id/article_gl_1"
+            app:layout_constraintEnd_toEndOf="@id/article_gl_2"
+            app:layout_constraintTop_toBottomOf="@id/article_sv_1"/>
+
+        <TextView
+            android:id="@+id/article_tv_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:lineSpacingExtra="8sp"
+            app:layout_constraintTop_toBottomOf="@id/article_btn_1"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="@id/article_cv_1"
+            android:text="مقالات مرتبط"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/article_page_recycle_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
+            android:orientation="horizontal"
+            android:scrollbars="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toStartOf="@id/article_gl_2"
+            app:layout_constraintTop_toBottomOf="@id/article_tv_5"
+            app:reverseLayout="false"
+            tools:listitem="@layout/related_cv" />
+
+        <TextView
+            android:id="@+id/article_tv_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:lineSpacingExtra="8sp"
+            android:gravity="end"
+            app:layout_constraintTop_toBottomOf="@id/article_page_recycle_1"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="@id/article_cv_1"
+            android:text="دیدگاه کاربران"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
+            android:id="@+id/article_page_recycle_2"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:reverseLayout="false"
+            app:layout_constraintTop_toBottomOf="@id/article_tv_6"
+            app:layout_constraintEnd_toStartOf="@id/article_gl_2"
+            tools:listitem="@layout/coment_cv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

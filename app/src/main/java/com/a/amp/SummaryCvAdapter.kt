@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.related_cv.view.*
 import kotlinx.android.synthetic.main.summary_cv.view.*
 
 class SummaryCvAdapter(
-    val list: MutableList<RelatedCvDataItem>
+    private val list: MutableList<RelatedCvDataItem>
 ) :
     RecyclerView.Adapter<SummaryCvAdapter.MyViewHolder>() {
 
@@ -18,6 +18,7 @@ class SummaryCvAdapter(
         var mainText: TextView = itemView.summary_tv_3
         var userFullName: TextView = itemView.summary_tv_1
         var days: TextView = itemView.summary_tv_2
+        var id : Int = 0
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -33,8 +34,7 @@ class SummaryCvAdapter(
         holder.mainText.text = list[position].text
         holder.userFullName.text = list[position].name
         holder.days.text = list[position].days
+        holder.id = list[position].id
     }
-
-
 
 }

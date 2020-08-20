@@ -26,7 +26,7 @@
 
         <com.google.android.material.tabs.TabLayout
             android:layoutDirection="rtl"
-            android:id="@+id/TL"
+            android:id="@+id/home_page_TL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
@@ -76,12 +76,12 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_marginRight="4dp"
             android:layout_marginLeft="4dp"
-            android:id="@+id/home_box_1"
+            android:id="@+id/home_page_et_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@id/home_page_gl_1"
             app:layout_constraintEnd_toStartOf="@id/home_page_gl_2"
-            app:layout_constraintTop_toBottomOf="@id/TL"
+            app:layout_constraintTop_toBottomOf="@id/home_page_TL"
             android:textColor="@android:color/black"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:boxStrokeColor="@color/colorPrimary"
@@ -106,7 +106,7 @@
             android:scrollbars="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:reverseLayout="false"
-            app:layout_constraintTop_toBottomOf="@id/home_box_1"
+            app:layout_constraintTop_toBottomOf="@id/home_page_et_1"
             app:layout_constraintRight_toLeftOf="@id/home_page_gl_2"
             app:layout_constraintLeft_toRightOf="@id/home_page_gl_1"
             tools:listitem="@layout/summary_cv" />
@@ -117,7 +117,7 @@
             android:text="برترین مقالات"
             android:layout_margin="5dp"
             android:layout_width="0dp"
-            android:id="@+id/TV"
+            android:id="@+id/home_page_tv_1"
             app:layout_constraintStart_toEndOf="@id/home_page_gl_1"
             app:layout_constraintEnd_toStartOf="@id/home_page_gl_2"
             app:layout_constraintTop_toBottomOf="@id/home_page_recycle_2"
@@ -132,7 +132,7 @@
             android:scrollbars="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:reverseLayout="false"
-            app:layout_constraintTop_toBottomOf="@id/TV"
+            app:layout_constraintTop_toBottomOf="@id/home_page_tv_1"
             app:layout_constraintRight_toLeftOf="@id/home_page_gl_2"
             app:layout_constraintLeft_toLeftOf="parent"
             tools:listitem="@layout/related_cv" />

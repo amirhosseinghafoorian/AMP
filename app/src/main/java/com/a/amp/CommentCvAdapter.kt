@@ -5,17 +5,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.coment_cv.view.*
 import kotlinx.android.synthetic.main.related_cv.view.*
 
-class RelatedCvAdapter(
-    private val list: MutableList<RelatedCvDataItem>
+class CommentCvAdapter(
+    private val list: MutableList<CommentCvDataItem>
 ) :
-    RecyclerView.Adapter<RelatedCvAdapter.MyViewHolder>() {
+    RecyclerView.Adapter<CommentCvAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var mainText: TextView = itemView.related_tv_1
-        var userFullName: TextView = itemView.related_tv_2
-        var days: TextView = itemView.related_tv_3
+        var mainText: TextView = itemView.comment_tv_2
+        var userFullName: TextView = itemView.comment_tv_1
         var id : Int = 0
         init {
             itemView.setOnClickListener{
@@ -26,7 +26,7 @@ class RelatedCvAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val textView =
-            LayoutInflater.from(parent.context).inflate(R.layout.related_cv, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.coment_cv, parent, false)
         return MyViewHolder(textView)
     }
 
@@ -35,7 +35,6 @@ class RelatedCvAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.mainText.text = list[position].text
         holder.userFullName.text = list[position].name
-        holder.days.text = list[position].days
         holder.id = list[position].id
     }
 

@@ -28,15 +28,14 @@
             android:id="@+id/coment_cv_gl_1"
             app:layout_constraintGuide_percent="0.15"/>
 
-
         <com.pkmmte.view.CircularImageView
-            android:id="@+id/coment_iv_1"
+            android:id="@+id/comment_iv_1"
             android:layout_margin="4dp"
             android:layout_width="40dp"
             android:layout_height="40dp"
             app:border="true"
-            app:border_width="1dp"
-            android:src="@drawable/test_pic"
+            app:border_width="2dp"
+            android:src="@drawable/ic_baseline_person_24"
             app:border_color="@android:color/black"
             app:layout_constraintEnd_toStartOf="@id/coment_cv_gl_1"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +43,7 @@
             android:contentDescription="@string/todo" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/coment_tv_1"
+            android:id="@+id/comment_tv_1"
             android:layout_marginStart="4dp"
             android:textColor="@android:color/black"
             android:textSize="17sp"
@@ -52,21 +51,21 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             app:layout_constraintStart_toEndOf="@id/coment_cv_gl_1"
-            app:layout_constraintTop_toTopOf="@id/coment_iv_1"
-            app:layout_constraintBottom_toBottomOf="@id/coment_iv_1"
+            app:layout_constraintTop_toTopOf="@id/comment_iv_1"
+            app:layout_constraintBottom_toBottomOf="@id/comment_iv_1"
             />
 
         <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/coment_br_1"
+            android:id="@+id/comment_br_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:constraint_referenced_ids="coment_iv_1"
+            app:constraint_referenced_ids="comment_iv_1"
             app:barrierDirection="bottom"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:fontFamily="@font/vazir_bold"
-            android:id="@+id/related_tv_1"
+            android:id="@+id/comment_tv_2"
             android:layout_margin="4dp"
             android:textColor="@android:color/black"
             android:textSize="20sp"
@@ -75,7 +74,7 @@
             android:layout_height="wrap_content"
             android:lines="4"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/coment_br_1"
+            app:layout_constraintTop_toBottomOf="@id/comment_br_1"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

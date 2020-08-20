@@ -28,7 +28,6 @@
 
     <!--    </com.google.android.material.appbar.AppBarLayout>-->
 
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/profile_gl_1"
         android:layout_width="wrap_content"
@@ -65,8 +64,8 @@
 
             <com.pkmmte.view.CircularImageView
                 android:id="@+id/profile_iv"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:src="@drawable/ic_baseline_person_24"
                 app:border="true"
                 app:border_color="#1B731F"
@@ -99,7 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/profile_tx2"
-                android:textSize="10sp"
+                android:textSize="12sp"
 
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="4dp"
