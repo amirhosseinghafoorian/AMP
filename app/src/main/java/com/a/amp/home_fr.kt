@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.signup.*
+//import kotlinx.android.synthetic.main.signup.*
 
 
 class home_fr : Fragment() {

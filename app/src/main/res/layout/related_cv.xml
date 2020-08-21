@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="300dp"
-    android:layout_height="120dp"
+    android:layout_height="wrap_content"
     app:rippleColor="@color/colorPrimary"
     android:layoutDirection="rtl"
     android:checkable="true"
@@ -11,6 +11,7 @@
     android:clickable="true"
     app:cardCornerRadius="20dp"
     android:layout_margin="2dp"
+    android:background="@android:color/white"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout

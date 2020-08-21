@@ -9,21 +9,21 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/write_gl_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.05" />
+            app:layout_constraintGuide_percent="0.025" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/write_gl_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.95"/>
+            app:layout_constraintGuide_percent="0.975"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/write_gl_3"
@@ -213,6 +213,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
+        app:rippleColor="@color/iconbackgroundColor"
             android:id="@+id/write_bt_3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
