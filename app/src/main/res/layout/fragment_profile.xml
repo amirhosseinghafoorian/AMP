@@ -8,25 +8,34 @@
     android:background="@color/backgroundColor"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!--    <com.google.android.material.appbar.AppBarLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        app:layout_constraintTop_toTopOf="parent">-->
+    <com.google.android.material.appbar.MaterialToolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layoutDirection="rtl"
+        android:id="@+id/topAppBar"
+        android:layout_height="?attr/actionBarSize"
+        style="@style/Widget.MaterialComponents.Toolbar.Primary"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <!--        <com.google.android.material.appbar.MaterialToolbar-->
-    <!--            android:id="@+id/topAppBar"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="?attr/actionBarSize"-->
-    <!--            style="@style/Widget.MaterialComponents.Toolbar.Primary">-->
+        <TextView
+            android:id="@+id/appbar_logo"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="پروفایل"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
 
-    <!--            <LinearLayout-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:gravity=""/>-->
-    <!--        </com.google.android.material.appbar.MaterialToolbar>-->
+        <ImageView
+            android:id="@+id/appbar_start_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+            android:layout_gravity="start"/>
 
-
-    <!--    </com.google.android.material.appbar.AppBarLayout>-->
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/profile_gl_1"
@@ -48,12 +57,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@id/profile_gl_1"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topAppBar"
         app:layout_constraintEnd_toEndOf="@id/profile_gl_2">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/profile_cv_gl_3"
@@ -171,6 +181,10 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="#286de6"
                 android:text="@string/profile_bt_fl"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginStart="4dp"
                 app:cornerRadius="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" />

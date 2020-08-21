@@ -6,26 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundColor">
 
-    <!--    <com.google.android.material.appbar.AppBarLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        app:layout_constraintTop_toTopOf="parent">-->
-
-    <!--        <com.google.android.material.appbar.MaterialToolbar-->
-    <!--            android:id="@+id/topAppBar"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="?attr/actionBarSize"-->
-    <!--            style="@style/Widget.MaterialComponents.Toolbar.Primary">-->
-
-    <!--            <LinearLayout-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:gravity=""/>-->
-    <!--        </com.google.android.material.appbar.MaterialToolbar>-->
-
-
-    <!--    </com.google.android.material.appbar.AppBarLayout>-->
-
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/profile_gl_1"

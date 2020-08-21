@@ -35,9 +35,9 @@ class signup_fr : Fragment() {
             test_fr.arguments
             val fragmentTransaction = fragmentManager?.beginTransaction()
             // replace the FrameLayout with new Fragment
-            fragmentTransaction?.replace(R.id.frame, test_fr)
-            fragmentTransaction?.addToBackStack("fr2")
-            fragmentTransaction?.commit() // save the changes
+//            fragmentTransaction?.replace(R.id.frame, test_fr)
+//            fragmentTransaction?.addToBackStack("fr2")
+//            fragmentTransaction?.commit() // save the changes
         }
     }
 

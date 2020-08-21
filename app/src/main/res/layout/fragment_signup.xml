@@ -199,8 +199,8 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:boxStrokeColor="@color/colorPrimary"
         app:hintTextColor="@color/colorPrimary"
-        android:hint="@string/pass2"
-        >
+        android:hint="@string/pass2">
+
         <com.google.android.material.textfield.TextInputEditText
             android:inputType="textPassword"
             android:layout_width="match_parent"
