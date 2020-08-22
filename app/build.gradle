@@ -39,5 +39,4 @@ dependencies {
     implementation 'com.pkmmte.view:circularimageview:1.1'
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-
 }

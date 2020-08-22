@@ -240,9 +240,10 @@
             app:layout_constraintTop_toBottomOf="@id/profile_chip_group"
             app:layout_constraintStart_toStartOf="@id/profile_gl_1"
             app:layout_constraintEnd_toEndOf="@id/profile_gl_2"
-
             tools:listitem="@layout/writing_cv"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </ScrollView>
