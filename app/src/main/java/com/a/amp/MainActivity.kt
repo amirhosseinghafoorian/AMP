@@ -12,22 +12,22 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_write)
+        setContentView(R.layout.activity_main)
 
-        val list = mutableListOf<WritingCvDataItem>()
+//        val list = mutableListOf<WritingCvDataItem>()
 //        val list2 = mutableListOf<CommentCvDataItem>()
 
-        repeat(10) {
-            list.add(WritingCvDataItem(" سه خط مقاله : $it"," دو خط مقاله : $it",
-                " نام کاربر : $it" , "$it روز پیش ",0))
+//        repeat(10) {
+//            list.add(WritingCvDataItem(" سه خط مقاله : $it"," دو خط مقاله : $it",
+//                " نام کاربر : $it" , "$it روز پیش ",0))
 
 //            list2.add(
 //                CommentCvDataItem(" دو خط مقاله : $it",
 //                " نام کاربر : $it",0))
-        }
+//        }
 
 //        val myAdapter2 = CommentCvAdapter(list2)
-        val myAdapter = WritingCvAdapter(list)
+//        val myAdapter = WritingCvAdapter(list)
 
 //        article_page_recycle_2.apply {
 //            adapter = myAdapter2

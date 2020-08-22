@@ -61,7 +61,7 @@
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/appbar_end_icon"
+            android:id="@+id/write_appbar_end_icon"
             android:layout_width="80dp"
             android:layout_height="30dp"
             android:text="پیش نویس"
@@ -71,7 +71,7 @@
             android:layout_marginEnd="5dp"/>
 
         <ImageView
-            android:id="@+id/appbar_start_icon"
+            android:id="@+id/write_appbar_start_icon"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/ic_baseline_arrow_forward_ios_24"
