@@ -29,6 +29,9 @@ class WriteFragment : Fragment() {
         write_appbar_start_icon.setOnClickListener {
             Navigation.findNavController(it).navigateUp()
         }
+        write_bt_3.setOnClickListener {
+            Navigation.findNavController(it).navigateUp()
+        }
     }
 
 }

@@ -9,6 +9,8 @@
         android:name="com.a.amp.SplashFragment"
         android:label="SplashFragment" >
         <action
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"
             android:id="@+id/action_splashFragment_to_authenticate"
             app:destination="@id/authenticate" />
         <action
@@ -30,6 +32,8 @@
             android:name="com.a.amp.SignupFragment"
             android:label="SignupFragment" />
         <action
+            app:popUpTo="@id/authenticate"
+            app:popUpToInclusive="true"
             android:id="@+id/action_global_homeFragment"
             app:destination="@id/homeFragment" />
     </navigation>

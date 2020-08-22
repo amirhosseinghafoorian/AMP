@@ -1,9 +1,16 @@
 package com.a.amp
 
+import android.app.Activity
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.writing_cv.view.*
 import kotlinx.android.synthetic.main.writing_cv.view.writing_cv_tv_1
@@ -21,7 +28,8 @@ class WritingCvAdapter(
         var id : Int = 0
         init {
             itemView.setOnClickListener{
-                
+//                Log.i("baby","hole item clicked")
+                it.findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToArticleFragment())
             }
         }
     }

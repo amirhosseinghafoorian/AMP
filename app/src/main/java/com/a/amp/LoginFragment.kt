@@ -12,6 +12,7 @@ class LoginFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        activity?.window?.decorView?.systemUiVisibility = 0
     }
 
     override fun onCreateView(
