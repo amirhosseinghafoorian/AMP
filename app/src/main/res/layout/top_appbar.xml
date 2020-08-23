@@ -13,9 +13,9 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="صفحه اصلی"
+        android:text="@string/mainPage"
         android:textColor="@android:color/white"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold"/>
 
     <ImageView
@@ -24,13 +24,15 @@
         android:layout_height="30dp"
         android:src="@drawable/ic_baseline_bookmark_border_24"
         android:layout_gravity="end"
-        android:layout_marginEnd="5dp"/>
+        android:layout_marginEnd="5dp"
+        android:contentDescription="@string/todo" />
 
     <ImageView
         android:id="@+id/appbar_start_icon"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-        android:layout_gravity="start"/>
+        android:layout_gravity="start"
+        android:contentDescription="@string/todo" />
 
 </com.google.android.material.appbar.MaterialToolbar>

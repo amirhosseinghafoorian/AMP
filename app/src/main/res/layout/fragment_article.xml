@@ -70,7 +70,7 @@
                     android:layout_margin="4dp"
                     android:textColor="@android:color/black"
                     android:textSize="17sp"
-                    android:text="نام کاربری"
+                    android:text="@string/username2"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     app:layout_constraintEnd_toStartOf="@id/article_gl_3"
@@ -81,7 +81,7 @@
                     android:id="@+id/article_tv_2"
                     android:layout_marginEnd="4dp"
                     android:textSize="12sp"
-                    android:text="2 روز پیش"
+                    android:text="@string/daysAgo"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     app:layout_constraintEnd_toStartOf="@id/article_gl_3"
@@ -102,7 +102,7 @@
                     android:layout_margin="4dp"
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
-                    android:text="تیتر اولیه مقاله"
+                    android:text="@string/articleTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:lines="2"
@@ -111,7 +111,7 @@
                     />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:text="متن مقاله "
+                    android:text="@string/articleText"
                     android:id="@+id/article_tv_7"
                     android:layout_margin="4dp"
                     android:textColor="@android:color/black"
@@ -134,7 +134,7 @@
             app:layout_constraintTop_toBottomOf="@id/article_cv_1"
             android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="@id/article_cv_1"
-            android:text="کلید واژه ها"
+            android:text="@string/keyWords"
             />
 
         <HorizontalScrollView
@@ -159,42 +159,42 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:rippleColor="@color/colorPrimary"
-                    android:text="سرمایه گذاری"/>
+                    android:text="@string/tab1" />
 
                 <com.google.android.material.chip.Chip
                     app:chipBackgroundColor="@android:color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:rippleColor="@color/colorPrimary"
-                    android:text="سهام"/>
+                    android:text="@string/tab2" />
 
                 <com.google.android.material.chip.Chip
                     app:chipBackgroundColor="@android:color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:rippleColor="@color/colorPrimary"
-                    android:text="اقتصاد"/>
+                    android:text="@string/tab3" />
 
                 <com.google.android.material.chip.Chip
                     app:chipBackgroundColor="@android:color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:rippleColor="@color/colorPrimary"
-                    android:text="apple"/>
+                    android:text="@string/tab4" />
 
                 <com.google.android.material.chip.Chip
                     app:chipBackgroundColor="@android:color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:rippleColor="@color/colorPrimary"
-                    android:text="تکنولوژی"/>
+                    android:text="@string/tab5" />
 
                 <com.google.android.material.chip.Chip
                     app:chipBackgroundColor="@android:color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:rippleColor="@color/colorPrimary"
-                    android:text="network"/>
+                    android:text="@string/tab6" />
 
             </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>
@@ -203,7 +203,7 @@
             android:id="@+id/article_btn_1"
             app:cornerRadius="10dp"
             android:textSize="17sp"
-            android:text="ارسال دیدگاه"
+            android:text="@string/sendComment"
             app:icon="@drawable/ic_send"
             app:iconGravity="textEnd"
             android:layout_width="0dp"
@@ -222,7 +222,7 @@
             app:layout_constraintTop_toBottomOf="@id/article_btn_1"
             android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="@id/article_cv_1"
-            android:text="مقالات مرتبط"
+            android:text="@string/relatedArticles"
             />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -249,7 +249,7 @@
             app:layout_constraintTop_toBottomOf="@id/article_page_recycle_1"
             android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="@id/article_cv_1"
-            android:text="دیدگاه کاربران"
+            android:text="@string/userComments"
             />
 
         <androidx.recyclerview.widget.RecyclerView

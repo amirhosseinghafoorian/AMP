@@ -30,5 +30,35 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="testtext">یک بازی سرگرم کننده در سبک کژوال است که شما را به اعماق دریا می‌برد تا در نقش یک گربه، به صید ماهی بپردازید</string>
     <string name="testtext2">مدت‌ها است که شایعاتی از مدل ارزان‌تر ایکس ‌باکس سری ایکس به‌گوش می‌رسد که ایکس‌باکس سری اس نام دارد. البته این کنسول هنوز به‌صورت رسمی معرفی نشده و احتمال می‌رود در جریان رویداد انتهای ماه اوت مایکروسافت، به‌صورت رسمی معرفی شود</string>
+    <string name="editArticle">ویرایش مقاله</string>
+    <string name="deleteArticle">حذف مقاله</string>
+    <string name="sendComment">ارسال دیدگاه</string>
+    <string name="username2">نام کاربری</string>
+    <string name="daysAgo">2 روز پیش</string>
+    <string name="articleTitle">تیتر اولیه مقاله</string>
+    <string name="articleText">متن مقاله</string>
+    <string name="keyWords">کلید واژه ها</string>
+    <string name="tab1">سرمایه گذاری</string>
+    <string name="tab2">سهام</string>
+    <string name="tab3">اقتصاد</string>
+    <string name="tab4">apple</string>
+    <string name="tab5">تکنولوژی</string>
+    <string name="tab6">network</string>
+    <string name="relatedArticles">مقالات مرتبط</string>
+    <string name="userComments">دیدگاه کاربران</string>
+    <string name="mainPage">صفحه اصلی</string>
+    <string name="forYou">برای شما</string>
+    <string name="searchArticle">جستجو مقاله</string>
+    <string name="topCharts">برترین مقالات</string>
+    <string name="profile">پروفایل</string>
+    <string name="zero">0</string>
+    <string name="writeArticle">نوشتن مقاله</string>
+    <string name="preWrite">پیش نویس</string>
+    <string name="label">عنوان</string>
+    <string name="addPn">افزودن پیوست</string>
+    <string name="addMedia">افزودن عکس،ویدئو یا صدا</string>
+    <string name="uploadFiles">بارگذاری فایل ها</string>
+    <string name="keywords2">کلمه کلیدی</string>
+    <string name="publishArticle">انتشار مقاله</string>
 
 </resources>

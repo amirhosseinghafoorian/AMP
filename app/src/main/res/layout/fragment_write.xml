@@ -41,7 +41,6 @@
 
 
         <com.google.android.material.appbar.MaterialToolbar
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layoutDirection="rtl"
         android:id="@+id/topAppBar"
@@ -55,27 +54,28 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="نوشتن مقاله"
+            android:text="@string/writeArticle"
             android:textColor="@android:color/white"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/write_appbar_end_icon"
             android:layout_width="80dp"
             android:layout_height="30dp"
-            android:text="پیش نویس"
+            android:text="@string/preWrite"
             android:gravity="center"
             android:textColor="@android:color/white"
             android:layout_gravity="end"
             android:layout_marginEnd="5dp"/>
 
-        <ImageView
-            android:id="@+id/write_appbar_start_icon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-            android:layout_gravity="start"/>
+            <ImageView
+                android:id="@+id/write_appbar_start_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                android:layout_gravity="start"
+                android:contentDescription="@string/todo" />
 
     </com.google.android.material.appbar.MaterialToolbar>
 
@@ -86,7 +86,7 @@
             android:id="@+id/write_tx_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="عنوان"
+            android:text="@string/label"
             android:textSize="20sp"
             android:textColor="@android:color/black"
             android:layout_marginTop="8dp"
@@ -116,7 +116,7 @@
             android:id="@+id/write_tx_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="متن مقاله"
+            android:text="@string/articleText"
             android:textSize="20sp"
             android:textColor="@android:color/black"
             app:layout_constraintTop_toBottomOf="@id/write_ti_1"
@@ -147,7 +147,7 @@
             android:id="@+id/write_tx_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="افزودن پیوست"
+            android:text="@string/addPn"
             android:textSize="20sp"
             android:textColor="@android:color/black"
             app:layout_constraintTop_toBottomOf="@id/write_ti_2"
@@ -159,7 +159,7 @@
             android:id="@+id/write_bt_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="افزودن عکس،ویدئو یا صدا"
+            android:text="@string/addMedia"
             android:textColor="@android:color/black"
             android:backgroundTint="#f3e6ff"
             app:layout_constraintTop_toBottomOf="@id/write_tx_3"
@@ -172,7 +172,7 @@
             android:id="@+id/write_bt_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="بارگذاری فایل ها"
+            android:text="@string/uploadFiles"
             android:backgroundTint="@color/backgroundColor"
             android:textColor="@color/colorPrimary"
             app:layout_constraintTop_toBottomOf="@id/write_bt_1"
@@ -185,7 +185,7 @@
             android:id="@+id/write_tx_4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="کلمه کلیدی"
+            android:text="@string/keywords2"
             android:textSize="20sp"
             android:textColor="@android:color/black"
             app:layout_constraintTop_toBottomOf="@id/write_bt_2"
@@ -219,7 +219,7 @@
             android:id="@+id/write_bt_3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="انتشار مقاله"
+            android:text="@string/publishArticle"
             android:backgroundTint="@color/colorPrimary"
             android:textColor="@android:color/white"
             app:layout_constraintTop_toBottomOf="@id/write_ti_3"

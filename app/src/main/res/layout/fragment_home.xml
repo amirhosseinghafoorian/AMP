@@ -25,7 +25,6 @@
             app:layout_constraintGuide_percent="0.975"/>
 
         <com.google.android.material.appbar.MaterialToolbar
-            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layoutDirection="rtl"
             android:id="@+id/topAppBar"
@@ -39,9 +38,9 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="صفحه اصلی"
+                android:text="@string/mainPage"
                 android:textColor="@android:color/white"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="bold"/>
 
             <ImageView
@@ -50,9 +49,11 @@
                 android:layout_height="30dp"
                 android:src="@drawable/ic_baseline_person_24"
                 android:layout_gravity="end"
-                android:layout_marginEnd="5dp"/>
+                android:layout_marginEnd="5dp"
+                android:contentDescription="@string/todo" />
 
             <ImageView
+                android:contentDescription="@string/todo"
                 android:id="@+id/home_appbar_start_icon"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -78,37 +79,37 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="برای شما"
+                android:text="@string/forYou"
                 />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="بورس"
+                android:text="@string/tab1"
                 />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="سهام"
+                android:text="@string/tab2"
                 />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="اقتصاد"
+                android:text="@string/tab3"
                 />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="سرمایه گذاری"
+                android:text="@string/tab4"
                 />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="مالی"
+                android:text="@string/tab5"
                 />
 
         </com.google.android.material.tabs.TabLayout>
@@ -129,7 +130,7 @@
             app:startIconDrawable="@drawable/ic_baseline_search_24"
             >
             <com.google.android.material.textfield.TextInputEditText
-                android:hint="جستجو مقاله"
+                android:hint="@string/searchArticle"
                 android:maxLines="1"
                 android:background="@drawable/et_corner"
                 android:layout_width="match_parent"
@@ -154,7 +155,7 @@
         <com.google.android.material.textview.MaterialTextView
             android:textColor="@android:color/black"
             android:textSize="20sp"
-            android:text="برترین مقالات"
+            android:text="@string/topCharts"
             android:layout_margin="5dp"
             android:layout_width="0dp"
             android:id="@+id/home_page_tv_1"

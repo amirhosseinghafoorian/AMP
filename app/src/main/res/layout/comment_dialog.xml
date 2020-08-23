@@ -12,7 +12,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ارسال دیدگاه"
+        android:text="@string/sendComment"
         android:textSize="18sp"
         android:textColor="@android:color/black"
         android:textStyle="bold"
@@ -41,7 +41,7 @@
     <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ارسال دیدگاه"
+        android:text="@string/sendComment"
         android:layout_margin="8dp"
         app:layout_constraintTop_toBottomOf="@id/comment_ti"
         app:layout_constraintEnd_toEndOf="parent"/>
