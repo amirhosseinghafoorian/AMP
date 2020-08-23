@@ -8,10 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.writing_cv.view.*
 import kotlinx.android.synthetic.main.writing_cv.view.writing_cv_tv_1
 
@@ -31,6 +33,14 @@ class WritingCvAdapter(
 //                Log.i("baby","hole item clicked")
                 it.findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToArticleFragment())
             }
+//            itemView.writing_cv_ic_more.setOnClickListener {
+//                val bottonSheetDialog = BottomSheetDialog(requireContext())
+//                val  view = layoutInflater.inflate(R.layout.bottom_sheet,null)
+//
+//                bottonSheetDialog.setContentView(view)
+//
+//                bottonSheetDialog.show()
+//            }
         }
     }
 

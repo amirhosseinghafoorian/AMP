@@ -76,7 +76,7 @@ class ArticleFragment : Fragment() {
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 //        dialog.window?.setLayout(1000,1000)
 
-        profile_cv_btn_1.setOnClickListener {
+        article_btn_1.setOnClickListener {
             dialog.show()
         }
     }

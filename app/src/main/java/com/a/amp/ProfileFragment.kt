@@ -23,11 +23,6 @@ class ProfileFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,7 +36,6 @@ class ProfileFragment : Fragment() {
         profile_cv_btn_1.setOnClickListener {
             bottonSheetDialog.show()
         }
-
 
     }
 
