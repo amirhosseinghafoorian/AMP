@@ -72,6 +72,9 @@
         <action
             android:id="@+id/action_articleFragment_to_tagFragment"
             app:destination="@id/tagFragment" />
+        <action
+            android:id="@+id/action_articleFragment_self"
+            app:destination="@id/articleFragment" />
     </fragment>
     <fragment
         android:id="@+id/writeFragment"

@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.related_cv.view.*
+import java.lang.IllegalArgumentException
 
 class RelatedCvAdapter(
     private val list: MutableList<RelatedCvDataItem>
@@ -20,7 +21,11 @@ class RelatedCvAdapter(
         var id : Int = 0
         init {
             itemView.setOnClickListener{
-                it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToArticleFragment())
+                try {
+                    it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToArticleFragment())
+                }catch (E : IllegalArgumentException){
+                    it.findNavController().navigate(ArticleFragmentDirections.actionArticleFragmentSelf())
+                }
             }
         }
     }

@@ -70,7 +70,7 @@
                     android:layout_margin="4dp"
                     android:textColor="@android:color/black"
                     android:textSize="17sp"
-                    android:text="@string/enterText"
+                    android:text="نام کاربری"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     app:layout_constraintEnd_toStartOf="@id/article_gl_3"
@@ -81,7 +81,7 @@
                     android:id="@+id/article_tv_2"
                     android:layout_marginEnd="4dp"
                     android:textSize="12sp"
-                    android:text="@string/email"
+                    android:text="2 روز پیش"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     app:layout_constraintEnd_toStartOf="@id/article_gl_3"
@@ -102,7 +102,7 @@
                     android:layout_margin="4dp"
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
-                    android:text="@string/enterText2"
+                    android:text="تیتر اولیه مقاله"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:lines="2"
@@ -111,6 +111,7 @@
                     />
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:text="متن مقاله "
                     android:id="@+id/article_tv_7"
                     android:layout_margin="4dp"
                     android:textColor="@android:color/black"

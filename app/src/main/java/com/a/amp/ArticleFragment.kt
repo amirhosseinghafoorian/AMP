@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_article.*
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 private const val ARG_PARAM1 = "ID"
 class ArticleFragment : Fragment() {
@@ -28,6 +29,35 @@ class ArticleFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        val relatedList = mutableListOf<RelatedCvDataItem>()
+        val commentList = mutableListOf<CommentCvDataItem>()
+
+        repeat(10) {
+            relatedList.add(
+                RelatedCvDataItem(" دو خط مقاله : $it",
+                " نام کاربر : $it" , "$it روز پیش ",0)
+            )
+
+            commentList.add(
+                CommentCvDataItem(" دو خط مقاله : $it",
+                    " نام کاربر : $it" ,0)
+            )
+        }
+
+        val myAdapter = RelatedCvAdapter(relatedList)
+        val myAdapter2 = CommentCvAdapter(commentList)
+
+        article_page_recycle_1.apply {
+            adapter = myAdapter
+            setHasFixedSize(true)
+        }
+
+        article_page_recycle_2.apply {
+            adapter = myAdapter2
+            setHasFixedSize(true)
+        }
+
         article_iv_1.setOnClickListener {
             findNavController().navigate(ArticleFragmentDirections.actionArticleFragmentToProfileFragment())
         }
