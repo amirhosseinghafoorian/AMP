@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#E9E9E9"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/home_page_gl_1"
+            app:layout_constraintGuide_percent="0.025"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/home_page_gl_2"
+            app:layout_constraintGuide_percent="0.975"/>
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="match_parent"
+            android:layoutDirection="rtl"
+            android:id="@+id/topAppBar"
+            android:layout_height="?attr/actionBarSize"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/appbar_logo"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/mainPage"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:id="@+id/home_appbar_end_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_baseline_person_24"
+                android:layout_gravity="end"
+                android:layout_marginEnd="5dp"
+                android:contentDescription="@string/todo" />
+
+            <ImageView
+                android:contentDescription="@string/todo"
+                android:id="@+id/home_appbar_start_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_write"
+                android:layout_gravity="start"/>
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <com.google.android.material.tabs.TabLayout
+            android:layoutDirection="rtl"
+            android:id="@+id/home_page_TL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/topAppBar"
+            app:tabSelectedTextColor="@color/colorPrimary"
+            app:tabIndicatorColor="@android:color/white"
+            android:backgroundTint="@color/colorPrimary"
+            app:tabIndicator="@drawable/tabindicator"
+            app:tabIndicatorGravity="stretch"
+            app:tabContentStart="0dp"
+            app:tabMode="scrollable">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/forYou"
+                />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab1"
+                />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab2"
+                />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab3"
+                />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab4"
+                />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab5"
+                />
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginRight="4dp"
+            android:layout_marginLeft="4dp"
+            android:id="@+id/home_page_et_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/home_page_gl_1"
+            app:layout_constraintEnd_toStartOf="@id/home_page_gl_2"
+            app:layout_constraintTop_toBottomOf="@id/home_page_TL"
+            android:textColor="@android:color/black"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:hintTextColor="@android:color/black"
+            app:startIconDrawable="@drawable/ic_baseline_search_24"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:hint="@string/searchArticle"
+                android:maxLines="1"
+                android:background="@drawable/et_corner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/home_page_recycle_2"
+            android:layoutDirection="rtl"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:reverseLayout="false"
+            app:layout_constraintTop_toBottomOf="@id/home_page_et_1"
+            app:layout_constraintRight_toLeftOf="@id/home_page_gl_2"
+            app:layout_constraintLeft_toRightOf="@id/home_page_gl_1"
+            tools:listitem="@layout/summary_cv" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:text="@string/topCharts"
+            android:layout_margin="5dp"
+            android:layout_width="0dp"
+            android:id="@+id/home_page_tv_1"
+            app:layout_constraintStart_toEndOf="@id/home_page_gl_1"
+            app:layout_constraintEnd_toStartOf="@id/home_page_gl_2"
+            app:layout_constraintTop_toBottomOf="@id/home_page_recycle_2"
+            android:layout_height="wrap_content"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
+            android:id="@+id/home_page_recycle_1"
+            android:layout_width="0dp"
+            android:orientation="horizontal"
+            android:scrollbars="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:reverseLayout="false"
+            app:layout_constraintTop_toBottomOf="@id/home_page_tv_1"
+            app:layout_constraintRight_toLeftOf="@id/home_page_gl_2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            tools:listitem="@layout/related_cv"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
