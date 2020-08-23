@@ -1,5 +1,8 @@
 package com.a.amp
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -60,6 +63,21 @@ class ArticleFragment : Fragment() {
 
         article_iv_1.setOnClickListener {
             findNavController().navigate(ArticleFragmentDirections.actionArticleFragmentToProfileFragment())
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val dialog = Dialog(requireContext())
+        val view = layoutInflater.inflate(R.layout.comment_dialog,null)
+
+        dialog.setContentView(view)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+//        dialog.window?.setLayout(1000,1000)
+
+        profile_cv_btn_1.setOnClickListener {
+            dialog.show()
         }
     }
 
