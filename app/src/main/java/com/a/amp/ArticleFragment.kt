@@ -4,16 +4,19 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.a.amp.databinding.FragmentArticleBinding
 import kotlinx.android.synthetic.main.fragment_article.*
-import kotlinx.android.synthetic.main.fragment_profile.*
+
 
 private const val ARG_PARAM1 = "ID"
 class ArticleFragment : Fragment() {
+    private lateinit var binding: FragmentArticleBinding
     private var param1: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,24 +30,39 @@ class ArticleFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_article, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_article, container, false)
+        return binding.root
+//        return inflater.inflate(R.layout.fragment_article, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        binding.articleBind = WritingCvDataItem(
+            "تیتر اولیه مقاله",
+            "متنی برای تست چند متن اصلی مقاله",
+            "امیرحسین غفوریان",
+            "5 روز پیش",
+            0
+        )
 
         val relatedList = mutableListOf<RelatedCvDataItem>()
         val commentList = mutableListOf<CommentCvDataItem>()
 
         repeat(10) {
             relatedList.add(
-                RelatedCvDataItem(" دو خط مقاله : $it",
-                " نام کاربر : $it" , "$it روز پیش ",0)
+                RelatedCvDataItem(
+                    " دو خط مقاله : $it",
+                    " نام کاربر : $it", "$it روز پیش ", 0
+                )
             )
 
             commentList.add(
-                CommentCvDataItem(" دو خط مقاله : $it",
-                    " نام کاربر : $it" ,0)
+                CommentCvDataItem(
+                    " دو خط مقاله : $it",
+                    " نام کاربر : $it", 0
+                )
             )
         }
 
@@ -70,7 +88,7 @@ class ArticleFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val dialog = Dialog(requireContext())
-        val view = layoutInflater.inflate(R.layout.comment_dialog,null)
+        val view = layoutInflater.inflate(R.layout.comment_dialog, null)
 
         dialog.setContentView(view)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

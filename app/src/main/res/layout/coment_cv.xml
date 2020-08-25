@@ -1,85 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:rippleColor="@color/colorPrimary"
-    android:layoutDirection="rtl"
-    android:checkable="true"
-    android:focusable="true"
-    android:clickable="true"
-    app:cardCornerRadius="20dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginBottom="8dp"
-    android:background="@android:color/white"
-    >
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_margin="4dp"
-        android:id="@+id/inside_layout"
-        app:layout_constraintTop_toTopOf="parent"
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="comment"
+            type="com.a.amp.CommentCvDataItem" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/white"
+        android:checkable="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:layoutDirection="rtl"
+        app:cardCornerRadius="20dp"
+        app:rippleColor="@color/colorPrimary">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/inside_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/coment_cv_gl_1"
-            app:layout_constraintGuide_percent="0.15"/>
-
-        <com.pkmmte.view.CircularImageView
-            android:id="@+id/comment_iv_1"
             android:layout_margin="4dp"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            app:border="true"
-            app:border_width="2dp"
-            android:src="@drawable/ic_baseline_person_24"
-            app:border_color="@android:color/black"
-            app:layout_constraintEnd_toStartOf="@id/coment_cv_gl_1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/todo" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/comment_tv_1"
-            android:layout_marginStart="4dp"
-            android:textColor="@android:color/black"
-            android:textSize="17sp"
-            android:text="@string/enterText"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            app:layout_constraintStart_toEndOf="@id/coment_cv_gl_1"
-            app:layout_constraintTop_toTopOf="@id/comment_iv_1"
-            app:layout_constraintBottom_toBottomOf="@id/comment_iv_1"
-            />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/coment_cv_gl_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.15" />
 
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/comment_br_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:constraint_referenced_ids="comment_iv_1"
-            app:barrierDirection="bottom"/>
+            <com.pkmmte.view.CircularImageView
+                android:id="@+id/comment_iv_1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="4dp"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_baseline_person_24"
+                app:border="true"
+                app:border_color="@android:color/black"
+                app:border_width="2dp"
+                app:layout_constraintEnd_toStartOf="@id/coment_cv_gl_1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:fontFamily="@font/vazir_bold"
-            android:id="@+id/comment_tv_2"
-            android:layout_margin="4dp"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            android:text="@string/enterText2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:lines="4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/comment_br_1"
-            />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/comment_tv_1"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginStart="4dp"
+                android:text="@{comment.name}"
+                android:textColor="@android:color/black"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="@id/comment_iv_1"
+                app:layout_constraintStart_toEndOf="@id/coment_cv_gl_1"
+                app:layout_constraintTop_toTopOf="@id/comment_iv_1" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/comment_br_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="comment_iv_1" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/comment_tv_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:fontFamily="@font/vazir_bold"
+                android:lines="4"
+                android:text="@{comment.text}"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/comment_br_1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+    </com.google.android.material.card.MaterialCardView>
 
-</com.google.android.material.card.MaterialCardView>
+</layout>

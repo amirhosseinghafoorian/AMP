@@ -1,93 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="300dp"
-    android:layout_height="wrap_content"
-    app:rippleColor="@color/colorPrimary"
-    android:layoutDirection="rtl"
-    android:checkable="true"
-    android:focusable="true"
-    android:clickable="true"
-    app:cardCornerRadius="20dp"
-    android:layout_margin="2dp"
-    android:background="@android:color/white"
-    >
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/inside_layout"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <data>
 
-        <androidx.constraintlayout.widget.Guideline
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/related_cv_gl_1"
-            app:layout_constraintGuide_percent="0.15"/>
+        <import type="android.view.View" />
 
-        <com.pkmmte.view.CircularImageView
-            android:id="@+id/related_iv_1"
-            android:layout_margin="4dp"
-            app:border="true"
-            app:border_width="2dp"
-            android:src="@drawable/ic_baseline_person_24"
-            app:border_color="@android:color/black"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            app:layout_constraintEnd_toStartOf="@id/related_cv_gl_1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/related_br_1"
-            android:contentDescription="@string/todo" />
+        <variable
+            name="related"
+            type="com.a.amp.RelatedCvDataItem" />
+    </data>
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/related_tv_2"
-            android:layout_marginStart="5dp"
-            android:textColor="@android:color/black"
-            android:textSize="17sp"
-            android:text="@string/enterText"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            app:layout_constraintStart_toEndOf="@id/related_cv_gl_1"
-            app:layout_constraintTop_toBottomOf="@id/related_br_1"
-            />
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:background="@android:color/white"
+        android:checkable="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:layoutDirection="rtl"
+        app:cardCornerRadius="20dp"
+        app:rippleColor="@color/colorPrimary">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/related_tv_3"
-            android:layout_marginStart="5dp"
-            android:textSize="12sp"
-            android:text="@string/email"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            app:layout_constraintStart_toEndOf="@id/related_cv_gl_1"
-            app:layout_constraintTop_toBottomOf="@id/related_tv_2"
-            />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/inside_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/related_br_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:constraint_referenced_ids="related_tv_1"
-            app:barrierDirection="bottom"/>
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/related_cv_gl_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.15" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:fontFamily="@font/vazir_bold"
-            android:id="@+id/related_tv_1"
-            android:layout_margin="2dp"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            android:text="@string/enterText2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:lines="2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            <com.pkmmte.view.CircularImageView
+                android:id="@+id/related_iv_1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="4dp"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_baseline_person_24"
+                app:border="true"
+                app:border_color="@android:color/black"
+                app:border_width="2dp"
+                app:layout_constraintEnd_toStartOf="@id/related_cv_gl_1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/related_br_1" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/related_tv_2"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginStart="5dp"
+                android:text="@{related.name}"
+                android:textColor="@android:color/black"
+                android:textSize="17sp"
+                app:layout_constraintStart_toEndOf="@id/related_cv_gl_1"
+                app:layout_constraintTop_toBottomOf="@id/related_br_1" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/related_tv_3"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginStart="5dp"
+                android:text="@{related.days}"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@id/related_cv_gl_1"
+                app:layout_constraintTop_toBottomOf="@id/related_tv_2" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/related_br_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="related_tv_1" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/related_tv_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:fontFamily="@font/vazir_bold"
+                android:lines="2"
+                android:text="@{related.text}"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+    </com.google.android.material.card.MaterialCardView>
 
-</com.google.android.material.card.MaterialCardView>
+</layout>

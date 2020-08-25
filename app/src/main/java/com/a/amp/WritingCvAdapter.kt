@@ -1,37 +1,31 @@
 package com.a.amp
 
-import android.app.Activity
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.navigation.Navigation.findNavController
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import kotlinx.android.synthetic.main.writing_cv.view.*
-import kotlinx.android.synthetic.main.writing_cv.view.writing_cv_tv_1
+import com.a.amp.databinding.WritingCvBinding
 
 class WritingCvAdapter(
     private val list: MutableList<WritingCvDataItem>
 ) :
     RecyclerView.Adapter<WritingCvAdapter.MyViewHolder>() {
 
-    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var mainText: TextView = itemView.writing_cv_tv_4
-        var userFullName: TextView = itemView.writing_cv_tv_1
-        var days: TextView = itemView.writing_cv_tv_2
-        var title: TextView = itemView.writing_cv_tv_3
-        var id : Int = 0
+    inner class MyViewHolder(binding: WritingCvBinding) : RecyclerView.ViewHolder(binding.root) {
+//        var mainText: TextView = itemView.writing_cv_tv_4
+//        var userFullName: TextView = itemView.writing_cv_tv_1
+//        var days: TextView = itemView.writing_cv_tv_2
+//        var title: TextView = itemView.writing_cv_tv_3
+//        var id : Int = 0
+
+        var binding: WritingCvBinding = binding
+
         init {
-            itemView.setOnClickListener{
+            itemView.setOnClickListener {
 //                Log.i("baby","hole item clicked")
-                it.findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToArticleFragment())
+                it.findNavController()
+                    .navigate(ProfileFragmentDirections.actionProfileFragmentToArticleFragment())
             }
 //            itemView.writing_cv_ic_more.setOnClickListener {
 //                val bottonSheetDialog = BottomSheetDialog(requireContext())
@@ -45,19 +39,24 @@ class WritingCvAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val textView =
-            LayoutInflater.from(parent.context).inflate(R.layout.writing_cv, parent, false)
-        return MyViewHolder(textView)
+        val binding: WritingCvBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(parent.getContext()),
+            R.layout.writing_cv, parent, false
+        )
+//        val textView =
+//            LayoutInflater.from(parent.context).inflate(R.layout.writing_cv, parent, false)
+        return MyViewHolder(binding)
     }
 
     override fun getItemCount() = list.size
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.mainText.text = list[position].text
-        holder.userFullName.text = list[position].name
-        holder.days.text = list[position].days
-        holder.title.text = list[position].title
-        holder.id = list[position].id
+//        holder.mainText.text = list[position].text
+//        holder.userFullName.text = list[position].name
+//        holder.days.text = list[position].days
+//        holder.title.text = list[position].title
+//        holder.id = list[position].id
+        holder.binding.write = list[position]
     }
 
 }
