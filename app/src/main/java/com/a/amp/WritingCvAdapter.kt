@@ -6,9 +6,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.a.amp.databinding.WritingCvBinding
+import kotlinx.android.synthetic.main.writing_cv.view.*
 
 class WritingCvAdapter(
-    private val list: MutableList<WritingCvDataItem>
+    private val list: MutableList<WritingCvDataItem>,
+    var clickListener: MoreClickListner? = null
 ) :
     RecyclerView.Adapter<WritingCvAdapter.MyViewHolder>() {
 
@@ -23,18 +25,12 @@ class WritingCvAdapter(
 
         init {
             itemView.setOnClickListener {
-//                Log.i("baby","hole item clicked")
                 it.findNavController()
                     .navigate(ProfileFragmentDirections.actionProfileFragmentToArticleFragment())
             }
-//            itemView.writing_cv_ic_more.setOnClickListener {
-//                val bottonSheetDialog = BottomSheetDialog(requireContext())
-//                val  view = layoutInflater.inflate(R.layout.bottom_sheet,null)
-//
-//                bottonSheetDialog.setContentView(view)
-//
-//                bottonSheetDialog.show()
-//            }
+            itemView.writing_cv_ic_more.setOnClickListener {
+                clickListener?.onClick(list[layoutPosition].id, layoutPosition)
+            }
         }
     }
 

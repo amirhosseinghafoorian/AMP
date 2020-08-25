@@ -11,20 +11,11 @@ import com.a.amp.databinding.FragmentProfileBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.fragment_profile.*
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment(), MoreClickListner {
     private lateinit var binding: FragmentProfileBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val bottonSheetDialog = BottomSheetDialog(requireContext())
-        val  view = layoutInflater.inflate(R.layout.bottom_sheet,null)
-
-        bottonSheetDialog.setContentView(view)
-
-        profile_cv_btn_1.setOnClickListener {
-            bottonSheetDialog.show()
-        }
 
     }
 
@@ -53,7 +44,7 @@ class ProfileFragment : Fragment() {
             )
         }
 
-        val myAdapter = WritingCvAdapter(writingList)
+        val myAdapter = WritingCvAdapter(writingList, this)
 
         profile_recycler.apply {
             adapter = myAdapter
@@ -63,5 +54,14 @@ class ProfileFragment : Fragment() {
         profile_appbar_start_icon.setOnClickListener {
             Navigation.findNavController(it).navigateUp()
         }
+    }
+
+    override fun onClick(id: Int, layoutPosition: Int) {
+        val bottonSheetDialog = BottomSheetDialog(requireContext())
+        val view = layoutInflater.inflate(R.layout.bottom_sheet, null)
+
+        bottonSheetDialog.setContentView(view)
+
+        bottonSheetDialog.show()
     }
 }
