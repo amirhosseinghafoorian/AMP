@@ -3,23 +3,23 @@ package com.a.amp
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class HomeListViewModel : ViewModel() {
-    var summaryList = MutableLiveData<MutableList<RelatedCvDataItem>>()
+class ArticleListViewModel : ViewModel() {
     var relatedList = MutableLiveData<MutableList<RelatedCvDataItem>>()
+    var commentList = MutableLiveData<MutableList<CommentCvDataItem>>()
 
     init {
-        summaryList.value = mutableListOf()
+        commentList.value = mutableListOf()
         relatedList.value = ArrayList()
         // can be used by each of above
     }
 
-    fun fillSummary() {
-        summaryList.value?.clear()
+    fun fillComment() {
+        commentList.value?.clear()
         repeat(10) {
-            summaryList.value?.add(
-                RelatedCvDataItem(
+            commentList.value?.add(
+                CommentCvDataItem(
                     " دو خط مقاله : $it",
-                    " نام کاربر : $it", "$it روز پیش ", 0
+                    " نام کاربر : $it", 0
                 )
             )
         }

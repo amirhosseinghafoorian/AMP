@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.a.amp.databinding.FragmentArticleBinding
 import kotlinx.android.synthetic.main.fragment_article.*
@@ -37,6 +38,7 @@ class ArticleFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        val articleViewModel = ViewModelProvider(this).get(ArticleListViewModel::class.java)
 
         binding.articleBind = WritingCvDataItem(
             "تیتر اولیه مقاله",
@@ -46,27 +48,8 @@ class ArticleFragment : Fragment() {
             0
         )
 
-        val relatedList = mutableListOf<RelatedCvDataItem>()
-        val commentList = mutableListOf<CommentCvDataItem>()
-
-        repeat(10) {
-            relatedList.add(
-                RelatedCvDataItem(
-                    " دو خط مقاله : $it",
-                    " نام کاربر : $it", "$it روز پیش ", 0
-                )
-            )
-
-            commentList.add(
-                CommentCvDataItem(
-                    " دو خط مقاله : $it",
-                    " نام کاربر : $it", 0
-                )
-            )
-        }
-
-        val myAdapter = RelatedCvAdapter(relatedList)
-        val myAdapter2 = CommentCvAdapter(commentList)
+        val myAdapter = articleViewModel.relatedList.value?.let { RelatedCvAdapter(it) }
+        val myAdapter2 = articleViewModel.commentList.value?.let { CommentCvAdapter(it) }
 
         article_page_recycle_1.apply {
             adapter = myAdapter
@@ -77,6 +60,17 @@ class ArticleFragment : Fragment() {
             adapter = myAdapter2
             setHasFixedSize(true)
         }
+
+        articleViewModel.relatedList.observe(viewLifecycleOwner, { list ->
+            myAdapter?.notifyDataSetChanged()
+        })
+
+        articleViewModel.commentList.observe(viewLifecycleOwner, { list ->
+            myAdapter2?.notifyDataSetChanged()
+        })
+
+        articleViewModel.fillRelated()
+        articleViewModel.fillComment()
 
         article_iv_1.setOnClickListener {
             findNavController().navigate(ArticleFragmentDirections.actionArticleFragmentToProfileFragment())
