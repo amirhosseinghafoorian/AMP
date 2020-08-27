@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -19,26 +20,10 @@ class HomeFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val summaryList = mutableListOf<RelatedCvDataItem>()
-        val relatedList = mutableListOf<RelatedCvDataItem>()
-        repeat(10) {
-            summaryList.add(
-                RelatedCvDataItem(
-                    " دو خط مقاله : $it",
-                    " نام کاربر : $it", "$it روز پیش ", 0
-                )
-            )
+        val loginViewModel = ViewModelProvider(this).get(HomeListViewModel::class.java)
 
-            relatedList.add(
-                RelatedCvDataItem(
-                    " دو خط مقاله : $it",
-                    " نام کاربر : $it", "$it روز پیش ", 0
-                )
-            )
-        }
-
-        val myAdapter2 = SummaryCvAdapter(summaryList)
-        val myAdapter = RelatedCvAdapter(relatedList)
+        val myAdapter2 = loginViewModel.summaryList.value?.let { SummaryCvAdapter(it) }
+        val myAdapter = loginViewModel.relatedList.value?.let { RelatedCvAdapter(it) }
 
         home_page_recycle_2.apply {
             adapter = myAdapter2
@@ -50,10 +35,21 @@ class HomeFragment : Fragment() {
             setHasFixedSize(true)
         }
 
+        loginViewModel.summaryList.observe(viewLifecycleOwner, { list ->
+            myAdapter2?.notifyDataSetChanged()
+        })
+
+        loginViewModel.relatedList.observe(viewLifecycleOwner, { list ->
+            myAdapter?.notifyDataSetChanged()
+        })
+
+        loginViewModel.fillSummary()
+        loginViewModel.fillRelated()
+
         home_appbar_end_icon.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProfileFragment())
         }
-        home_appbar_start_icon.setOnClickListener{
+        home_appbar_start_icon.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToWriteFragment())
         }
     }

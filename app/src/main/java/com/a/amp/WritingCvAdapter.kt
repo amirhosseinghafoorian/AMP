@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.writing_cv.view.*
 class WritingCvAdapter(
     private val list: MutableList<WritingCvDataItem>,
     var clickListener: MoreClickListner? = null
+//,var clickcallback:(id : Int) -> Unit
 ) :
     RecyclerView.Adapter<WritingCvAdapter.MyViewHolder>() {
 
@@ -29,6 +30,7 @@ class WritingCvAdapter(
                     .navigate(ProfileFragmentDirections.actionProfileFragmentToArticleFragment())
             }
             itemView.writing_cv_ic_more.setOnClickListener {
+//                clickcallback.invoke(2)
                 clickListener?.onClick(list[layoutPosition].id, layoutPosition)
             }
         }

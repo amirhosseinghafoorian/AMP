@@ -13,11 +13,10 @@ import androidx.navigation.fragment.findNavController
 import com.a.amp.databinding.FragmentArticleBinding
 import kotlinx.android.synthetic.main.fragment_article.*
 
-
-private const val ARG_PARAM1 = "ID"
 class ArticleFragment : Fragment() {
     private lateinit var binding: FragmentArticleBinding
     private var param1: Int = 0
+    private val ARG_PARAM1 = "ID"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

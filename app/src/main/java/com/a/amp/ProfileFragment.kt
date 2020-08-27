@@ -44,7 +44,13 @@ class ProfileFragment : Fragment(), MoreClickListner {
             )
         }
 
-        val myAdapter = WritingCvAdapter(writingList, this)
+        val myAdapter = WritingCvAdapter(
+            writingList, this
+//        ,
+//            {
+//              call back body
+//            }
+        )
 
         profile_recycler.apply {
             adapter = myAdapter
