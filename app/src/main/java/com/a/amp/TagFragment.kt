@@ -4,42 +4,40 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-
-//TODO should be edited
-private val arg = "edit reminder"
+import androidx.lifecycle.ViewModelProvider
+import com.a.amp.databinding.FragmentTagBinding
+import kotlinx.android.synthetic.main.fragment_tag.*
 
 class TagFragment : Fragment() {
-    private var param1: String? = null
-    private var param2: String? = null
-
-    private val ARG_PARAM1 = "param1"
-    private val ARG_PARAM2 = "param2"
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentTagBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_tag, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_tag, container, false)
+        return binding.root
     }
 
-    companion object {
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val tagViewModel = ViewModelProvider(this).get(TagListViewModel::class.java)
 
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            TagFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        val myAdapter = tagViewModel.summaryList.value?.let { SummaryCvAdapter(it) }
+
+        tag_recycler.apply {
+            adapter = myAdapter
+            setHasFixedSize(true)
+        }
+
+        tagViewModel.summaryList.observe(viewLifecycleOwner, { list ->
+            myAdapter?.notifyDataSetChanged()
+        })
+
+        tagViewModel.fillSummary()
     }
+
 }

@@ -30,7 +30,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/appbar_logo"
+                    android:id="@+id/profile_appbar_logo"
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"

@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.a.amp.databinding.FragmentArticleBinding
 import kotlinx.android.synthetic.main.fragment_article.*
@@ -74,6 +75,14 @@ class ArticleFragment : Fragment() {
 
         article_iv_1.setOnClickListener {
             findNavController().navigate(ArticleFragmentDirections.actionArticleFragmentToProfileFragment())
+        }
+
+        article_tv_4.setOnClickListener {
+            findNavController().navigate(ArticleFragmentDirections.actionArticleFragmentToTagFragment())
+        }
+
+        article_appbar_start_icon.setOnClickListener {
+            Navigation.findNavController(it).navigateUp()
         }
     }
 
