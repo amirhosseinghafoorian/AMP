@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.a.amp.databinding.FragmentTagBinding
 import kotlinx.android.synthetic.main.fragment_tag.*
 
@@ -38,6 +39,10 @@ class TagFragment : Fragment() {
         })
 
         tagViewModel.fillSummary()
+
+        tag_appbar_start_icon.setOnClickListener {
+            Navigation.findNavController(it).navigateUp()
+        }
     }
 
 }
