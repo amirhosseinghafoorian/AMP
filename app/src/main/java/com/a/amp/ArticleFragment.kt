@@ -77,7 +77,7 @@ class ArticleFragment : Fragment() {
             findNavController().navigate(ArticleFragmentDirections.actionArticleFragmentToProfileFragment())
         }
 
-        article_tv_4.setOnClickListener {
+        article_chip_1.setOnClickListener {
             findNavController().navigate(ArticleFragmentDirections.actionArticleFragmentToTagFragment())
         }
 
