@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.a.amp.HomeFragmentDirections
 import com.a.amp.R
 import com.a.amp.databinding.SummaryCvBinding
 import com.a.amp.home.data.HomeRelatedCvDataItem
@@ -50,7 +49,7 @@ class HomeSummaryCvAdapter(
 //        holder.userFullName.text = list[position].name
 //        holder.days.text = list[position].days
 //        holder.id = list[position].id
-        holder.binding.switch = true
+        holder.binding.flag = true
         holder.binding.summary = list[position]
     }
 

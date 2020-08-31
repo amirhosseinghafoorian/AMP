@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.a.amp.LoginFragmentDirections
 import com.a.amp.R
 import kotlinx.android.synthetic.main.fragment_login.*
 

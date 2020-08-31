@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.a.amp.HomeFragmentDirections
 import com.a.amp.R
 import com.a.amp.article.ui.ArticleFragmentDirections
 import com.a.amp.databinding.RelatedCvBinding
@@ -46,7 +45,7 @@ class HomeRelatedCvAdapter(
     override fun getItemCount() = list.size
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.binding.switch = true
+        holder.binding.flag = true
         holder.binding.related = list[position]
     }
 

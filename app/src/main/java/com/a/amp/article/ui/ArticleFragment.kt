@@ -51,7 +51,7 @@ class ArticleFragment : Fragment() {
             0
         )
 
-        val myAdapter = articleViewModel.relatedList.value?.let { RelatedCvAdapter(it) }
+        val myAdapter = articleViewModel.relatedList.value?.let { ArticleRelatedCvAdapter(it) }
         val myAdapter2 = articleViewModel.commentList.value?.let { CommentCvAdapter(it) }
 
         article_page_recycle_1.apply {

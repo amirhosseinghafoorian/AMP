@@ -2,10 +2,10 @@ package com.a.amp.article.ui
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.a.amp.RelatedCvDataItem
+import com.a.amp.article.data.ArticleRelatedCvDataItem
 
 class TagListViewModel : ViewModel() {
-    var summaryList = MutableLiveData<MutableList<RelatedCvDataItem>>()
+    var summaryList = MutableLiveData<MutableList<ArticleRelatedCvDataItem>>()
 
     init {
         summaryList.value = ArrayList()
@@ -15,7 +15,7 @@ class TagListViewModel : ViewModel() {
         summaryList.value?.clear()
         repeat(10) {
             summaryList.value?.add(
-                RelatedCvDataItem(
+                ArticleRelatedCvDataItem(
                     " دو خط مقاله : $it",
                     " نام کاربر : $it", "$it روز پیش ", 0
                 )

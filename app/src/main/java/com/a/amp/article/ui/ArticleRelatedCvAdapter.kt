@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.a.amp.HomeFragmentDirections
 import com.a.amp.R
 import com.a.amp.article.data.ArticleRelatedCvDataItem
 import com.a.amp.databinding.RelatedCvBinding
+import com.a.amp.home.ui.HomeFragmentDirections
 
 class ArticleRelatedCvAdapter(
     private val list: MutableList<ArticleRelatedCvDataItem>
@@ -53,7 +53,7 @@ class ArticleRelatedCvAdapter(
 //        holder.userFullName.text = list[position].name
 //        holder.days.text = list[position].days
 //        holder.id = list[position].id
-        holder.binding.switch = false
+        holder.binding.flag = false
         holder.binding.related2 = list[position]
     }
 

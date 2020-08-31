@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.a.amp.R
-import com.a.amp.SplashFragmentDirections
 
 
 class SplashFragment : Fragment() {

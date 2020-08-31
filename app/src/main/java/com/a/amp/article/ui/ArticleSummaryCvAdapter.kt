@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.a.amp.HomeFragmentDirections
 import com.a.amp.R
 import com.a.amp.article.data.ArticleRelatedCvDataItem
 import com.a.amp.databinding.SummaryCvBinding
+import com.a.amp.home.ui.HomeFragmentDirections
 
 
 class ArticleSummaryCvAdapter(
@@ -26,8 +26,13 @@ class ArticleSummaryCvAdapter(
 //        var id : Int = 0
         init {
             itemView.setOnClickListener {
-                it.findNavController()
-                    .navigate(HomeFragmentDirections.actionHomeFragmentToArticleFragment())
+                try {
+                    it.findNavController()
+                        .navigate(HomeFragmentDirections.actionHomeFragmentToArticleFragment())
+                } catch (E: IllegalArgumentException) {
+                    it.findNavController()
+                        .navigate(TagFragmentDirections.actionTagFragmentToArticleFragment())
+                }
             }
         }
     }
@@ -51,7 +56,7 @@ class ArticleSummaryCvAdapter(
 //        holder.days.text = list[position].days
 //        holder.id = list[position].id
 
-        holder.binding.switch = false
+        holder.binding.flag = false
         holder.binding.summary2 = list[position]
     }
 

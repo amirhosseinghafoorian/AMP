@@ -2,7 +2,6 @@ package com.a.amp.home.ui
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.a.amp.RelatedCvDataItem
 import com.a.amp.home.data.HomeRelatedCvDataItem
 
 class HomeListViewModel : ViewModel() {
