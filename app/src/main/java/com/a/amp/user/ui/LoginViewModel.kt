@@ -1,4 +1,4 @@
-package com.a.amp
+package com.a.amp.user.ui
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

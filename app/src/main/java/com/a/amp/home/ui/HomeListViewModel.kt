@@ -1,11 +1,12 @@
-package com.a.amp
+package com.a.amp.home.ui
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.a.amp.home.data.HomeRelatedCvDataItem
 
 class HomeListViewModel : ViewModel() {
-    var summaryList = MutableLiveData<MutableList<RelatedCvDataItem>>()
-    var relatedList = MutableLiveData<MutableList<RelatedCvDataItem>>()
+    var summaryList = MutableLiveData<MutableList<HomeRelatedCvDataItem>>()
+    var relatedList = MutableLiveData<MutableList<HomeRelatedCvDataItem>>()
 
     init {
         summaryList.value = mutableListOf()
@@ -17,7 +18,7 @@ class HomeListViewModel : ViewModel() {
         summaryList.value?.clear()
         repeat(10) {
             summaryList.value?.add(
-                RelatedCvDataItem(
+                HomeRelatedCvDataItem(
                     " دو خط مقاله : $it",
                     " نام کاربر : $it", "$it روز پیش ", 0
                 )
@@ -29,7 +30,7 @@ class HomeListViewModel : ViewModel() {
         relatedList.value?.clear()
         repeat(10) {
             relatedList.value?.add(
-                RelatedCvDataItem(
+                HomeRelatedCvDataItem(
                     " دو خط مقاله : $it",
                     " نام کاربر : $it", "$it روز پیش ", 0
                 )

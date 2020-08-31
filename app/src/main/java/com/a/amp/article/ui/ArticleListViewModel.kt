@@ -1,10 +1,12 @@
-package com.a.amp
+package com.a.amp.article.ui
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.a.amp.article.data.ArticleRelatedCvDataItem
+import com.a.amp.article.data.CommentCvDataItem
 
 class ArticleListViewModel : ViewModel() {
-    var relatedList = MutableLiveData<MutableList<RelatedCvDataItem>>()
+    var relatedList = MutableLiveData<MutableList<ArticleRelatedCvDataItem>>()
     var commentList = MutableLiveData<MutableList<CommentCvDataItem>>()
 
     init {
@@ -29,7 +31,7 @@ class ArticleListViewModel : ViewModel() {
         relatedList.value?.clear()
         repeat(10) {
             relatedList.value?.add(
-                RelatedCvDataItem(
+                ArticleRelatedCvDataItem(
                     " دو خط مقاله : $it",
                     " نام کاربر : $it", "$it روز پیش ", 0
                 )

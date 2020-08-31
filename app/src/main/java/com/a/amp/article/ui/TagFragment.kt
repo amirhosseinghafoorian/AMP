@@ -1,4 +1,4 @@
-package com.a.amp
+package com.a.amp.article.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import com.a.amp.R
 import com.a.amp.databinding.FragmentTagBinding
 import kotlinx.android.synthetic.main.fragment_tag.*
 
@@ -27,7 +28,8 @@ class TagFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         val tagViewModel = ViewModelProvider(this).get(TagListViewModel::class.java)
 
-        val myAdapter = tagViewModel.summaryList.value?.let { SummaryCvAdapter(it) }
+        val myAdapter = tagViewModel.summaryList.value?.let { ArticleSummaryCvAdapter(it) }
+
 
         tag_recycler.apply {
             adapter = myAdapter

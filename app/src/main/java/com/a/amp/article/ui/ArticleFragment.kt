@@ -1,4 +1,4 @@
-package com.a.amp
+package com.a.amp.article.ui
 
 import android.app.Dialog
 import android.graphics.Color
@@ -12,7 +12,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import com.a.amp.R
 import com.a.amp.databinding.FragmentArticleBinding
+import com.a.amp.user.data.WritingCvDataItem
 import kotlinx.android.synthetic.main.fragment_article.*
 
 class ArticleFragment : Fragment() {
@@ -49,7 +51,7 @@ class ArticleFragment : Fragment() {
             0
         )
 
-        val myAdapter = articleViewModel.relatedList.value?.let { RelatedCvAdapter(it) }
+        val myAdapter = articleViewModel.relatedList.value?.let { ArticleRelatedCvAdapter(it) }
         val myAdapter2 = articleViewModel.commentList.value?.let { CommentCvAdapter(it) }
 
         article_page_recycle_1.apply {

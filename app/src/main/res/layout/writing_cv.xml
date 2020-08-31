@@ -8,7 +8,7 @@
 
         <variable
             name="write"
-            type="com.a.amp.WritingCvDataItem" />
+            type="com.a.amp.user.data.WritingCvDataItem" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -74,8 +74,8 @@
 
             <ImageView
                 android:id="@+id/writing_cv_ic_more"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:contentDescription="@string/todo"
                 android:src="@drawable/ic_baseline_more_vert_24"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -83,8 +83,8 @@
 
             <ImageView
                 android:id="@+id/writing_cv_ic_bookmark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:contentDescription="@string/todo"
                 android:src="@drawable/ic_baseline_bookmark_border_24"
                 app:layout_constraintEnd_toStartOf="@id/writing_cv_ic_more"
@@ -128,8 +128,8 @@
 
             <ImageView
                 android:id="@+id/writing_cv_icon_like"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="4dp"
@@ -157,8 +157,8 @@
 
             <ImageView
                 android:id="@+id/writing_cv_icon_comment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="4dp"

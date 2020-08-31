@@ -5,10 +5,6 @@
     <data>
 
         <import type="android.view.View" />
-
-        <variable
-            name="tagBind"
-            type="com.a.amp.RelatedCvDataItem" />
     </data>
 
     <ScrollView xmlns:tools="http://schemas.android.com/tools"

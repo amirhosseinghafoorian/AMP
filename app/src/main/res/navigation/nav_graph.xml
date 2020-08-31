@@ -5,7 +5,7 @@
     app:startDestination="@id/splashFragment">
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.a.amp.SplashFragment"
+        android:name="com.a.amp.home.ui.SplashFragment"
         android:label="SplashFragment" >
         <action
             app:popUpTo="@id/splashFragment"
@@ -20,7 +20,7 @@
         app:startDestination="@id/loginFragment">
         <fragment
             android:id="@+id/loginFragment"
-            android:name="com.a.amp.LoginFragment"
+            android:name="com.a.amp.user.ui.LoginFragment"
             android:label="LoginFragment">
             <action
                 android:id="@+id/action_loginFragment_to_signupFragment"
@@ -28,7 +28,7 @@
         </fragment>
         <fragment
             android:id="@+id/signupFragment"
-            android:name="com.a.amp.SignupFragment"
+            android:name="com.a.amp.user.ui.SignupFragment"
             android:label="SignupFragment" />
         <action
             app:popUpTo="@id/authenticate"
@@ -38,7 +38,7 @@
     </navigation>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.a.amp.HomeFragment"
+        android:name="com.a.amp.home.ui.HomeFragment"
         android:label="HomeFragment" >
         <action
             android:id="@+id/action_homeFragment_to_profileFragment"
@@ -52,7 +52,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.a.amp.ProfileFragment"
+        android:name="com.a.amp.user.ui.ProfileFragment"
         android:label="ProfileFragment" >
         <action
             android:id="@+id/action_profileFragment_to_articleFragment"
@@ -63,7 +63,7 @@
     </fragment>
     <fragment
         android:id="@+id/articleFragment"
-        android:name="com.a.amp.ArticleFragment"
+        android:name="com.a.amp.article.ui.ArticleFragment"
         android:label="ArticleFragment" >
         <action
             android:id="@+id/action_articleFragment_to_profileFragment"
@@ -77,10 +77,14 @@
     </fragment>
     <fragment
         android:id="@+id/writeFragment"
-        android:name="com.a.amp.WriteFragment"
+        android:name="com.a.amp.article.ui.WriteFragment"
         android:label="WriteFragment" />
     <fragment
         android:id="@+id/tagFragment"
-        android:name="com.a.amp.TagFragment"
-        android:label="TagFragment" />
+        android:name="com.a.amp.article.ui.TagFragment"
+        android:label="TagFragment">
+        <action
+            android:id="@+id/action_tagFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
+    </fragment>
 </navigation>

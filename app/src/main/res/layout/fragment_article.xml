@@ -8,7 +8,7 @@
 
         <variable
             name="articleBind"
-            type="com.a.amp.WritingCvDataItem" />
+            type="com.a.amp.user.data.WritingCvDataItem" />
     </data>
 
     <ScrollView xmlns:tools="http://schemas.android.com/tools"
@@ -168,21 +168,23 @@
 
                     <ImageView
                         android:id="@+id/article_share_ic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:src="@drawable/ic_share_1"
                         android:layout_margin="4dp"
-                        app:layout_constraintStart_toStartOf="parent"/>
+                        android:contentDescription="@string/todo"
+                        app:layout_constraintStart_toStartOf="parent" />
 
                     <ImageView
                         android:id="@+id/article_favorite_ic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:src="@drawable/ic_baseline_favorite_border_24"
                         android:layout_marginStart="10dp"
                         app:layout_constraintStart_toEndOf="@id/article_share_ic"
                         app:layout_constraintTop_toTopOf="@id/article_share_ic"
-                        app:layout_constraintBottom_toBottomOf="@id/article_share_ic"/>
+                        android:contentDescription="@string/todo"
+                        app:layout_constraintBottom_toBottomOf="@id/article_share_ic" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>

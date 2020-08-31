@@ -1,4 +1,4 @@
-package com.a.amp
+package com.a.amp.user.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.a.amp.R
 import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : Fragment() {

@@ -8,7 +8,15 @@
 
         <variable
             name="related"
-            type="com.a.amp.RelatedCvDataItem" />
+            type="com.a.amp.home.data.HomeRelatedCvDataItem" />
+
+        <variable
+            name="related2"
+            type="com.a.amp.article.data.ArticleRelatedCvDataItem" />
+
+        <variable
+            name="flag"
+            type="Boolean" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -55,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_marginStart="5dp"
-                android:text="@{related.name}"
+                android:text="@{flag ? related.name : related2.name}"
                 android:textColor="@android:color/black"
                 android:textSize="17sp"
                 app:layout_constraintStart_toEndOf="@id/related_cv_gl_1"
@@ -66,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginStart="5dp"
-                android:text="@{related.days}"
+                android:text="@{flag ? related.days : related2.days}"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@id/related_cv_gl_1"
                 app:layout_constraintTop_toBottomOf="@id/related_tv_2" />
@@ -86,7 +94,7 @@
                 android:layout_margin="2dp"
                 android:fontFamily="@font/vazir_bold"
                 android:lines="2"
-                android:text="@{related.text}"
+                android:text="@{flag ? related.text : related2.text}"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -94,12 +102,13 @@
 
             <ImageView
                 android:id="@+id/related_bookmark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:src="@drawable/ic_baseline_bookmark_border_24"
                 android:layout_margin="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                android:contentDescription="@string/todo"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

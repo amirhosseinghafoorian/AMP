@@ -6,10 +6,6 @@ apply plugin: "androidx.navigation.safeargs.kotlin"
 android {
     compileSdkVersion 30
 
-    buildFeatures {
-        dataBinding true
-    }
-
     defaultConfig {
         applicationId "com.a.amp"
         minSdkVersion 17

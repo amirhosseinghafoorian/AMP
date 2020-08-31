@@ -1,9 +1,11 @@
-package com.a.amp
+package com.a.amp.article.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.a.amp.R
+import com.a.amp.article.data.CommentCvDataItem
 import com.a.amp.databinding.ComentCvBinding
 
 class CommentCvAdapter(

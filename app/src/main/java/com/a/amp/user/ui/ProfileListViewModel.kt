@@ -1,7 +1,8 @@
-package com.a.amp
+package com.a.amp.user.ui
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.a.amp.user.data.WritingCvDataItem
 
 class ProfileListViewModel : ViewModel() {
     var writeList = MutableLiveData<MutableList<WritingCvDataItem>>()
