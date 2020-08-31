@@ -34,6 +34,9 @@ class WritingCvAdapter(
 //                clickcallback.invoke(2)
                 clickListener?.onClick(list[layoutPosition].id, layoutPosition)
             }
+//            itemView.writing_cv_ic_bookmark.setOnClickListener{
+//                binding.writingCvIcBookmark.setImageDrawable(Drawable.createFromPath())
+//            }
         }
     }
 
