@@ -1,14 +1,14 @@
-package com.a.amp
+package com.a.amp.home.ui
 
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import kotlin.math.log
+import com.a.amp.R
+import com.a.amp.SplashFragmentDirections
 
 
 class SplashFragment : Fragment() {

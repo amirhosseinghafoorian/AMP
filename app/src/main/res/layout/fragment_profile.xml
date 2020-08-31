@@ -8,7 +8,7 @@
 
         <variable
             name="profileBind"
-            type="com.a.amp.ProfileDataItem" />
+            type="com.a.amp.user.data.ProfileDataItem" />
     </data>
 
     <ScrollView xmlns:tools="http://schemas.android.com/tools"

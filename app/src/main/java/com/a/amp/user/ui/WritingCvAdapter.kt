@@ -1,12 +1,15 @@
-package com.a.amp
+package com.a.amp.user.ui
 
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.a.amp.ProfileFragmentDirections
+import com.a.amp.R
 import com.a.amp.databinding.WritingCvBinding
+import com.a.amp.user.data.MoreClickListner
+import com.a.amp.user.data.WritingCvDataItem
 import kotlinx.android.synthetic.main.writing_cv.view.*
 
 class WritingCvAdapter(

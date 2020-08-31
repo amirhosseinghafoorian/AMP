@@ -1,4 +1,4 @@
-package com.a.amp
+package com.a.amp.home.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.a.amp.R
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
@@ -22,8 +23,8 @@ class HomeFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         val loginViewModel = ViewModelProvider(this).get(HomeListViewModel::class.java)
 
-        val myAdapter2 = loginViewModel.summaryList.value?.let { SummaryCvAdapter(it) }
-        val myAdapter = loginViewModel.relatedList.value?.let { RelatedCvAdapter(it) }
+        val myAdapter2 = loginViewModel.summaryList.value?.let { HomeSummaryCvAdapter(it) }
+        val myAdapter = loginViewModel.relatedList.value?.let { HomeRelatedCvAdapter(it) }
 
         home_page_recycle_2.apply {
             adapter = myAdapter2

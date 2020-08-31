@@ -1,17 +1,20 @@
-package com.a.amp
+package com.a.amp.home.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.a.amp.HomeFragmentDirections
+import com.a.amp.R
 import com.a.amp.databinding.SummaryCvBinding
+import com.a.amp.home.data.HomeRelatedCvDataItem
 
 
-class SummaryCvAdapter(
-    private val list: MutableList<RelatedCvDataItem>
+class HomeSummaryCvAdapter(
+    private val list: MutableList<HomeRelatedCvDataItem>
 ) :
-    RecyclerView.Adapter<SummaryCvAdapter.MyViewHolder>() {
+    RecyclerView.Adapter<HomeSummaryCvAdapter.MyViewHolder>() {
 
 
     inner class MyViewHolder(binding: SummaryCvBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -47,7 +50,7 @@ class SummaryCvAdapter(
 //        holder.userFullName.text = list[position].name
 //        holder.days.text = list[position].days
 //        holder.id = list[position].id
-
+        holder.binding.switch = true
         holder.binding.summary = list[position]
     }
 

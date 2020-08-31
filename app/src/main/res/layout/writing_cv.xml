@@ -8,7 +8,7 @@
 
         <variable
             name="write"
-            type="com.a.amp.WritingCvDataItem" />
+            type="com.a.amp.user.data.WritingCvDataItem" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

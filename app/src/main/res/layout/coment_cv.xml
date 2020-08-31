@@ -8,7 +8,7 @@
 
         <variable
             name="comment"
-            type="com.a.amp.CommentCvDataItem" />
+            type="com.a.amp.article.data.CommentCvDataItem" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

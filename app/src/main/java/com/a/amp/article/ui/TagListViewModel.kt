@@ -1,7 +1,8 @@
-package com.a.amp
+package com.a.amp.article.ui
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.a.amp.RelatedCvDataItem
 
 class TagListViewModel : ViewModel() {
     var summaryList = MutableLiveData<MutableList<RelatedCvDataItem>>()

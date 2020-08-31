@@ -8,7 +8,7 @@
 
         <variable
             name="articleBind"
-            type="com.a.amp.WritingCvDataItem" />
+            type="com.a.amp.user.data.WritingCvDataItem" />
     </data>
 
     <ScrollView xmlns:tools="http://schemas.android.com/tools"
