@@ -1,5 +1,7 @@
 package com.a.amp.user.ui
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,9 +15,12 @@ import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : Fragment() {
 
+    var preferences: SharedPreferences? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.window?.decorView?.systemUiVisibility = 0
+        preferences = activity?.getSharedPreferences("locals", Context.MODE_PRIVATE)
     }
 
     override fun onCreateView(
@@ -31,6 +36,8 @@ class LoginFragment : Fragment() {
         val loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         loginViewModel.isLogin.observe(viewLifecycleOwner, { isLogin ->
             if (isLogin) {
+                preferences?.edit()?.putString("username", login_et_1.editText?.text.toString())
+                    ?.apply()
                 findNavController().navigate(LoginFragmentDirections.actionGlobalHomeFragment())
             }
         })

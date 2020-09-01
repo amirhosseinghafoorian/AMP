@@ -1,10 +1,13 @@
 package com.a.amp.home.ui
 
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.a.amp.R
@@ -12,9 +15,14 @@ import com.a.amp.R
 
 class SplashFragment : Fragment() {
 
+    var preferences: SharedPreferences? = null
+    var current_user = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        preferences = activity?.getSharedPreferences("locals", MODE_PRIVATE)
+        current_user = preferences?.getString("username", "***").toString()
     }
 
     override fun onCreateView(
@@ -28,11 +36,12 @@ class SplashFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        Toast.makeText(context, current_user, Toast.LENGTH_SHORT).show()
         val handler = Handler()
         handler.postDelayed({
-            if (true){          // will be checked with login status
+            if (current_user == "***") {
                 findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToAuthenticate())
-            }else{
+            } else {
                 findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment())
             }
         }, 3000)

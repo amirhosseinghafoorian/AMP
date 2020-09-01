@@ -1,5 +1,7 @@
 package com.a.amp.home.ui
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +13,14 @@ import com.a.amp.R
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
+
+    var preferences: SharedPreferences? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        activity?.window?.decorView?.systemUiVisibility = 0
+        preferences = activity?.getSharedPreferences("locals", Context.MODE_PRIVATE)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,6 +62,9 @@ class HomeFragment : Fragment() {
         }
         home_appbar_start_icon.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToWriteFragment())
+        }
+        home_appbar_logo.setOnClickListener {
+            preferences?.edit()?.remove("username")?.apply()
         }
     }
 }
