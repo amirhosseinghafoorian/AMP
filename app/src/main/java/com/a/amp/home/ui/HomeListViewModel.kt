@@ -20,8 +20,7 @@ class HomeListViewModel : ViewModel() {
             summaryList.value?.add(
                 HomeRelatedCvDataItem(
                     " دو خط مقاله : $it",
-                    " نام کاربر : $it", "$it روز پیش ", 0
-                )
+                    " نام کاربر : $it", "$it روز پیش ", 0,false)
             )
         }
     }
@@ -32,7 +31,7 @@ class HomeListViewModel : ViewModel() {
             relatedList.value?.add(
                 HomeRelatedCvDataItem(
                     " دو خط مقاله : $it",
-                    " نام کاربر : $it", "$it روز پیش ", 0
+                    " نام کاربر : $it", "$it روز پیش ", 0,false
                 )
             )
         }

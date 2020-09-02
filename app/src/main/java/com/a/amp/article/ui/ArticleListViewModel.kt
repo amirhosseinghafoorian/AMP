@@ -33,7 +33,7 @@ class ArticleListViewModel : ViewModel() {
             relatedList.value?.add(
                 ArticleRelatedCvDataItem(
                     " دو خط مقاله : $it",
-                    " نام کاربر : $it", "$it روز پیش ", 0
+                    " نام کاربر : $it", "$it روز پیش ", 0,false
                 )
             )
         }

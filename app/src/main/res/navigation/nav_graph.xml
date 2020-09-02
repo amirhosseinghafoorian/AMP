@@ -49,6 +49,11 @@
         <action
             android:id="@+id/action_homeFragment_to_writeFragment"
             app:destination="@id/writeFragment" />
+        <action
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true"
+            android:id="@+id/action_homeFragment_to_authenticate"
+            app:destination="@id/authenticate" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"

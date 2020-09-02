@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.a.amp.R
 import com.a.amp.databinding.SummaryCvBinding
 import com.a.amp.home.data.HomeRelatedCvDataItem
+import kotlinx.android.synthetic.main.summary_cv.view.*
 
 
 class HomeSummaryCvAdapter(
@@ -27,6 +28,10 @@ class HomeSummaryCvAdapter(
             itemView.setOnClickListener {
                 it.findNavController()
                     .navigate(HomeFragmentDirections.actionHomeFragmentToArticleFragment())
+            }
+            itemView.summary_bookmark.setOnClickListener {
+                list[position].isTag = list[position].isTag.not()
+                notifyItemChanged(position)
             }
         }
     }
@@ -51,6 +56,7 @@ class HomeSummaryCvAdapter(
 //        holder.id = list[position].id
         holder.binding.flag = true
         holder.binding.summary = list[position]
+        holder.binding.saved = list[position].isTag
     }
 
 }

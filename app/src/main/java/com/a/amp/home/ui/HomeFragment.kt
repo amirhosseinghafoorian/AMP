@@ -63,8 +63,9 @@ class HomeFragment : Fragment() {
         home_appbar_start_icon.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToWriteFragment())
         }
-        home_appbar_logo.setOnClickListener {
+        home_appbar_end_icon_power.setOnClickListener {
             preferences?.edit()?.remove("username")?.apply()
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAuthenticate())
         }
     }
 }

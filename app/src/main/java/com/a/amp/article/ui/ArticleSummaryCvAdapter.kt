@@ -9,6 +9,7 @@ import com.a.amp.R
 import com.a.amp.article.data.ArticleRelatedCvDataItem
 import com.a.amp.databinding.SummaryCvBinding
 import com.a.amp.home.ui.HomeFragmentDirections
+import kotlinx.android.synthetic.main.summary_cv.view.*
 
 
 class ArticleSummaryCvAdapter(
@@ -34,6 +35,11 @@ class ArticleSummaryCvAdapter(
                         .navigate(TagFragmentDirections.actionTagFragmentToArticleFragment())
                 }
             }
+
+            itemView.summary_bookmark.setOnClickListener {
+                list[position].isTag = list[position].isTag.not()
+                notifyItemChanged(position)
+            }
         }
     }
 
@@ -58,6 +64,7 @@ class ArticleSummaryCvAdapter(
 
         holder.binding.flag = false
         holder.binding.summary2 = list[position]
+        holder.binding.saved = list[position].isTag
     }
 
 }

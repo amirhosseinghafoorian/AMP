@@ -4,5 +4,6 @@ data class ArticleRelatedCvDataItem(
     var text: String,
     var name: String,
     var days: String,
-    var id: Int
+    var id: Int,
+    var isTag: Boolean
 )

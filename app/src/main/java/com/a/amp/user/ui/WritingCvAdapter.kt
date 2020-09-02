@@ -18,6 +18,7 @@ class WritingCvAdapter(
 ) :
     RecyclerView.Adapter<WritingCvAdapter.MyViewHolder>() {
 
+    @Suppress("DEPRECATION")
     inner class MyViewHolder(binding: WritingCvBinding) : RecyclerView.ViewHolder(binding.root) {
 //        var mainText: TextView = itemView.writing_cv_tv_4
 //        var userFullName: TextView = itemView.writing_cv_tv_1
@@ -36,9 +37,15 @@ class WritingCvAdapter(
 //                clickcallback.invoke(2)
                 clickListener?.onClick(list[layoutPosition].id, layoutPosition)
             }
-//            itemView.writing_cv_ic_bookmark.setOnClickListener{
-//                binding.writingCvIcBookmark.setImageDrawable(Drawable.createFromPath())
-//            }
+            itemView.writing_cv_ic_bookmark.setOnClickListener {
+                list[position].isTag = list[position].isTag.not()
+                notifyItemChanged(position)
+            }
+            itemView.writing_cv_icon_like.setOnClickListener {
+                list[position].isFav = list[position].isFav.not()
+                list[position].cont = list[position].cont + 1
+                notifyItemChanged(position)
+            }
         }
     }
 
@@ -60,7 +67,9 @@ class WritingCvAdapter(
 //        holder.days.text = list[position].days
 //        holder.title.text = list[position].title
 //        holder.id = list[position].id
-        holder.binding.write = list[position]
+        holder.binding.saved = list[position].isTag
+        holder.binding.liked = list[position].isFav
+//        holder.binding.write.cont = list[position].cont
     }
 
 }

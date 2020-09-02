@@ -11,6 +11,9 @@
             type="com.a.amp.home.data.HomeRelatedCvDataItem" />
 
         <variable
+            name="saved"
+            type="Boolean" />
+        <variable
             name="related2"
             type="com.a.amp.article.data.ArticleRelatedCvDataItem" />
 
@@ -104,7 +107,7 @@
                 android:id="@+id/related_bookmark"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_baseline_bookmark_border_24"
+                android:src="@{saved?@drawable/ic_baseline_bookmark_24:@drawable/ic_baseline_bookmark_border_24}"
                 android:layout_margin="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:contentDescription="@string/todo"

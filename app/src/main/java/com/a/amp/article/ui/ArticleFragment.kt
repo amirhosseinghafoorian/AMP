@@ -16,6 +16,7 @@ import com.a.amp.R
 import com.a.amp.databinding.FragmentArticleBinding
 import com.a.amp.user.data.WritingCvDataItem
 import kotlinx.android.synthetic.main.fragment_article.*
+import kotlinx.android.synthetic.main.writing_cv.*
 
 class ArticleFragment : Fragment() {
     private lateinit var binding: FragmentArticleBinding
@@ -48,11 +49,16 @@ class ArticleFragment : Fragment() {
             "متنی برای تست چند متن اصلی مقاله",
             "امیرحسین غفوریان",
             "5 روز پیش",
+            0,
+            false,
+            false,
             0
         )
 
         val myAdapter = articleViewModel.relatedList.value?.let { ArticleRelatedCvAdapter(it) }
         val myAdapter2 = articleViewModel.commentList.value?.let { CommentCvAdapter(it) }
+
+
 
         article_page_recycle_1.apply {
             adapter = myAdapter
@@ -86,6 +92,7 @@ class ArticleFragment : Fragment() {
         article_appbar_start_icon.setOnClickListener {
             Navigation.findNavController(it).navigateUp()
         }
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -101,6 +108,7 @@ class ArticleFragment : Fragment() {
         article_btn_1.setOnClickListener {
             dialog.show()
         }
+
     }
 
     companion object {

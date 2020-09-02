@@ -7,6 +7,10 @@
         <import type="android.view.View" />
 
         <variable
+            name="saved"
+            type="Boolean" />
+
+        <variable
             name="articleBind"
             type="com.a.amp.user.data.WritingCvDataItem" />
     </data>
@@ -179,7 +183,7 @@
                         android:id="@+id/article_favorite_ic"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:src="@drawable/ic_baseline_favorite_border_24"
+                        android:src="@{saved?@drawable/ic_baseline_favorite_24:@drawable/ic_baseline_favorite_border_24}"
                         android:layout_marginStart="10dp"
                         app:layout_constraintStart_toEndOf="@id/article_share_ic"
                         app:layout_constraintTop_toTopOf="@id/article_share_ic"

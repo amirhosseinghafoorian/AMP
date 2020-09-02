@@ -7,6 +7,15 @@
         <import type="android.view.View" />
 
         <variable
+            name="saved"
+            type="Boolean" />
+
+        <variable
+            name="liked"
+            type="Boolean" />
+
+
+        <variable
             name="write"
             type="com.a.amp.user.data.WritingCvDataItem" />
     </data>
@@ -86,9 +95,9 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:contentDescription="@string/todo"
-                android:src="@drawable/ic_baseline_bookmark_border_24"
+                android:src="@{saved?@drawable/ic_baseline_bookmark_24:@drawable/ic_baseline_bookmark_border_24}"
                 app:layout_constraintEnd_toStartOf="@id/writing_cv_ic_more"
-                app:layout_constraintTop_toTopOf="@id/writing_cv_iv" />
+                app:layout_constraintTop_toTopOf="@id/writing_cv_ic_more" />
 
             <androidx.constraintlayout.widget.Barrier
                 android:id="@+id/writing_cv_br_1"
@@ -136,7 +145,7 @@
                 android:layout_marginBottom="8dp"
                 android:backgroundTint="@color/colorPrimary"
                 android:contentDescription="@string/todo"
-                android:src="@drawable/ic_baseline_favorite_border_24"
+                android:src="@{liked?@drawable/ic_baseline_favorite_24:@drawable/ic_baseline_favorite_border_24}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/writing_cv_tv_4" />
@@ -149,7 +158,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="4dp"
                 android:layout_marginBottom="8dp"
-                android:text="@string/zero"
+                android:text="@{String.valueOf(write.cont)}"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="18sp"
                 app:layout_constraintStart_toEndOf="@id/writing_cv_icon_like"

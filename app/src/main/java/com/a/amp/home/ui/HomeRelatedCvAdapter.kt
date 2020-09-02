@@ -9,6 +9,7 @@ import com.a.amp.R
 import com.a.amp.article.ui.ArticleFragmentDirections
 import com.a.amp.databinding.RelatedCvBinding
 import com.a.amp.home.data.HomeRelatedCvDataItem
+import kotlinx.android.synthetic.main.related_cv.view.*
 
 class HomeRelatedCvAdapter(
     private val list: MutableList<HomeRelatedCvDataItem>
@@ -29,6 +30,10 @@ class HomeRelatedCvAdapter(
                         .navigate(ArticleFragmentDirections.actionArticleFragmentSelf())
                 }
             }
+//            itemView.related_bookmark.setOnClickListener {
+//                list[position].isTag = list[position].isTag.not()
+//                notifyItemChanged(position)
+//            }
         }
     }
 
@@ -47,6 +52,7 @@ class HomeRelatedCvAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.binding.flag = true
         holder.binding.related = list[position]
+        holder.binding.saved = list[position].isTag
     }
 
 }
