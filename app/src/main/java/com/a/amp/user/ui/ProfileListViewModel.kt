@@ -2,6 +2,7 @@ package com.a.amp.user.ui
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.a.amp.user.data.UserRepository
 import com.a.amp.user.data.WritingCvDataItem
 
 class ProfileListViewModel : ViewModel() {
@@ -13,14 +14,8 @@ class ProfileListViewModel : ViewModel() {
 
     fun fillWrite() {
         writeList.value?.clear()
-        repeat(10) {
-            writeList.value?.add(
-                WritingCvDataItem(
-                    " سه خط مقاله : $it", " دو خط مقاله : $it",
-                    " نام کاربر : $it", "$it روز پیش ", 0,false,false,0
-                )
-            )
-        }
+        val user = UserRepository()
+        user.fillWriteFromRepo(writeList)
     }
 
 }

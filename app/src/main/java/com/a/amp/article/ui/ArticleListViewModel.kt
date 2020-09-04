@@ -3,6 +3,7 @@ package com.a.amp.article.ui
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.a.amp.article.data.ArticleRelatedCvDataItem
+import com.a.amp.article.data.ArticleRepository
 import com.a.amp.article.data.CommentCvDataItem
 
 class ArticleListViewModel : ViewModel() {
@@ -17,26 +18,14 @@ class ArticleListViewModel : ViewModel() {
 
     fun fillComment() {
         commentList.value?.clear()
-        repeat(10) {
-            commentList.value?.add(
-                CommentCvDataItem(
-                    " دو خط مقاله : $it",
-                    " نام کاربر : $it", 0
-                )
-            )
-        }
+        val article = ArticleRepository()
+        article.fillCommentFromRepo(commentList)
     }
 
     fun fillRelated() {
         relatedList.value?.clear()
-        repeat(10) {
-            relatedList.value?.add(
-                ArticleRelatedCvDataItem(
-                    " دو خط مقاله : $it",
-                    " نام کاربر : $it", "$it روز پیش ", 0,false
-                )
-            )
-        }
+        val article = ArticleRepository()
+        article.fillRelatedFromRepo(relatedList)
     }
 
 }

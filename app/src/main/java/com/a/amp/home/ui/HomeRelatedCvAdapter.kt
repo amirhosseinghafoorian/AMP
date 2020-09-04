@@ -16,7 +16,7 @@ class HomeRelatedCvAdapter(
 ) :
     RecyclerView.Adapter<HomeRelatedCvAdapter.MyViewHolder>() {
 
-    class MyViewHolder(binding: RelatedCvBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class MyViewHolder(binding: RelatedCvBinding) : RecyclerView.ViewHolder(binding.root) {
 
         var binding: RelatedCvBinding = binding
 
@@ -30,16 +30,16 @@ class HomeRelatedCvAdapter(
                         .navigate(ArticleFragmentDirections.actionArticleFragmentSelf())
                 }
             }
-//            itemView.related_bookmark.setOnClickListener {
-//                list[position].isTag = list[position].isTag.not()
-//                notifyItemChanged(position)
-//            }
+            itemView.related_bookmark.setOnClickListener {
+                list[position].isTag = list[position].isTag.not()
+                notifyItemChanged(position)
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding: RelatedCvBinding = DataBindingUtil.inflate(
-            LayoutInflater.from(parent.getContext()),
+            LayoutInflater.from(parent.context),
             R.layout.related_cv, parent, false
         )
 //        val textView =

@@ -3,6 +3,7 @@ package com.a.amp.home.ui
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.a.amp.home.data.HomeRelatedCvDataItem
+import com.a.amp.home.data.HomeRepository
 
 class HomeListViewModel : ViewModel() {
     var summaryList = MutableLiveData<MutableList<HomeRelatedCvDataItem>>()
@@ -16,25 +17,14 @@ class HomeListViewModel : ViewModel() {
 
     fun fillSummary() {
         summaryList.value?.clear()
-        repeat(10) {
-            summaryList.value?.add(
-                HomeRelatedCvDataItem(
-                    " دو خط مقاله : $it",
-                    " نام کاربر : $it", "$it روز پیش ", 0,false)
-            )
-        }
+        val home = HomeRepository()
+        home.fillSummaryFromRepo(summaryList)
     }
 
     fun fillRelated() {
         relatedList.value?.clear()
-        repeat(10) {
-            relatedList.value?.add(
-                HomeRelatedCvDataItem(
-                    " دو خط مقاله : $it",
-                    " نام کاربر : $it", "$it روز پیش ", 0,false
-                )
-            )
-        }
+        val home = HomeRepository()
+        home.fillRelatedFromRepo(relatedList)
     }
 
 }

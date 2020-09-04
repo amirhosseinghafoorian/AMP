@@ -43,7 +43,7 @@ class ArticleRelatedCvAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding: RelatedCvBinding = DataBindingUtil.inflate(
-            LayoutInflater.from(parent.getContext()),
+            LayoutInflater.from(parent.context),
             R.layout.related_cv, parent, false
         )
 //        val textView =

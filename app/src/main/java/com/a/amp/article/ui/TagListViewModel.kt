@@ -3,6 +3,7 @@ package com.a.amp.article.ui
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.a.amp.article.data.ArticleRelatedCvDataItem
+import com.a.amp.article.data.ArticleRepository
 
 class TagListViewModel : ViewModel() {
     var summaryList = MutableLiveData<MutableList<ArticleRelatedCvDataItem>>()
@@ -13,14 +14,8 @@ class TagListViewModel : ViewModel() {
 
     fun fillSummary() {
         summaryList.value?.clear()
-        repeat(10) {
-            summaryList.value?.add(
-                ArticleRelatedCvDataItem(
-                    " دو خط مقاله : $it",
-                    " نام کاربر : $it", "$it روز پیش ", 0,false
-                )
-            )
-        }
+        val article = ArticleRepository()
+        article.fillRelatedFromRepo(summaryList)
     }
 
 }
