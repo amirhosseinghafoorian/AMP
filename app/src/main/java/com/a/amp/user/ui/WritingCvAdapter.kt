@@ -51,7 +51,7 @@ class WritingCvAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding: WritingCvBinding = DataBindingUtil.inflate(
-            LayoutInflater.from(parent.getContext()),
+            LayoutInflater.from(parent.context),
             R.layout.writing_cv, parent, false
         )
 //        val textView =
@@ -67,6 +67,7 @@ class WritingCvAdapter(
 //        holder.days.text = list[position].days
 //        holder.title.text = list[position].title
 //        holder.id = list[position].id
+        holder.binding.write = list[position]
         holder.binding.saved = list[position].isTag
         holder.binding.liked = list[position].isFav
 //        holder.binding.write.cont = list[position].cont
