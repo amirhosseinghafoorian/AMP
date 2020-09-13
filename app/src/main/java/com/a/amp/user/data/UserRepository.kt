@@ -1,11 +1,12 @@
 package com.a.amp.user.data
 
-import androidx.lifecycle.MutableLiveData
+import android.app.Application
 
-class UserRepository {
+class UserRepository(application: Application) {
+    val app = application
 
-    fun fillWriteFromRepo(writeList: MutableLiveData<MutableList<WritingCvDataItem>>) {
-        val user = UserLocal()
+    fun fillWriteFromRepo(writeList: MutableList<WritingCvDataItem>) {
+        val user = UserLocal(application = app)
         user.fillWriteFromLocal(writeList)
     }
 }

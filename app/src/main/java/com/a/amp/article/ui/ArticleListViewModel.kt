@@ -27,7 +27,7 @@ class ArticleListViewModel(application: Application) : AndroidViewModel(applicat
     fun fillRelated() {
         relatedList.value?.clear()
         val article = ArticleRepository(app)
-        article.fillRelatedFromRepo(relatedList)
+        relatedList.value?.let { article.fillRelatedFromRepo(it) }
     }
 
 }

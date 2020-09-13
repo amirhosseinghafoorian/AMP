@@ -1,28 +1,25 @@
 package com.a.amp.home.data
 
-import androidx.lifecycle.MutableLiveData
+import android.app.Application
+import com.a.amp.AppDataBase
+import com.a.amp.article.data.ArticleEntity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class HomeLocal {
+class HomeLocal(application: Application) {
 
-    fun fillSummaryFromLocal(summaryList: MutableLiveData<MutableList<HomeRelatedCvDataItem>>) {
-        repeat(10) {
-            summaryList.value?.add(
-                HomeRelatedCvDataItem(
-                    " دو خط مقاله : $it",
-                    " نام کاربر : $it", "$it روز پیش ", 0, false
-                )
-            )
+    private val db = AppDataBase.buildDatabase(context = application)
+
+    fun fillSummaryFromLocal(summaryList: MutableList<HomeRelatedCvDataItem>) {
+        CoroutineScope(Dispatchers.IO).launch {
+            summaryList.addAll(ArticleEntity.convertToDataItem3(db.myDao().getArticles()))
         }
     }
 
-    fun fillRelatedFromLocal(relatedList: MutableLiveData<MutableList<HomeRelatedCvDataItem>>) {
-        repeat(10) {
-            relatedList.value?.add(
-                HomeRelatedCvDataItem(
-                    " دو خط مقاله : $it",
-                    " نام کاربر : $it", "$it روز پیش ", 0, false
-                )
-            )
+    fun fillRelatedFromLocal(relatedList: MutableList<HomeRelatedCvDataItem>) {
+        CoroutineScope(Dispatchers.IO).launch {
+            relatedList.addAll(ArticleEntity.convertToDataItem3(db.myDao().getArticles()))
         }
     }
 }

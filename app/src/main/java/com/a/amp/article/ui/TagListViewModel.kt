@@ -17,7 +17,7 @@ class TagListViewModel(application: Application) : AndroidViewModel(application)
     fun fillSummary() {
         summaryList.value?.clear()
         val article = ArticleRepository(app)
-        article.fillRelatedFromRepo(summaryList)
+        summaryList.value?.let { article.fillRelatedFromRepo(it) }
     }
 
 }

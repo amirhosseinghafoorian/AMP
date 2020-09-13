@@ -1,16 +1,17 @@
 package com.a.amp.home.data
 
-import androidx.lifecycle.MutableLiveData
+import android.app.Application
 
-class HomeRepository {
+class HomeRepository(application: Application) {
+    val app = application
 
-    fun fillSummaryFromRepo(summaryList: MutableLiveData<MutableList<HomeRelatedCvDataItem>>) {
-        val home = HomeLocal()
+    fun fillSummaryFromRepo(summaryList: MutableList<HomeRelatedCvDataItem>) {
+        val home = HomeLocal(app)
         home.fillSummaryFromLocal(summaryList)
     }
 
-    fun fillRelatedFromRepo(RelatedList: MutableLiveData<MutableList<HomeRelatedCvDataItem>>) {
-        val home = HomeLocal()
+    fun fillRelatedFromRepo(RelatedList: MutableList<HomeRelatedCvDataItem>) {
+        val home = HomeLocal(app)
         home.fillRelatedFromLocal(RelatedList)
     }
 }

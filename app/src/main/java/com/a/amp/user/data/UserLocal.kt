@@ -1,19 +1,19 @@
 package com.a.amp.user.data
 
-import androidx.lifecycle.MutableLiveData
+import android.app.Application
+import com.a.amp.AppDataBase
+import com.a.amp.article.data.ArticleEntity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class UserLocal {
+class UserLocal(application: Application) {
 
-    fun fillWriteFromLocal(writeList: MutableLiveData<MutableList<WritingCvDataItem>>) {
-        repeat(10) {
-            writeList.value?.add(
-//                WritingCvDataItem("title $it" , "main text $it" , "user $it" ,
-//                "$it days ago" , 0 , false , false , 0)
-                WritingCvDataItem(
-                    " سه خط مقاله : $it", " دو خط مقاله : $it",
-                    " نام کاربر : $it", "$it روز پیش ", 0, false, false, 0
-                )
-            )
+    private val db = AppDataBase.buildDatabase(context = application)
+
+    fun fillWriteFromLocal(writeList: MutableList<WritingCvDataItem>) {
+        CoroutineScope(Dispatchers.IO).launch {
+            writeList.addAll(ArticleEntity.convertToDataItem2(db.myDao().getArticles()))
         }
     }
 }

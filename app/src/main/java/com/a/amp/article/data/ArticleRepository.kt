@@ -1,7 +1,6 @@
 package com.a.amp.article.data
 
 import android.app.Application
-import androidx.lifecycle.MutableLiveData
 
 class ArticleRepository(application: Application) {
     val app = application
@@ -11,7 +10,7 @@ class ArticleRepository(application: Application) {
         article.fillCommentFromLocal(commentList)
     }
 
-    fun fillRelatedFromRepo(RelatedList: MutableLiveData<MutableList<ArticleRelatedCvDataItem>>) {
+    fun fillRelatedFromRepo(RelatedList: MutableList<ArticleRelatedCvDataItem>) {
         val article = ArticleLocal(app)
         article.fillRelatedFromLocal(RelatedList)
     }

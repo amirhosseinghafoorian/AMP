@@ -19,10 +19,16 @@ data class CommentEntity(
     @ColumnInfo(name = "CommentText") val commentText: String?
 ) {
     companion object {
-        fun convertToDataItem(cms: List<CommentEntity>): MutableList<CommentCvDataItem> {
+        fun convertToDataItem(list: List<CommentEntity>): MutableList<CommentCvDataItem> {
             val resultList: MutableList<CommentCvDataItem> = mutableListOf()
-            for (i in cms.indices) {
-                resultList.add(CommentCvDataItem(cms[i].commentText!!, "Test $i", cms[i].commentId))
+            for (i in list.indices) {
+                resultList.add(
+                    CommentCvDataItem(
+                        list[i].commentText!!,
+                        "Test $i",
+                        list[i].commentId
+                    )
+                )
             }
             return resultList
         }
