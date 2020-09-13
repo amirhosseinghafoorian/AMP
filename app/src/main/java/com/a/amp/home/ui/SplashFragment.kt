@@ -15,6 +15,7 @@ import com.a.amp.AppDataBase
 import com.a.amp.R
 import com.a.amp.article.data.ArticleEntity
 import com.a.amp.article.data.CommentEntity
+import com.a.amp.home.data.HomeRepository
 import com.a.amp.user.data.UserEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -61,6 +62,9 @@ class SplashFragment : Fragment() {
     }
 
     private suspend fun fillDataBase() {
+
+        val repo: HomeRepository
+
         val db = AppDataBase.buildDatabase(context = requireContext())
 
         db.myDao().insertUsers(
@@ -102,5 +106,4 @@ class SplashFragment : Fragment() {
             CommentEntity(310, 204, "nice article 10"),
         )
     }
-
 }

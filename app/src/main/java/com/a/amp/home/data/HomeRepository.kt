@@ -14,4 +14,8 @@ class HomeRepository(application: Application) {
         val home = HomeLocal(app)
         home.fillRelatedFromLocal(RelatedList)
     }
+
+    suspend fun addArticlesToLocal() {
+
+    }
 }
