@@ -16,7 +16,6 @@ import com.a.amp.R
 import com.a.amp.databinding.FragmentArticleBinding
 import com.a.amp.user.data.WritingCvDataItem
 import kotlinx.android.synthetic.main.fragment_article.*
-import kotlinx.android.synthetic.main.writing_cv.*
 
 class ArticleFragment : Fragment() {
     private lateinit var binding: FragmentArticleBinding
