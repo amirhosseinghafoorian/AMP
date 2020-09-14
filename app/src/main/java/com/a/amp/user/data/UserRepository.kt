@@ -10,8 +10,8 @@ class UserRepository(application: Application) {
         user.fillWriteFromLocal(writeList)
     }
 
-    suspend fun LoginResult() {
+    suspend fun loginResult(user: String, pass: String): Boolean {
         val remote = UserRemote()
-        remote.LoginFromServer()
+        return remote.loginFromServer(user, pass)
     }
 }

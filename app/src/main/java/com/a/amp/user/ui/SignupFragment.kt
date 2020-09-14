@@ -12,11 +12,6 @@ import kotlinx.android.synthetic.main.fragment_signup.*
 
 class SignupFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,12 +21,54 @@ class SignupFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        signup_btn_1.setOnClickListener{
-            findNavController().navigate(SignupFragmentDirections.actionGlobalHomeFragment())
+        signup_btn_1.setOnClickListener {
+            if (isValid()) {
+                findNavController().navigate(SignupFragmentDirections.actionGlobalHomeFragment())
+            }
         }
         signup_tv_2.setOnClickListener {
             Navigation.findNavController(it).navigateUp()
         }
+    }
+
+    private fun isValid(): Boolean {
+        signup_et_1.error = null
+        signup_et_2.error = null
+        signup_et_3.error = null
+        signup_et_4.error = null
+        if (signup_et_1.editText?.text.toString() == "") {
+            signup_et_1.error = "نام را وارد کنید"
+            signup_et_1.requestFocus()
+            return false
+        } else if (signup_et_2.editText?.text.toString() == "") {
+            signup_et_2.error = "ایمیل را وارد کنید"
+            signup_et_2.requestFocus()
+            return false
+        } else if (
+            !signup_et_2.editText?.text.toString().contains('@') ||
+            !signup_et_2.editText?.text.toString().contains('.')
+        ) {
+            signup_et_2.error = "فرمت ایمیل اشتباه است"
+            signup_et_2.requestFocus()
+            return false
+        } else if (signup_et_3.editText?.text.toString() == "") {
+            signup_et_3.error = "رمز عبور را وارد کنید"
+            signup_et_3.requestFocus()
+            return false
+        } else if (signup_et_3.editText?.text.toString().length < 8 || signup_et_3.editText?.text.toString().length > 20) {
+            signup_et_3.error = "رمز عبور باید بین 8 تا 20 کارکتر باشد"
+            signup_et_3.requestFocus()
+            return false
+        } else if (signup_et_4.editText?.text.toString() == "") {
+            signup_et_4.error = "تکرار رمز عبور را وارد کنید"
+            signup_et_4.requestFocus()
+            return false
+        } else if (signup_et_3.editText?.text.toString() != signup_et_4.editText?.text.toString()) {
+            signup_et_4.error = "تکرار رمز اشتباه است"
+            signup_et_4.requestFocus()
+            return false
+        }
+        return true
     }
 
 }

@@ -1,6 +1,5 @@
 package com.a.amp.home.ui
 
-import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -11,11 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.a.amp.R
-import com.a.amp.user.data.UserRepository
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
@@ -62,12 +57,6 @@ class HomeFragment : Fragment() {
         loginViewModel.fillSummary()
         loginViewModel.fillRelated()
 
-        home_appbar_logo.setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
-                val ur = UserRepository(application = Application())
-                ur.LoginResult()
-            }
-        }
         home_appbar_end_icon.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProfileFragment())
         }

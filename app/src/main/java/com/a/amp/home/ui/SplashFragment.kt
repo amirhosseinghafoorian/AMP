@@ -1,5 +1,6 @@
 package com.a.amp.home.ui
 
+import android.app.Application
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -23,17 +24,20 @@ import kotlinx.coroutines.launch
 
 class SplashFragment : Fragment() {
 
-    var preferences: SharedPreferences? = null
+    private var preferences: SharedPreferences? = null
     private var currentUser = ""
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        publicContext = Application()
         lifecycleScope.launch(Dispatchers.IO) {
             fillDataBase()
-
             preferences = activity?.getSharedPreferences("locals", MODE_PRIVATE)
             currentUser = preferences?.getString("username", "***").toString()
         }
+    }
+
+    companion object {
+        lateinit var publicContext: Application
     }
 
     override fun onCreateView(

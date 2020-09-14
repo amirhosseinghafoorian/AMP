@@ -11,31 +11,41 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class UserRemote {
-    fun LoginFromServer() {
+    suspend fun loginFromServer(user: String, pass: String): Boolean {
         val auth = RetrofitBuilder.retrofit.create(AuthApi::class.java)
-        login(auth)
+        return login(auth, user, pass)
     }
 
-    fun login(authApi: AuthApi) {
+    suspend fun registerInServer(user: String, pass: String): Boolean {
+        val auth = RetrofitBuilder.retrofit.create(AuthApi::class.java)
+        return login(auth, user, pass)
+    }
+
+    suspend fun login(authApi: AuthApi, user: String, pass: String): Boolean {
+        var result = false
         authApi.login(
             authRequest = LoginRequest(
                 User(
-                    email = "test@part.ir",
-                    password = "11111111"
+                    email = user,
+                    password = pass
                 )
-            )
+            )//test@part.ir , 11111111
         ).enqueue(object : Callback<LoginResponse?> {
             override fun onFailure(call: Call<LoginResponse?>, t: Throwable) {
                 Log.i("baby", "failed baby")
+                result = false
             }
 
             override fun onResponse(
                 call: Call<LoginResponse?>,
                 response: Response<LoginResponse?>
             ) {
-                Log.i("baby", response.body()?.user?.token.toString())
+                Log.i("baby", response.body()?.user?.email.toString())
+                result = true
             }
         }
         )
+        return result
     }
+
 }
