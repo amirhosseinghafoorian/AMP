@@ -1,14 +1,9 @@
 package com.a.amp.user.data
 
-import android.util.Log
-import com.a.amp.AuthApi
-import com.a.amp.core.RetrofitBuilder
+import com.a.amp.services.AuthApi
+import com.a.amp.services.RetrofitBuilder
 import com.a.amp.user.apimodel1.LoginRequest
-import com.a.amp.user.apimodel1.LoginResponse
 import com.a.amp.user.apimodel1.User
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class UserRemote {
     suspend fun loginFromServer(user: String, pass: String): Boolean {
@@ -16,35 +11,42 @@ class UserRemote {
         return login(auth, user, pass)
     }
 
-    suspend fun registerInServer(user: String, pass: String): Boolean {
+    suspend fun registerInServer(user: String, pass: String, email: String): Boolean {
         val auth = RetrofitBuilder.retrofit.create(AuthApi::class.java)
-        return login(auth, user, pass)
+        return signUp(auth, user, pass, email)
     }
 
     suspend fun login(authApi: AuthApi, user: String, pass: String): Boolean {
         var result = false
-        authApi.login(
+        val a = authApi.login(
             authRequest = LoginRequest(
                 User(
                     email = user,
                     password = pass
                 )
             )//test@part.ir , 11111111
-        ).enqueue(object : Callback<LoginResponse?> {
-            override fun onFailure(call: Call<LoginResponse?>, t: Throwable) {
-                Log.i("baby", "failed baby")
-                result = false
-            }
-
-            override fun onResponse(
-                call: Call<LoginResponse?>,
-                response: Response<LoginResponse?>
-            ) {
-                Log.i("baby", response.body()?.user?.email.toString())
-                result = true
-            }
-        }
         )
+        if (a.code() == 200) {
+            result = true
+        }
+        return result
+    }
+
+    suspend fun signUp(authApi: AuthApi, username: String, pass: String, email: String): Boolean {
+        var result = false
+        val a = authApi.register(
+            authRequest = LoginRequest(
+                User(
+                    email = email,
+                    password = pass,
+                    username = username
+                )
+            )//test@part.ir , 11111111
+        )
+        if (a.code() == 200) {
+            result = true
+        }
+
         return result
     }
 

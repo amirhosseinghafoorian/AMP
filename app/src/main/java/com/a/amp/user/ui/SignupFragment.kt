@@ -4,13 +4,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.a.amp.R
+import com.a.amp.setting
 import kotlinx.android.synthetic.main.fragment_signup.*
 
 class SignupFragment : Fragment() {
+
+    private lateinit var setting: setting
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setting = setting()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -19,11 +29,28 @@ class SignupFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_signup, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+
+        loginViewModel.isSigned.observe(viewLifecycleOwner, { isSigned ->
+            if (isSigned != null) {
+                if (isSigned) {
+                    setting.putString("username", signup_et_2.editText?.text.toString())
+                    findNavController().navigate(SignupFragmentDirections.actionGlobalHomeFragment())
+                } else if (!isSigned) {
+                    Toast.makeText(context, "ثبت نام ناموفق", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+
         signup_btn_1.setOnClickListener {
             if (isValid()) {
-                findNavController().navigate(SignupFragmentDirections.actionGlobalHomeFragment())
+                loginViewModel.authenticate2(
+                    signup_et_1.editText?.text.toString(),
+                    signup_et_3.editText?.text.toString(),
+                    signup_et_2.editText?.text.toString()
+                )
             }
         }
         signup_tv_2.setOnClickListener {
@@ -31,13 +58,22 @@ class SignupFragment : Fragment() {
         }
     }
 
+
     private fun isValid(): Boolean {
         signup_et_1.error = null
         signup_et_2.error = null
         signup_et_3.error = null
         signup_et_4.error = null
+        signup_et_1.isErrorEnabled = false
+        signup_et_2.isErrorEnabled = false
+        signup_et_3.isErrorEnabled = false
+        signup_et_4.isErrorEnabled = false
         if (signup_et_1.editText?.text.toString() == "") {
             signup_et_1.error = "نام را وارد کنید"
+            signup_et_1.requestFocus()
+            return false
+        } else if (signup_et_1.editText?.text.toString().contains('_')) {
+            signup_et_1.error = "خط تیره مجاز نیست"
             signup_et_1.requestFocus()
             return false
         } else if (signup_et_2.editText?.text.toString() == "") {

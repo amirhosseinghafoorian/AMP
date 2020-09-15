@@ -1,8 +1,5 @@
 package com.a.amp.home.ui
 
-import android.app.Application
-import android.content.Context.MODE_PRIVATE
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -12,11 +9,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.a.amp.AppDataBase
+import com.a.amp.MyApp
 import com.a.amp.R
 import com.a.amp.article.data.ArticleEntity
 import com.a.amp.article.data.CommentEntity
-import com.a.amp.home.data.HomeRepository
+import com.a.amp.database.AppDataBase
+import com.a.amp.setting
 import com.a.amp.user.data.UserEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,20 +22,14 @@ import kotlinx.coroutines.launch
 
 class SplashFragment : Fragment() {
 
-    private var preferences: SharedPreferences? = null
     private var currentUser = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        publicContext = Application()
         lifecycleScope.launch(Dispatchers.IO) {
             fillDataBase()
-            preferences = activity?.getSharedPreferences("locals", MODE_PRIVATE)
-            currentUser = preferences?.getString("username", "***").toString()
+            val setting = setting()
+            currentUser = setting.getString("username")
         }
-    }
-
-    companion object {
-        lateinit var publicContext: Application
     }
 
     override fun onCreateView(
@@ -57,7 +49,7 @@ class SplashFragment : Fragment() {
         Toast.makeText(context, currentUser, Toast.LENGTH_SHORT).show()
         val handler = Handler()
         handler.postDelayed({
-            if (currentUser == "***") {
+            if (currentUser == "***" || currentUser == "") {
                 findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToAuthenticate())
             } else {
                 findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment())
@@ -67,9 +59,9 @@ class SplashFragment : Fragment() {
 
     private suspend fun fillDataBase() {
 
-        val repo: HomeRepository
+//        val repo: HomeRepository
 
-        val db = AppDataBase.buildDatabase(context = requireContext())
+        val db = AppDataBase.buildDatabase(context = MyApp.publicApp)
 
         db.myDao().insertUsers(
             UserEntity(101, "javad"),

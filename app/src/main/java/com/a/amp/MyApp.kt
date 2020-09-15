@@ -13,10 +13,12 @@ class MyApp : Application() {
 
     companion object {
         val networkFlipperPlugin = NetworkFlipperPlugin()
+        lateinit var publicApp: Application
     }
 
     override fun onCreate() {
         super.onCreate()
+        publicApp = this
         SoLoader.init(this, false)
         if (BuildConfig.DEBUG && FlipperUtils.shouldEnableFlipper(this)) {
             val client = AndroidFlipperClient.getInstance(this)

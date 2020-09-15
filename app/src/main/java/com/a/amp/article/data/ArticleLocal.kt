@@ -1,7 +1,7 @@
 package com.a.amp.article.data
 
 import android.app.Application
-import com.a.amp.AppDataBase
+import com.a.amp.database.AppDataBase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

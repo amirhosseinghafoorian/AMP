@@ -1,4 +1,4 @@
-package com.a.amp
+package com.a.amp.database
 
 import androidx.room.*
 import com.a.amp.article.data.ArticleEntity

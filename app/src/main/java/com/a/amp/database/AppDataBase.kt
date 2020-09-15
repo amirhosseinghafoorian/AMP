@@ -1,4 +1,4 @@
-package com.a.amp
+package com.a.amp.database
 
 import android.content.Context
 import androidx.room.Database

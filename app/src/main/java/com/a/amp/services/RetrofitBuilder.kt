@@ -1,4 +1,4 @@
-package com.a.amp.core
+package com.a.amp.services
 
 import com.a.amp.MyApp
 import com.facebook.flipper.plugins.network.FlipperOkhttpInterceptor
@@ -7,7 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitBuilder {
-    val client = OkHttpClient.Builder()
+    private val client = OkHttpClient.Builder()
         .addNetworkInterceptor(FlipperOkhttpInterceptor(MyApp.networkFlipperPlugin))
         .build()
 

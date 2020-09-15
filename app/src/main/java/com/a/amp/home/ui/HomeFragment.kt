@@ -1,7 +1,5 @@
 package com.a.amp.home.ui
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,16 +8,18 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.a.amp.R
+import com.a.amp.setting
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
 
-    var preferences: SharedPreferences? = null
+    private lateinit var setting: setting
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.window?.decorView?.systemUiVisibility = 0
-        preferences = activity?.getSharedPreferences("locals", Context.MODE_PRIVATE)
+        setting = setting()
     }
 
     override fun onCreateView(
@@ -64,7 +64,7 @@ class HomeFragment : Fragment() {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToWriteFragment())
         }
         home_appbar_end_icon_power.setOnClickListener {
-            preferences?.edit()?.remove("username")?.apply()
+            setting.remove("username")
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAuthenticate())
         }
     }
