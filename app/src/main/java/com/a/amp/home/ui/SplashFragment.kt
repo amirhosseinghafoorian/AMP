@@ -11,11 +11,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.a.amp.MyApp
 import com.a.amp.R
+import com.a.amp.article.apimodel2.Article
 import com.a.amp.article.data.ArticleEntity
-import com.a.amp.article.data.CommentEntity
+import com.a.amp.article.data.ArticleRemote
 import com.a.amp.database.AppDataBase
 import com.a.amp.storage.setting
-import com.a.amp.user.data.UserEntity
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -59,47 +60,62 @@ class SplashFragment : Fragment() {
 
     private suspend fun fillDataBase() {
 
-//        val repo: HomeRepository
-
         val db = AppDataBase.buildDatabase(context = MyApp.publicApp)
 
-        db.myDao().insertUsers(
-            UserEntity(101, "javad"),
-            UserEntity(102, "ali"),
-            UserEntity(103, "reza"),
-            UserEntity(104, "yasi"),
-            UserEntity(105, "amir"),
-            UserEntity(106, "nazi"),
-            UserEntity(107, "milad"),
-            UserEntity(108, "amin"),
-            UserEntity(109, "sirus"),
-            UserEntity(110, "sajjad"),
-        )
+        var resList = mutableListOf<Article>()
+        CoroutineScope(Dispatchers.IO).launch {
+            val remote = ArticleRemote()
+            val res = remote.getArticlesFromServer()
+            val resl: List<Article>?
+            resl = res.data?.articles
+            resList.addAll(resl!!)
+            val s = ""
+            val ll = ArticleEntity.convertToDataItem4(resList)
+            for (i in resList.indices) {
+                db.myDao().insertArticles(ll[i])
+            }
+        }
 
-        db.myDao().insertArticles(
-            ArticleEntity(201, 101, "A simple paper 1", "This is a sample 1"),
-            ArticleEntity(202, 105, "A simple paper 2", "This is a sample 2"),
-            ArticleEntity(203, 107, "A simple paper 3", "This is a sample 3"),
-            ArticleEntity(204, 102, "A simple paper 4", "This is a sample 4"),
-            ArticleEntity(205, 103, "A simple paper 5", "This is a sample 5"),
-            ArticleEntity(206, 102, "A simple paper 6", "This is a sample 6"),
-            ArticleEntity(207, 105, "A simple paper 7", "This is a sample 7"),
-            ArticleEntity(208, 105, "A simple paper 8", "This is a sample 8"),
-            ArticleEntity(209, 106, "A simple paper 9", "This is a sample 9"),
-            ArticleEntity(210, 110, "A simple paper 10", "This is a sample 10"),
-        )
+//        val repo: HomeRepository
 
-        db.myDao().insertComments(
-            CommentEntity(301, 203, "nice article 1"),
-            CommentEntity(302, 205, "nice article 2"),
-            CommentEntity(303, 206, "nice article 3"),
-            CommentEntity(304, 202, "nice article 4"),
-            CommentEntity(305, 202, "nice article 5"),
-            CommentEntity(306, 209, "nice article 6"),
-            CommentEntity(307, 203, "nice article 7"),
-            CommentEntity(308, 207, "nice article 8"),
-            CommentEntity(309, 209, "nice article 9"),
-            CommentEntity(310, 204, "nice article 10"),
-        )
+
+//        db.myDao().insertUsers(
+//            UserEntity(101, "javad"),
+//            UserEntity(102, "ali"),
+//            UserEntity(103, "reza"),
+//            UserEntity(104, "yasi"),
+//            UserEntity(105, "amir"),
+//            UserEntity(106, "nazi"),
+//            UserEntity(107, "milad"),
+//            UserEntity(108, "amin"),
+//            UserEntity(109, "sirus"),
+//            UserEntity(110, "sajjad"),
+//        )
+
+//        db.myDao().insertArticles(
+//            ArticleEntity(201, 101, "A simple paper 1", "This is a sample 1"),
+//            ArticleEntity(202, 105, "A simple paper 2", "This is a sample 2"),
+//            ArticleEntity(203, 107, "A simple paper 3", "This is a sample 3"),
+//            ArticleEntity(204, 102, "A simple paper 4", "This is a sample 4"),
+//            ArticleEntity(205, 103, "A simple paper 5", "This is a sample 5"),
+//            ArticleEntity(206, 102, "A simple paper 6", "This is a sample 6"),
+//            ArticleEntity(207, 105, "A simple paper 7", "This is a sample 7"),
+//            ArticleEntity(208, 105, "A simple paper 8", "This is a sample 8"),
+//            ArticleEntity(209, 106, "A simple paper 9", "This is a sample 9"),
+//            ArticleEntity(210, 110, "A simple paper 10", "This is a sample 10"),
+//        )
+//
+//        db.myDao().insertComments(
+//            CommentEntity(301, 203, "nice article 1"),
+//            CommentEntity(302, 205, "nice article 2"),
+//            CommentEntity(303, 206, "nice article 3"),
+//            CommentEntity(304, 202, "nice article 4"),
+//            CommentEntity(305, 202, "nice article 5"),
+//            CommentEntity(306, 209, "nice article 6"),
+//            CommentEntity(307, 203, "nice article 7"),
+//            CommentEntity(308, 207, "nice article 8"),
+//            CommentEntity(309, 209, "nice article 9"),
+//            CommentEntity(310, 204, "nice article 10"),
+//        )
     }
 }

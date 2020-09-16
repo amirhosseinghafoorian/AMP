@@ -1,21 +1,24 @@
 package com.a.amp.article.data
 
-import androidx.room.*
-import androidx.room.ForeignKey.CASCADE
+import androidx.room.ColumnInfo
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.Relation
+import com.a.amp.article.apimodel2.Article
 import com.a.amp.home.data.HomeRelatedCvDataItem
-import com.a.amp.user.data.UserEntity
 import com.a.amp.user.data.WritingCvDataItem
 import java.util.*
 
 @Entity(
-    tableName = "articles", primaryKeys = ["ArticleId"], foreignKeys = [
-        ForeignKey(
-            onDelete = CASCADE,
-            parentColumns = ["UserId"],
-            childColumns = ["UserOwnerId"],
-            entity = UserEntity::class
-        )
-    ]
+    tableName = "articles", primaryKeys = ["ArticleId"]
+//    , foreignKeys = [
+//        ForeignKey(
+//            onDelete = CASCADE,
+//            parentColumns = ["UserId"],
+//            childColumns = ["UserOwnerId"],
+//            entity = UserEntity::class
+//        )
+//    ]
 )
 data class ArticleEntity(
     @ColumnInfo(name = "ArticleId") val articleId: Int,
@@ -69,6 +72,19 @@ data class ArticleEntity(
                         list[i].publishDate.toString(),
                         list[i].articleId,
                         isTag = false
+                    )
+                )
+            }
+            return resultList
+        }
+
+        fun convertToDataItem4(list: List<Article>): MutableList<ArticleEntity> {
+            val resultList: MutableList<ArticleEntity> = mutableListOf()
+            for (i in list.indices) {
+                resultList.add(
+                    ArticleEntity(
+                        i,
+                        i * 100, list[i].title, list[i].body
                     )
                 )
             }
