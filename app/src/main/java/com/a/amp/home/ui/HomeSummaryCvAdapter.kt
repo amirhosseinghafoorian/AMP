@@ -38,7 +38,7 @@ class HomeSummaryCvAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding: SummaryCvBinding = DataBindingUtil.inflate(
-            LayoutInflater.from(parent.getContext()),
+            LayoutInflater.from(parent.context),
             R.layout.summary_cv, parent, false
         )
 //        val textView =

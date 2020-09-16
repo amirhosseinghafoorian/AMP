@@ -4,25 +4,32 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.a.amp.core.resource.LoginAction
+import com.a.amp.core.resource.Resource
+import com.a.amp.user.apimodel1.LoginResponse
 import com.a.amp.user.data.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class LoginViewModel : ViewModel() {
-    var isLogin: MutableLiveData<Boolean> = MutableLiveData()
+    var isLogin: MutableLiveData<LoginAction> = MutableLiveData()
     var isSigned: MutableLiveData<Boolean> = MutableLiveData()
+    val username = MutableLiveData<String>()
+    val password = MutableLiveData<String>()
+    val result = MutableLiveData<Resource<LoginResponse>>()
 
-    fun authenticate(user: String, pass: String) {
+    fun authenticate() {
         viewModelScope.launch(Dispatchers.IO) {
-            if (user != "") {
+            if (username.value != "") {
                 val ur = UserRepository(application = Application())
                 isLogin.postValue(null)
-                val result = ur.loginResult(user, pass)
-                if (result) {
-                    isLogin.postValue(true)
-                } else if (!result) {
-                    isLogin.postValue(false)
-                }
+                result.postValue(Resource.loading(null))
+                result.postValue(
+                    ur.loginResult(
+                        username.value.toString(),
+                        password.value.toString()
+                    )
+                )
             }
         }
     }

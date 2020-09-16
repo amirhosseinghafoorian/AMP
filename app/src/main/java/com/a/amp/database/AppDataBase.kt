@@ -11,12 +11,7 @@ import com.a.amp.article.data.TagEntity
 import com.a.amp.user.data.UserEntity
 
 @Database(
-    entities = arrayOf(
-        UserEntity::class,
-        ArticleEntity::class,
-        CommentEntity::class,
-        TagEntity::class
-    ),
+    entities = [UserEntity::class, ArticleEntity::class, CommentEntity::class, TagEntity::class],
     version = 1
 )
 @TypeConverters(DateConverter::class)

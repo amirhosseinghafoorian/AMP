@@ -14,7 +14,7 @@ import com.a.amp.R
 import com.a.amp.article.data.ArticleEntity
 import com.a.amp.article.data.CommentEntity
 import com.a.amp.database.AppDataBase
-import com.a.amp.setting
+import com.a.amp.storage.setting
 import com.a.amp.user.data.UserEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

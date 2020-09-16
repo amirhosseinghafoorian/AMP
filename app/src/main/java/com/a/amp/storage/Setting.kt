@@ -1,7 +1,8 @@
-package com.a.amp
+package com.a.amp.storage
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.a.amp.MyApp
 
 class setting {
     private val prefKey = "locals"
