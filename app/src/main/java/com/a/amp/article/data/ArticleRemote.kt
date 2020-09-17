@@ -1,8 +1,8 @@
 package com.a.amp.article.data
 
 import com.a.amp.article.apimodel2.ArticleResponse
-import com.a.amp.core.SafeApiCall
 import com.a.amp.core.resource.Resource
+import com.a.amp.core.safeApiCall
 import com.a.amp.services.AuthApi
 import com.a.amp.services.RetrofitBuilder
 
@@ -12,14 +12,10 @@ class ArticleRemote {
         return login(auth)
     }
 
-    suspend fun login(authApi: AuthApi): Resource<ArticleResponse> {
+    private suspend fun login(authApi: AuthApi): Resource<ArticleResponse> {
 
-        val apiResult: Resource<ArticleResponse>
-
-        apiResult = SafeApiCall {
+        return safeApiCall {
             authApi.AllArticles()
         }
-
-        return apiResult
     }
 }

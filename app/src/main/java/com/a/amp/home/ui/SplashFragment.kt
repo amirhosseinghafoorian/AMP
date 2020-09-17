@@ -2,23 +2,25 @@ package com.a.amp.home.ui
 
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.a.amp.MyApp
 import com.a.amp.R
 import com.a.amp.article.apimodel2.Article
 import com.a.amp.article.data.ArticleEntity
-import com.a.amp.article.data.ArticleRemote
+import com.a.amp.article.data.ArticleRepository
+import com.a.amp.core.resource.Status
 import com.a.amp.database.AppDataBase
 import com.a.amp.storage.setting
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class SplashFragment : Fragment() {
@@ -26,11 +28,11 @@ class SplashFragment : Fragment() {
     private var currentUser = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        lifecycleScope.launch(Dispatchers.IO) {
+        CoroutineScope((Dispatchers.IO)).launch {
             fillDataBase()
-            val setting = setting()
-            currentUser = setting.getString("username")
         }
+        val setting = setting()
+        currentUser = setting.getString("username")
     }
 
     override fun onCreateView(
@@ -61,22 +63,30 @@ class SplashFragment : Fragment() {
     private suspend fun fillDataBase() {
 
         val db = AppDataBase.buildDatabase(context = MyApp.publicApp)
+        val repo = ArticleRepository(MyApp.publicApp)
 
-        var resList = mutableListOf<Article>()
-        CoroutineScope(Dispatchers.IO).launch {
-            val remote = ArticleRemote()
-            val res = remote.getArticlesFromServer()
-            val resl: List<Article>?
-            resl = res.data?.articles
-            resList.addAll(resl!!)
-            val s = ""
-            val ll = ArticleEntity.convertToDataItem4(resList)
-            for (i in resList.indices) {
-                db.myDao().insertArticles(ll[i])
+        Looper.prepare()
+        val repoResult = repo.syncArticles()
+        if (repoResult.status == Status.SUCCESS && repoResult.code == 200) {
+            val unformattedList = repoResult.data?.articles
+            val formattedList = mutableListOf<Article>()
+            unformattedList?.let { formattedList.addAll(it) }
+            val resultList = ArticleEntity.convertToDataItem4(formattedList)
+            for (i in resultList.indices) {
+                db.myDao().insertArticles(resultList[i])
+            }
+            withContext(Dispatchers.Main) {
+                Toast.makeText(MyApp.publicApp, "بروزرسانی انجام شد", Toast.LENGTH_SHORT).show()
+            }
+        } else if (repoResult.status == Status.SUCCESS && repoResult.code != 200) {
+            withContext(Dispatchers.Main) {
+                Toast.makeText(context, "خطا", Toast.LENGTH_SHORT).show()
+            }
+        } else if (repoResult.status == Status.ERROR) {
+            withContext(Dispatchers.Main) {
+                Toast.makeText(MyApp.publicApp, "عدم اتصال به اینترنت", Toast.LENGTH_SHORT).show()
             }
         }
-
-//        val repo: HomeRepository
 
 
 //        db.myDao().insertUsers(

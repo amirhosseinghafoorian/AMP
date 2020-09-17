@@ -1,21 +1,27 @@
 package com.a.amp.user.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.a.amp.R
+import com.a.amp.core.resource.LoginAction
+import com.a.amp.core.resource.Status
+import com.a.amp.databinding.FragmentSignupBinding
 import com.a.amp.storage.setting
 import kotlinx.android.synthetic.main.fragment_signup.*
 
 class SignupFragment : Fragment() {
 
     private lateinit var setting: setting
+    private lateinit var Binding: FragmentSignupBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,31 +32,80 @@ class SignupFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_signup, container, false)
+        val binding: FragmentSignupBinding = DataBindingUtil.inflate(
+            inflater, R.layout.fragment_signup, container, false
+        )
+        Binding = binding
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+
+        val loginViewModel = ViewModelProvider(this)
+            .get(LoginViewModel::class.java)
+
+        Binding.also {
+            it.vm = loginViewModel
+            it.lifecycleOwner = this
+        }
 
         loginViewModel.isSigned.observe(viewLifecycleOwner, { isSigned ->
             if (isSigned != null) {
-                if (isSigned) {
+                if (isSigned == LoginAction.LOGIN) {
                     setting.putString("username", signup_et_2.editText?.text.toString())
                     findNavController().navigate(SignupFragmentDirections.actionGlobalHomeFragment())
-                } else if (!isSigned) {
+                } else if (isSigned == LoginAction.WRONG
+                    && loginViewModel.result2.value?.errorbody?.source()?.buffer.toString()
+                        .substringAfter("\",\"email\":\"").startsWith("is already")
+                ) {
+                    Toast.makeText(context, "ایمیل قبلا استفاده شده", Toast.LENGTH_SHORT).show()
+                    Log.i(
+                        "baby",
+                        loginViewModel.result2.value?.errorbody?.source()?.buffer.toString()
+                    )
+                } else if (isSigned == LoginAction.WRONG
+                    && loginViewModel.result2.value?.errorbody?.source()?.buffer.toString()
+                        .substringAfter("\",\"email\":\"").startsWith("is inv")
+                ) {
+                    Toast.makeText(context, "ایمیل را درست وارد کنید", Toast.LENGTH_SHORT).show()
+                    Log.i(
+                        "baby",
+                        loginViewModel.result2.value?.errorbody?.source()?.buffer.toString()
+                    )
+                } else if (isSigned == LoginAction.WRONG
+                    && loginViewModel.result2.value?.errorbody?.source()?.buffer.toString()
+                        .substringAfter("\"username\":\"").startsWith("is already")
+                ) {
+                    Toast.makeText(context, "نام کاربری قبلا استفاده شده", Toast.LENGTH_SHORT)
+                        .show()
+                } else if (isSigned == LoginAction.WRONG
+                    && loginViewModel.result2.value?.errorbody?.source()?.buffer.toString()
+                        .substringAfter("\"username\":\"").startsWith("is inv")
+                ) {
+                    Toast.makeText(context, "نام کاربری را درست وارد کنید", Toast.LENGTH_SHORT)
+                        .show()
+                } else if (isSigned == LoginAction.WRONG) {
                     Toast.makeText(context, "ثبت نام ناموفق", Toast.LENGTH_SHORT).show()
+                } else if (isSigned == LoginAction.FAIL) {
+                    Toast.makeText(context, "عدم اتصال به اینترنت", Toast.LENGTH_SHORT).show()
                 }
+            }
+        })
+
+        loginViewModel.result2.observe(viewLifecycleOwner, { result ->
+            if (result.status == Status.SUCCESS && result.code == 200) {
+                loginViewModel.isSigned.postValue(LoginAction.LOGIN)
+            } else if (result.status == Status.SUCCESS && result.code != 200) {
+                loginViewModel.isSigned.postValue(LoginAction.WRONG)
+            } else if (result.status == Status.ERROR) {
+                loginViewModel.isSigned.postValue(LoginAction.FAIL)
             }
         })
 
         signup_btn_1.setOnClickListener {
             if (isValid()) {
-                loginViewModel.authenticate2(
-                    signup_et_1.editText?.text.toString(),
-                    signup_et_3.editText?.text.toString(),
-                    signup_et_2.editText?.text.toString()
-                )
+                loginViewModel.authenticate2()
             }
         }
         signup_tv_2.setOnClickListener {

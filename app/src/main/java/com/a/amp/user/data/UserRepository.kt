@@ -17,7 +17,7 @@ class UserRepository(application: Application) {
         return remote.loginFromServer(user, pass)
     }
 
-    suspend fun signUpResult(user: String, pass: String, email: String): Boolean {
+    suspend fun signUpResult(user: String, pass: String, email: String): Resource<LoginResponse> {
         val remote = UserRemote()
         return remote.registerInServer(user, pass, email)
     }
