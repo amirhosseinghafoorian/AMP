@@ -14,8 +14,10 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.a.amp.R
 import com.a.amp.databinding.FragmentArticleBinding
-import com.a.amp.user.data.WritingCvDataItem
 import kotlinx.android.synthetic.main.fragment_article.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ArticleFragment : Fragment() {
     private lateinit var binding: FragmentArticleBinding
@@ -43,21 +45,8 @@ class ArticleFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         val articleViewModel = ViewModelProvider(this).get(ArticleListViewModel::class.java)
 
-        binding.articleBind = WritingCvDataItem(
-            "تیتر اولیه مقاله",
-            "متنی برای تست چند متن اصلی مقاله",
-            "امیرحسین غفوریان",
-            "5 روز پیش",
-            0,
-            false,
-            false,
-            0
-        )
-
         val myAdapter = articleViewModel.relatedList.value?.let { ArticleRelatedCvAdapter(it) }
         val myAdapter2 = articleViewModel.commentList.value?.let { CommentCvAdapter(it) }
-
-
 
         article_page_recycle_1.apply {
             adapter = myAdapter
@@ -77,8 +66,17 @@ class ArticleFragment : Fragment() {
             myAdapter2?.notifyDataSetChanged()
         })
 
-        articleViewModel.fillRelated()
-        articleViewModel.fillComment()
+        articleViewModel.singleArticle.observe(viewLifecycleOwner, { list ->
+            if (list.size > 0) {
+                binding.articleBind = list[0]
+            }
+        })
+
+        CoroutineScope(Dispatchers.IO).launch {
+            articleViewModel.fillRelated()
+            articleViewModel.fillComment()
+            articleViewModel.fillSingleArticle("-aaz38v")
+        }
 
         article_iv_1.setOnClickListener {
             findNavController().navigate(ArticleFragmentDirections.actionArticleFragmentToProfileFragment())

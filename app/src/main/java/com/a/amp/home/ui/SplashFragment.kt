@@ -88,6 +88,9 @@ class SplashFragment : Fragment() {
             }
         }
 
+        val b = db.myDao().getSingleArticleById("hiiiiiiiiiiiiiiiiiii-b1j4ed")
+        val ss = ""
+
 
 //        db.myDao().insertUsers(
 //            UserEntity(101, "javad"),

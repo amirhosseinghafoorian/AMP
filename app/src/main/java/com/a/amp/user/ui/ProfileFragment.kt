@@ -53,14 +53,14 @@ class ProfileFragment : Fragment(), MoreClickListner {
             myAdapter?.notifyDataSetChanged()
         })
 
-        profileViewModel.fillWrite()
+        profileViewModel.fillWrite("jai214766")
 
         profile_appbar_start_icon.setOnClickListener {
             Navigation.findNavController(it).navigateUp()
         }
     }
 
-    override fun onClick(id: Int, layoutPosition: Int) {
+    override fun onClick(id: String, layoutPosition: Int) {
         val bottonSheetDialog = BottomSheetDialog(requireContext())
         val view = layoutInflater.inflate(R.layout.bottom_sheet, null)
 

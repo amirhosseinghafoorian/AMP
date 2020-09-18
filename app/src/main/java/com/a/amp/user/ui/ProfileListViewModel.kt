@@ -14,10 +14,10 @@ class ProfileListViewModel(application: Application) : AndroidViewModel(applicat
         writeList.value = mutableListOf()
     }
 
-    fun fillWrite() {
+    fun fillWrite(username: String) {
         writeList.value?.clear()
         val user = UserRepository(app)
-        writeList.value?.let { user.fillWriteFromRepo(it) }
+        writeList.value?.let { user.fillWriteFromRepo(it, username) }
     }
 
 }

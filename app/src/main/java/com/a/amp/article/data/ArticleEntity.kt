@@ -1,5 +1,6 @@
 package com.a.amp.article.data
 
+import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
@@ -21,8 +22,8 @@ import java.util.*
 //    ]
 )
 data class ArticleEntity(
-    @ColumnInfo(name = "ArticleId") val articleId: Int,
-    @ColumnInfo(name = "UserOwnerId") val userOwnerId: Int,
+    @NonNull @ColumnInfo(name = "ArticleId") val articleId: String,
+    @ColumnInfo(name = "UserOwnerId") val userOwnerId: String,
     @ColumnInfo(name = "Title") val title: String?,
     @ColumnInfo(name = "MainText") val mainText: String?,
     @ColumnInfo(name = "PublishDate") val publishDate: Date? = null
@@ -51,7 +52,7 @@ data class ArticleEntity(
                     WritingCvDataItem(
                         list[i].title.toString(),
                         list[i].mainText.toString(),
-                        "user : ${list[i].userOwnerId}",
+                        list[i].userOwnerId,
                         list[i].publishDate.toString(),
                         list[i].articleId,
                         isTag = false,
@@ -83,8 +84,8 @@ data class ArticleEntity(
             for (i in list.indices) {
                 resultList.add(
                     ArticleEntity(
-                        i,
-                        i * 100, list[i].title, list[i].body
+                        list[i].slug,
+                        list[i].author.username, list[i].title, list[i].body
                     )
                 )
             }

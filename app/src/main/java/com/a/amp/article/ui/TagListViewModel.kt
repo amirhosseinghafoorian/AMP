@@ -14,10 +14,10 @@ class TagListViewModel(application: Application) : AndroidViewModel(application)
         summaryList.value = ArrayList()
     }
 
-    fun fillSummary() {
-        summaryList.value?.clear()
+    suspend fun fillSummary() {
+        summaryList.postValue(null)
         val article = ArticleRepository(app)
-        summaryList.value?.let { article.fillRelatedFromRepo(it) }
+        summaryList.postValue(article.fillRelatedFromRepo())
     }
 
 }

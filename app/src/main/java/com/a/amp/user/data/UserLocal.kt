@@ -11,9 +11,13 @@ class UserLocal(application: Application) {
 
     private val db = AppDataBase.buildDatabase(context = application)
 
-    fun fillWriteFromLocal(writeList: MutableList<WritingCvDataItem>) {
+    fun fillWriteFromLocal(writeList: MutableList<WritingCvDataItem>, username: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            writeList.addAll(ArticleEntity.convertToDataItem2(db.myDao().getArticles()))
+            writeList.addAll(
+                ArticleEntity.convertToDataItem2(
+                    db.myDao().getArticlesByAuthor(username)
+                )
+            )
         }
     }
 }

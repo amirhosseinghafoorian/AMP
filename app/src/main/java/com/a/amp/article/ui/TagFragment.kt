@@ -11,6 +11,9 @@ import androidx.navigation.Navigation
 import com.a.amp.R
 import com.a.amp.databinding.FragmentTagBinding
 import kotlinx.android.synthetic.main.fragment_tag.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class TagFragment : Fragment() {
     private lateinit var binding: FragmentTagBinding
@@ -37,10 +40,14 @@ class TagFragment : Fragment() {
         }
 
         tagViewModel.summaryList.observe(viewLifecycleOwner, { list ->
-            myAdapter?.notifyDataSetChanged()
+            if (list != null) {
+                myAdapter?.notifyDataSetChanged()
+            }
         })
 
-        tagViewModel.fillSummary()
+        CoroutineScope(Dispatchers.IO).launch {
+            tagViewModel.fillSummary()
+        }
 
         tag_appbar_start_icon.setOnClickListener {
             Navigation.findNavController(it).navigateUp()

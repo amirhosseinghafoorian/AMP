@@ -15,6 +15,12 @@ interface MyDao {
     @Query("select * from articles")
     fun getArticles(): List<ArticleEntity>
 
+    @Query("select * from articles where UserOwnerId == :username")
+    fun getArticlesByAuthor(username: String): List<ArticleEntity>
+
+    @Query("select * from articles where ArticleId == :id")
+    fun getSingleArticleById(id: String): List<ArticleEntity>
+
     @Query("select * from users")
     fun getUsers(): List<UserEntity>
 
