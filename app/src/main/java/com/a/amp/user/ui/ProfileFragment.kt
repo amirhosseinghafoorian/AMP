@@ -70,11 +70,11 @@ class ProfileFragment : Fragment(), MoreClickListner {
     }
 
     override fun onClick(id: String, layoutPosition: Int) {
-        val bottonSheetDialog = BottomSheetDialog(requireContext())
+        val buttonSheetDialog = BottomSheetDialog(requireContext())
         val view = layoutInflater.inflate(R.layout.bottom_sheet, null)
 
-        bottonSheetDialog.setContentView(view)
+        buttonSheetDialog.setContentView(view)
 
-        bottonSheetDialog.show()
+        buttonSheetDialog.show()
     }
 }
