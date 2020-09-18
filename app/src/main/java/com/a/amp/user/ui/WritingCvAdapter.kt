@@ -31,7 +31,7 @@ class WritingCvAdapter(
         init {
             itemView.setOnClickListener {
                 it.findNavController()
-                    .navigate(ProfileFragmentDirections.actionProfileFragmentToArticleFragment())
+                    .navigate(ProfileFragmentDirections.actionProfileFragmentToArticleFragment(list[position].id))
             }
             itemView.writing_cv_ic_more.setOnClickListener {
 //                clickcallback.invoke(2)

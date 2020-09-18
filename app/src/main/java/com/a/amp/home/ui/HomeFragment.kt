@@ -15,7 +15,6 @@ class HomeFragment : Fragment() {
 
     private lateinit var setting: setting
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.window?.decorView?.systemUiVisibility = 0
@@ -58,7 +57,12 @@ class HomeFragment : Fragment() {
         loginViewModel.fillRelated()
 
         home_appbar_end_icon.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProfileFragment())
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToProfileFragment(
+                    setting.getString("username"),
+                    setting.getString("id")
+                )
+            )
         }
         home_appbar_start_icon.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToWriteFragment())

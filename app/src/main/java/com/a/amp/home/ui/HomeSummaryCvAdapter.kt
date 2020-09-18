@@ -27,7 +27,7 @@ class HomeSummaryCvAdapter(
         init {
             itemView.setOnClickListener {
                 it.findNavController()
-                    .navigate(HomeFragmentDirections.actionHomeFragmentToArticleFragment())
+                    .navigate(HomeFragmentDirections.actionHomeFragmentToArticleFragment(list[position].id))
             }
             itemView.summary_bookmark.setOnClickListener {
                 list[position].isTag = list[position].isTag.not()

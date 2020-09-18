@@ -52,7 +52,11 @@ class LoginFragment : Fragment() {
         loginViewModel.isLogin.observe(viewLifecycleOwner, { isLogin ->
             if (isLogin != null) {
                 if (isLogin == LoginAction.LOGIN) {
-                    setting.putString("username", login_et_1.editText?.text.toString())
+                    setting.putString("id", login_et_1.editText?.text.toString())
+                    setting.putString(
+                        "username",
+                        loginViewModel.result.value?.data?.user?.username.toString()
+                    )
                     findNavController().navigate(LoginFragmentDirections.actionGlobalHomeFragment())
                 } else if (isLogin == LoginAction.WRONG) {
                     Toast.makeText(context, "نام کاربری یا رمز عبور اشتباه است", Toast.LENGTH_SHORT)

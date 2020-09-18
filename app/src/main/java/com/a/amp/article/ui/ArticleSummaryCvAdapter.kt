@@ -29,10 +29,10 @@ class ArticleSummaryCvAdapter(
             itemView.setOnClickListener {
                 try {
                     it.findNavController()
-                        .navigate(HomeFragmentDirections.actionHomeFragmentToArticleFragment())
+                        .navigate(HomeFragmentDirections.actionHomeFragmentToArticleFragment(list[position].id))
                 } catch (E: IllegalArgumentException) {
                     it.findNavController()
-                        .navigate(TagFragmentDirections.actionTagFragmentToArticleFragment())
+                        .navigate(TagFragmentDirections.actionTagFragmentToArticleFragment(list[position].id))
                 }
             }
 

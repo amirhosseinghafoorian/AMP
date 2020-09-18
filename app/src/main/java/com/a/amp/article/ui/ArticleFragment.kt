@@ -21,14 +21,14 @@ import kotlinx.coroutines.launch
 
 class ArticleFragment : Fragment() {
     private lateinit var binding: FragmentArticleBinding
-    private var param1: Int = 0
-    private val ARG_PARAM1 = "ID"
+    private var slug = ""
+//    private val ARG_PARAM1 = "ID"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getInt(ARG_PARAM1)
-        }
+//        val args : ArticleFragment by navArgs()
+//        slug = args.slug
+        slug = arguments?.let { ArticleFragmentArgs.fromBundle(it).slug }.toString()
     }
 
     override fun onCreateView(
@@ -75,11 +75,15 @@ class ArticleFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             articleViewModel.fillRelated()
             articleViewModel.fillComment()
-            articleViewModel.fillSingleArticle("-aaz38v")
+            articleViewModel.fillSingleArticle(slug)
         }
 
         article_iv_1.setOnClickListener {
-            findNavController().navigate(ArticleFragmentDirections.actionArticleFragmentToProfileFragment())
+            findNavController().navigate(
+                ArticleFragmentDirections.actionArticleFragmentToProfileFragment(
+                    articleViewModel.singleArticle.value?.get(0)?.name.toString(), ""
+                )
+            )
         }
 
         article_chip_1.setOnClickListener {
@@ -113,7 +117,7 @@ class ArticleFragment : Fragment() {
         fun newInstance(param1: Int) =
             ArticleFragment().apply {
                 arguments = Bundle().apply {
-                    putInt(ARG_PARAM1, param1)
+//                    putInt(ARG_PARAM1, param1)
                 }
             }
     }

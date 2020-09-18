@@ -24,10 +24,10 @@ class HomeRelatedCvAdapter(
             itemView.setOnClickListener {
                 try {
                     it.findNavController()
-                        .navigate(HomeFragmentDirections.actionHomeFragmentToArticleFragment())
+                        .navigate(HomeFragmentDirections.actionHomeFragmentToArticleFragment(list[position].id))
                 } catch (E: IllegalArgumentException) {
                     it.findNavController()
-                        .navigate(ArticleFragmentDirections.actionArticleFragmentSelf())
+                        .navigate(ArticleFragmentDirections.actionArticleFragmentSelf(list[position].id))
                 }
             }
             itemView.related_bookmark.setOnClickListener {

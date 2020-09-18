@@ -16,7 +16,16 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : Fragment(), MoreClickListner {
+
     private lateinit var binding: FragmentProfileBinding
+    private var username = ""
+    private var id = ""
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        username = arguments?.let { ProfileFragmentArgs.fromBundle(it).username }.toString()
+        id = arguments?.let { ProfileFragmentArgs.fromBundle(it).id }.toString()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +41,7 @@ class ProfileFragment : Fragment(), MoreClickListner {
         super.onActivityCreated(savedInstanceState)
         val profileViewModel = ViewModelProvider(this).get(ProfileListViewModel::class.java)
 
-        binding.profileBind = ProfileDataItem("امیرحسین غفوریان", "برنامه نویس اندروید", 0)
+        binding.profileBind = ProfileDataItem(username, id)
 
         val myAdapter = profileViewModel.writeList.value?.let {
             WritingCvAdapter(
@@ -53,7 +62,7 @@ class ProfileFragment : Fragment(), MoreClickListner {
             myAdapter?.notifyDataSetChanged()
         })
 
-        profileViewModel.fillWrite("jai214766")
+        profileViewModel.fillWrite(username)
 
         profile_appbar_start_icon.setOnClickListener {
             Navigation.findNavController(it).navigateUp()

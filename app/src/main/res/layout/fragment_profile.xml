@@ -128,7 +128,7 @@
                         android:layout_marginStart="4dp"
                         android:layout_marginEnd="4dp"
                         android:layout_marginBottom="8dp"
-                        android:text="@{profileBind.description}"
+                        android:text="@{profileBind.id}"
                         android:textSize="12sp"
                         app:layout_constraintStart_toStartOf="@id/profile_gl_3"
                         app:layout_constraintTop_toBottomOf="@id/profile_cv_tv_1" />
