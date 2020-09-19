@@ -36,11 +36,12 @@ class TagFragment : Fragment() {
 
         tag_recycler.apply {
             adapter = myAdapter
-            setHasFixedSize(true)
+//            setHasFixedSize(true)
         }
 
         tagViewModel.summaryList.observe(viewLifecycleOwner, { list ->
             if (list != null) {
+                myAdapter?.list = list
                 myAdapter?.notifyDataSetChanged()
             }
         })

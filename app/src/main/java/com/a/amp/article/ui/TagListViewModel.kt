@@ -11,7 +11,7 @@ class TagListViewModel(application: Application) : AndroidViewModel(application)
     val app = application
 
     init {
-        summaryList.value = ArrayList()
+        summaryList.value = mutableListOf()
     }
 
     suspend fun fillSummary() {

@@ -50,12 +50,12 @@ class ArticleFragment : Fragment() {
 
         article_page_recycle_1.apply {
             adapter = myAdapter
-            setHasFixedSize(true)
+//            setHasFixedSize(true)
         }
 
         article_page_recycle_2.apply {
             adapter = myAdapter2
-            setHasFixedSize(true)
+//            setHasFixedSize(true)
         }
 
         articleViewModel.relatedList.observe(viewLifecycleOwner, { list ->
