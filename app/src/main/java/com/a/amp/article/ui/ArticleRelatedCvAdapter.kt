@@ -12,7 +12,7 @@ import com.a.amp.home.ui.HomeFragmentDirections
 import kotlinx.android.synthetic.main.related_cv.view.*
 
 class ArticleRelatedCvAdapter(
-    private val list: MutableList<ArticleRelatedCvDataItem>
+    var list: MutableList<ArticleRelatedCvDataItem>
 ) :
     RecyclerView.Adapter<ArticleRelatedCvAdapter.MyViewHolder>() {
 

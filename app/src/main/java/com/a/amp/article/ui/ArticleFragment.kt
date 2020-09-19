@@ -59,7 +59,10 @@ class ArticleFragment : Fragment() {
         }
 
         articleViewModel.relatedList.observe(viewLifecycleOwner, { list ->
-            myAdapter?.notifyDataSetChanged()
+            if (list != null) {
+                myAdapter?.list = list
+                myAdapter?.notifyDataSetChanged()
+            }
         })
 
         articleViewModel.commentList.observe(viewLifecycleOwner, { list ->
@@ -110,15 +113,5 @@ class ArticleFragment : Fragment() {
             dialog.show()
         }
 
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: Int) =
-            ArticleFragment().apply {
-                arguments = Bundle().apply {
-//                    putInt(ARG_PARAM1, param1)
-                }
-            }
     }
 }

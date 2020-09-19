@@ -7,6 +7,7 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface AuthApi {
 
@@ -18,4 +19,10 @@ interface AuthApi {
 
     @GET("articles")
     suspend fun AllArticles(): Response<ArticleResponse>
+
+    @GET("articles/{slug}")
+    suspend fun getArticle(
+        @Path("slug")
+        slug: String
+    ): Response<ArticleResponse>
 }
