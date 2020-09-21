@@ -36,12 +36,13 @@ class UserRemote {
         email: String
     ): Resource<followResponse>{
         return safeApiCall {
-            authApi.Follow(username = username,
+            authApi.follow(
+                username = username,
                 followRequest = Follow(
                     User(
                         email = email,
 
-                    )
+                        )
                 )
             )
         }
