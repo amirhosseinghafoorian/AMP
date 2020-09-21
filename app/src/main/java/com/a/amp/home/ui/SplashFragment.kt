@@ -88,15 +88,15 @@ class SplashFragment : Fragment() {
                 Toast.makeText(MyApp.publicApp, "عدم اتصال به اینترنت", Toast.LENGTH_SHORT).show()
             }
         }
-        val li = mutableListOf<String>()
-        li.add("tag 1 ")
-        li.add("tag 2")
-        val at = ArticleRemote()
-        val b = at.createArticleForServer(
-            "we are just testing to create an article ",
-            "it's just a test", li, "amp test"
-        )
-        val s = ""
+//        val li = mutableListOf<String>()
+//        li.add("tag 1 ")
+//        li.add("tag 2")
+//        val at = ArticleRemote()
+//        val b = at.createArticleForServer(
+//            "we are just testing to create an article ",
+//            "it's just a test", li, "amp test"
+//        )
+//        val s = ""
 
 //        db.myDao().insertUsers(
 //            UserEntity(101, "javad"),

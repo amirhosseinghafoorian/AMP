@@ -7,6 +7,7 @@ import com.facebook.flipper.plugins.databases.DatabasesFlipperPlugin
 import com.facebook.flipper.plugins.inspector.DescriptorMapping
 import com.facebook.flipper.plugins.inspector.InspectorFlipperPlugin
 import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
+import com.facebook.flipper.plugins.sharedpreferences.SharedPreferencesFlipperPlugin
 import com.facebook.soloader.SoLoader
 
 class MyApp : Application() {
@@ -25,6 +26,7 @@ class MyApp : Application() {
             client.addPlugin(InspectorFlipperPlugin(this, DescriptorMapping.withDefaults()))
             client.addPlugin(DatabasesFlipperPlugin(this))
             client.addPlugin(networkFlipperPlugin)
+            client.addPlugin(SharedPreferencesFlipperPlugin(this,"setting"))
 
             client.start()
         }

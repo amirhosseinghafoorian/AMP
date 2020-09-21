@@ -15,17 +15,23 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.get
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.a.amp.R
+import com.a.amp.article.data.ArticleRemote
 import com.a.amp.core.resource.Resource
 import com.a.amp.databinding.FragmentWriteBinding
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipDrawable
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_write.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class WriteFragment : Fragment() {
+
+    val tagList = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,16 +63,24 @@ class WriteFragment : Fragment() {
             addTag()
         }
 
-//        write_chipGroup.setOnClickListener {
-//
-//        }
+        write_bt_4.setOnClickListener {
+            lifecycleScope.launch(Dispatchers.IO) {
+                val crPost = ArticleRemote()
+                val createPost = crPost.createArticleForServer(
+                    title = write_tl_1.text.toString(),
+                    body = write_tl_2.text.toString(),
+                    description = write_tl_3.text.toString(),
+                    tagList = tagList
+                )
+            }
+        }
 
 
 
     }
 
     private fun addTag(){
-                val tagList = mutableListOf<String>()
+
         addTag.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
                 Toast.makeText(context, "Tag added", Toast.LENGTH_LONG).show()
