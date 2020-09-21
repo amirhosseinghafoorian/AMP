@@ -1,13 +1,11 @@
 package com.a.amp.services
 
 import com.a.amp.article.apimodel2.ArticleResponse
+import com.a.amp.article.apimodel2.ArticleResponse2
 import com.a.amp.user.apimodel1.LoginRequest
 import com.a.amp.user.apimodel1.LoginResponse
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface AuthApi {
 
@@ -21,8 +19,14 @@ interface AuthApi {
     suspend fun AllArticles(): Response<ArticleResponse>
 
     @GET("articles/{slug}")
-    suspend fun getArticle(
+    suspend fun getSingleArticleBySlug(
         @Path("slug")
         slug: String
+    ): Response<ArticleResponse2>
+
+    @GET("articles")
+    suspend fun getArticlesByAuthor(
+        @Query("author")
+        username: String
     ): Response<ArticleResponse>
 }

@@ -55,7 +55,11 @@ class LoginFragment : Fragment() {
                     setting.putString("id", login_et_1.editText?.text.toString())
                     setting.putString(
                         "username",
-                        loginViewModel.result.value?.data?.user?.username.toString()
+                        loginViewModel.result.value?.data?.user?.username.toString(),
+                    )
+                    setting.putString(
+                        "token",
+                        loginViewModel.result.value?.data?.user?.token.toString()
                     )
                     findNavController().navigate(LoginFragmentDirections.actionGlobalHomeFragment())
                 } else if (isLogin == LoginAction.WRONG) {

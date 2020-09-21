@@ -6,6 +6,7 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.Relation
 import com.a.amp.article.apimodel2.Article
+import com.a.amp.article.apimodel2.ArticleX
 import com.a.amp.home.data.HomeRelatedCvDataItem
 import com.a.amp.user.data.WritingCvDataItem
 import java.util.*
@@ -80,6 +81,19 @@ data class ArticleEntity(
         }
 
         fun convertToDataItem4(list: List<Article>): MutableList<ArticleEntity> {
+            val resultList: MutableList<ArticleEntity> = mutableListOf()
+            for (i in list.indices) {
+                resultList.add(
+                    ArticleEntity(
+                        list[i].slug,
+                        list[i].author.username, list[i].title, list[i].body
+                    )
+                )
+            }
+            return resultList
+        }
+
+        fun convertToDataItem5(list: List<ArticleX>): MutableList<ArticleEntity> {
             val resultList: MutableList<ArticleEntity> = mutableListOf()
             for (i in list.indices) {
                 resultList.add(

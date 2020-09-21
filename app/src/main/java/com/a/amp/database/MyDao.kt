@@ -13,13 +13,13 @@ import com.a.amp.user.data.UserWithArticlesWithCommentsAndTags
 interface MyDao {
 
     @Query("select * from articles")
-    fun getArticles(): List<ArticleEntity>
+    suspend fun getArticles(): List<ArticleEntity>
 
     @Query("select * from articles where UserOwnerId == :username")
-    fun getArticlesByAuthor(username: String): List<ArticleEntity>
+    suspend fun getArticlesByAuthor(username: String): List<ArticleEntity>
 
     @Query("select * from articles where ArticleId == :id")
-    fun getSingleArticleById(id: String): List<ArticleEntity>
+    suspend fun getSingleArticleById(id: String): List<ArticleEntity>
 
     @Query("select * from users")
     fun getUsers(): List<UserEntity>
@@ -47,6 +47,9 @@ interface MyDao {
 
     @Delete
     fun deleteArticles(vararg article: ArticleEntity)
+
+    @Query("delete from articles where UserOwnerId == :username")
+    suspend fun deleteArticlesByAuthor(username: String)
 
     @Delete
     fun deleteComments(vararg comment: CommentEntity)

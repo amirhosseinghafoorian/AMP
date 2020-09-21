@@ -12,7 +12,7 @@ import com.a.amp.user.data.WritingCvDataItem
 import kotlinx.android.synthetic.main.writing_cv.view.*
 
 class WritingCvAdapter(
-    private val list: MutableList<WritingCvDataItem>,
+    var list: MutableList<WritingCvDataItem>,
     var clickListener: MoreClickListner? = null
 //,var clickcallback:(id : Int) -> Unit
 ) :

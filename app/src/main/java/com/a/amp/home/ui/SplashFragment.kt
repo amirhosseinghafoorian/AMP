@@ -13,10 +13,12 @@ import com.a.amp.MyApp
 import com.a.amp.R
 import com.a.amp.article.apimodel2.Article
 import com.a.amp.article.data.ArticleEntity
+import com.a.amp.article.data.ArticleRemote
 import com.a.amp.article.data.ArticleRepository
 import com.a.amp.core.resource.Status
 import com.a.amp.database.AppDataBase
 import com.a.amp.storage.setting
+import com.a.amp.user.data.UserRemote
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -87,7 +89,14 @@ class SplashFragment : Fragment() {
                 Toast.makeText(MyApp.publicApp, "عدم اتصال به اینترنت", Toast.LENGTH_SHORT).show()
             }
         }
-
+        val s1 = db.myDao().getArticlesByAuthor("hosseinmirzaei")
+        db.myDao().deleteArticlesByAuthor("hosseinmirzaei")
+        val s2 = db.myDao().getArticlesByAuthor("hosseinmirzaei")
+        val g = ""
+        val rt = ArticleRemote()
+        val ut = UserRemote()
+        val az = rt.getSingleArticleBySlug("my-first-article-9xv5v5")
+        val gz = ut.getArticlesByAuthorFromServer("hosseinmirzaei")
         val b = db.myDao().getSingleArticleById("hiiiiiiiiiiiiiiiiiii-b1j4ed")
         val ss = ""
 

@@ -43,7 +43,7 @@ class ProfileFragment : Fragment(), MoreClickListner {
 
         binding.profileBind = ProfileDataItem(username, id)
 
-        val myAdapter = profileViewModel.writeList.value?.let {
+        var myAdapter = profileViewModel.writeList.value?.let {
             WritingCvAdapter(
                 it, this
                 //        ,
@@ -58,8 +58,11 @@ class ProfileFragment : Fragment(), MoreClickListner {
             setHasFixedSize(true)
         }
 
-        profileViewModel.writeList.observe(viewLifecycleOwner, {
-            myAdapter?.notifyDataSetChanged()
+        profileViewModel.writeList.observe(viewLifecycleOwner, { list ->
+            if (list != null) {
+                myAdapter?.list = list
+                myAdapter?.notifyDataSetChanged()
+            }
         })
 
         profileViewModel.fillWrite(username)

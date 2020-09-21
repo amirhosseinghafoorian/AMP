@@ -1,5 +1,6 @@
 package com.a.amp.user.data
 
+import com.a.amp.article.apimodel2.ArticleResponse
 import com.a.amp.core.resource.Resource
 import com.a.amp.core.safeApiCall
 import com.a.amp.services.AuthApi
@@ -21,6 +22,20 @@ class UserRemote {
     ): Resource<LoginResponse> {
         val auth = RetrofitBuilder.retrofit.create(AuthApi::class.java)
         return signUp(auth, user, pass, email)
+    }
+
+    suspend fun getArticlesByAuthorFromServer(username: String): Resource<ArticleResponse> {
+        val auth = RetrofitBuilder.retrofit.create(AuthApi::class.java)
+        return ArticlesByAuthor(auth, username)
+    }
+
+    private suspend fun ArticlesByAuthor(
+        authApi: AuthApi,
+        username: String
+    ): Resource<ArticleResponse> {
+        return safeApiCall {
+            authApi.getArticlesByAuthor(username)
+        }
     }
 
     private suspend fun login(
