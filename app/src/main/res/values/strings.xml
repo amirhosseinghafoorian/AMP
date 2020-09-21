@@ -54,11 +54,12 @@
     <string name="writeArticle">نوشتن مقاله</string>
     <string name="preWrite">پیش نویس</string>
     <string name="label">عنوان</string>
-    <string name="addPn">افزودن پیوست</string>
+    <string name="addPn">توضیحات</string>
     <string name="addMedia">افزودن عکس،ویدئو یا صدا</string>
     <string name="uploadFiles">بارگذاری فایل ها</string>
     <string name="keywords2">کلمه کلیدی</string>
     <string name="publishArticle">انتشار مقاله</string>
     <string name="singleArticle">تک مقاله</string>
+    <string name="addchip">اضافه کردن</string>
 
 </resources>

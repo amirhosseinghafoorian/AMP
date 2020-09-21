@@ -10,21 +10,33 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.a.amp.R
 import com.a.amp.databinding.FragmentProfileBinding
+import com.a.amp.storage.setting
+import com.a.amp.user.apimodel1.followResponse
 import com.a.amp.user.data.MoreClickListner
 import com.a.amp.user.data.ProfileDataItem
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.fragment_profile.*
+import retrofit2.Response
 
 class ProfileFragment : Fragment(), MoreClickListner {
 
     private lateinit var binding: FragmentProfileBinding
     private var username = ""
     private var id = ""
+    lateinit var result: Response<followResponse>
+
+    var folowing: Boolean = false
+
+    lateinit var currentUser: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         username = arguments?.let { ProfileFragmentArgs.fromBundle(it).username }.toString()
         id = arguments?.let { ProfileFragmentArgs.fromBundle(it).id }.toString()
+
+        val setting = setting()
+        currentUser = setting.getString("username")
+
     }
 
     override fun onCreateView(
@@ -40,35 +52,51 @@ class ProfileFragment : Fragment(), MoreClickListner {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val profileViewModel = ViewModelProvider(this).get(ProfileListViewModel::class.java)
+//         result
 
         binding.profileBind = ProfileDataItem(username, id)
 
-        var myAdapter = profileViewModel.writeList.value?.let {
-            WritingCvAdapter(
-                it, this
-                //        ,
-                //            {
-                //              call back body
-                //            }
-            )
+
+
+
+        if (currentUser == username) {
+            profile_cv_btn_1.visibility = View.GONE
         }
 
-        profile_recycler.apply {
-            adapter = myAdapter
-            setHasFixedSize(true)
-        }
-
-        profileViewModel.writeList.observe(viewLifecycleOwner, { list ->
-            if (list != null) {
-                myAdapter?.list = list
-                myAdapter?.notifyDataSetChanged()
+        val myAdapter = profileViewModel.writeList.value?.let {
+            var myAdapter = profileViewModel.writeList.value?.let {
+                WritingCvAdapter(
+                    it, this, currentUser, username
+                    //        ,
+                    //            {
+                    //              call back body
+                    //            }
+                )
             }
-        })
 
-        profileViewModel.fillWrite(username)
+            profile_recycler.apply {
+                adapter = myAdapter
+                setHasFixedSize(true)
+            }
 
-        profile_appbar_start_icon.setOnClickListener {
-            Navigation.findNavController(it).navigateUp()
+            profileViewModel.writeList.observe(viewLifecycleOwner, { list ->
+                if (list != null) {
+                    myAdapter?.list = list
+                    myAdapter?.notifyDataSetChanged()
+                }
+            })
+
+            profileViewModel.fillWrite(username)
+
+            profile_appbar_start_icon.setOnClickListener {
+                Navigation.findNavController(it).navigateUp()
+            }
+
+            profile_cv_btn_1.setOnClickListener {
+                profileViewModel.followOtherProfile(username)
+            }
+
+//        profileViewModel.isFollowing.observe(this as)
         }
     }
 

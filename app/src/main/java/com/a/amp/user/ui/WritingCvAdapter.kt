@@ -1,6 +1,7 @@
 package com.a.amp.user.ui
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
@@ -9,11 +10,14 @@ import com.a.amp.R
 import com.a.amp.databinding.WritingCvBinding
 import com.a.amp.user.data.MoreClickListner
 import com.a.amp.user.data.WritingCvDataItem
+import kotlinx.android.synthetic.main.writing_cv.*
 import kotlinx.android.synthetic.main.writing_cv.view.*
 
 class WritingCvAdapter(
     var list: MutableList<WritingCvDataItem>,
-    var clickListener: MoreClickListner? = null
+    var clickListener: MoreClickListner? = null,
+    var currnt: String?,
+    var username: String?
 //,var clickcallback:(id : Int) -> Unit
 ) :
     RecyclerView.Adapter<WritingCvAdapter.MyViewHolder>() {
@@ -32,6 +36,9 @@ class WritingCvAdapter(
             itemView.setOnClickListener {
                 it.findNavController()
                     .navigate(ProfileFragmentDirections.actionProfileFragmentToArticleFragment(list[position].id))
+            }
+            if (currnt != username){
+                itemView.writing_cv_ic_more.visibility = View.GONE
             }
             itemView.writing_cv_ic_more.setOnClickListener {
 //                clickcallback.invoke(2)

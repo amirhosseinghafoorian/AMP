@@ -4,11 +4,13 @@ import android.app.Application
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.a.amp.MyApp
 import com.a.amp.article.apimodel2.Article
 import com.a.amp.article.data.ArticleEntity
 import com.a.amp.core.resource.Status
 import com.a.amp.database.AppDataBase
+import com.a.amp.storage.setting
 import com.a.amp.user.data.UserRemote
 import com.a.amp.user.data.UserRepository
 import com.a.amp.user.data.WritingCvDataItem
@@ -20,6 +22,8 @@ import kotlinx.coroutines.withContext
 class ProfileListViewModel(application: Application) : AndroidViewModel(application) {
     var writeList = MutableLiveData<MutableList<WritingCvDataItem>>()
     val app = application
+    val isFollowing: MutableLiveData<Boolean> = MutableLiveData()
+
 
     init {
         writeList.value = mutableListOf()
@@ -55,6 +59,27 @@ class ProfileListViewModel(application: Application) : AndroidViewModel(applicat
             }
             val user = UserRepository(app)
             writeList.postValue(user.fillWriteFromRepo(username))
+        }
+    }
+
+    fun followOtherProfile(username: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = UserRepository(application = Application()).followResult(
+                username = username,
+                email = setting().getString("id")
+            )
+            isFollowing.postValue(
+                result.data?.profile?.following
+            )
+
+        }
+    }
+
+    fun onFollowOtherProfile(username: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = UserRepository(application = Application()).onFollowResult(
+                username = username
+            )
         }
     }
 

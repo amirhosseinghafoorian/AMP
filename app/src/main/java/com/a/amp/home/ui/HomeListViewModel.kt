@@ -3,8 +3,11 @@ package com.a.amp.home.ui
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.a.amp.home.data.HomeRelatedCvDataItem
 import com.a.amp.home.data.HomeRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class HomeListViewModel(application: Application) : AndroidViewModel(application) {
     var summaryList = MutableLiveData<MutableList<HomeRelatedCvDataItem>>()

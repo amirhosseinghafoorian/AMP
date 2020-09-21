@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "608734788841",
+    "firebase_url": "https://amppart-f0e2a.firebaseio.com",
+    "project_id": "amppart-f0e2a",
+    "storage_bucket": "amppart-f0e2a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:608734788841:android:dd0a56c82d9e9214f84478",
+        "android_client_info": {
+          "package_name": "com.a.amp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "608734788841-d6kfd378b1abnns6hnfcbej88r6oa8m8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.a.amp",
+            "certificate_hash": "015c6a630ac030653f1c1d28afa02dfeda4b79d8"
+          }
+        },
+        {
+          "client_id": "608734788841-h930j9hkot8b511c2ejckiqc4gr8ccg8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcbEJcnv__2SYl8IA793dl2thQoX0jz-A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "608734788841-h930j9hkot8b511c2ejckiqc4gr8ccg8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

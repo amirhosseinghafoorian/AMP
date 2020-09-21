@@ -3,6 +3,7 @@ package com.a.amp.user.data
 import android.app.Application
 import com.a.amp.core.resource.Resource
 import com.a.amp.user.apimodel1.LoginResponse
+import com.a.amp.user.apimodel1.followResponse
 
 class UserRepository(application: Application) {
     val app = application
@@ -21,4 +22,15 @@ class UserRepository(application: Application) {
         val remote = UserRemote()
         return remote.registerInServer(user, pass, email)
     }
+
+    suspend fun followResult(username: String,email: String): Resource<followResponse> {
+        val  remote = UserRemote()
+        return remote.followOtherUser(username, email)
+    }
+
+    suspend fun onFollowResult(username: String): Resource<Unit> {
+        val  remote = UserRemote()
+        return remote.onFollowOtherUser(username)
+    }
+
 }
