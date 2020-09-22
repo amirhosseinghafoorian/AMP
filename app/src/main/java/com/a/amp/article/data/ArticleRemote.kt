@@ -8,6 +8,8 @@ import com.a.amp.core.resource.Resource
 import com.a.amp.core.safeApiCall
 import com.a.amp.services.AuthApi
 import com.a.amp.services.RetrofitBuilder
+import retrofit2.Response
+import retrofit2.create
 
 class ArticleRemote {
     suspend fun getArticlesFromServer(): Resource<ArticleResponse> {
@@ -29,6 +31,20 @@ class ArticleRemote {
     ): Resource<ArticleResponse2> {
         val auth = RetrofitBuilder.retrofit.create(AuthApi::class.java)
         return createArticle(auth, body, description, tagList, title)
+    }
+
+    suspend fun deleteArticleFormServer(
+        id: String
+    ): Resource<Unit>{
+        val auth = RetrofitBuilder.retrofit.create(AuthApi::class.java)
+        return deleteArticle(auth,id)
+    }
+
+
+    private suspend fun deleteArticle(authApi: AuthApi, id: String): Resource<Unit>{
+        return safeApiCall {
+            authApi.deleteArticle(slug = id)
+        }
     }
 
     private suspend fun allArticles(authApi: AuthApi): Resource<ArticleResponse> {

@@ -10,6 +10,7 @@ import com.a.amp.R
 import com.a.amp.databinding.WritingCvBinding
 import com.a.amp.user.data.MoreClickListner
 import com.a.amp.user.data.WritingCvDataItem
+import kotlinx.android.synthetic.main.bottom_sheet.view.*
 import kotlinx.android.synthetic.main.writing_cv.*
 import kotlinx.android.synthetic.main.writing_cv.view.*
 

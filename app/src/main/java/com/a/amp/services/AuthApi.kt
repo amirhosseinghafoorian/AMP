@@ -44,4 +44,7 @@ interface AuthApi {
 
     @DELETE("/profiles/{USERNAME}/follow")
     suspend fun onFollow(@Path("username") username: String): Response<Unit>
+
+    @DELETE("articles/{slug}")
+    suspend fun deleteArticle(@Path("slug") slug: String): Response<Unit>
 }

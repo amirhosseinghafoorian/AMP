@@ -4,10 +4,12 @@ import android.app.Application
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import com.a.amp.MyApp
 import com.a.amp.article.apimodel2.Article
 import com.a.amp.article.data.ArticleEntity
+import com.a.amp.article.data.ArticleRemote
 import com.a.amp.core.resource.Status
 import com.a.amp.database.AppDataBase
 import com.a.amp.storage.setting
