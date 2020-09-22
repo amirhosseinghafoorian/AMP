@@ -2,8 +2,8 @@
 <layout>
     <data>
         <variable
-            name="viewModel"
-            type="String" />
+            name="vm"
+            type="com.a.amp.article.ui.WriteViewModel" />
     </data>
 
 <androidx.core.widget.NestedScrollView
@@ -96,10 +96,10 @@
             android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@id/topAppBar"
             app:layout_constraintStart_toStartOf="@id/write_gl_1"
-            app:layout_constraintBottom_toTopOf="@id/write_ti_1"/>
+            app:layout_constraintBottom_toTopOf="@id/write_et_1" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/write_ti_1"
+            android:id="@+id/write_et_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/backgroundColor"
@@ -110,7 +110,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/write_tl_1"
+                android:text="@={vm.title}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="1"/>
@@ -124,12 +124,12 @@
             android:text="@string/articleText"
             android:textSize="20sp"
             android:textColor="@android:color/black"
-            app:layout_constraintTop_toBottomOf="@id/write_ti_1"
+            app:layout_constraintBottom_toTopOf="@id/write_et_2"
             app:layout_constraintStart_toStartOf="@id/write_gl_1"
-            app:layout_constraintBottom_toTopOf="@id/write_ti_2"/>
+            app:layout_constraintTop_toBottomOf="@id/write_et_1" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/write_ti_2"
+            android:id="@+id/write_et_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/backgroundColor"
@@ -140,7 +140,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/write_tl_2"
+                android:text="@={vm.body}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:maxLines="20"
@@ -156,14 +156,14 @@
             android:text="@string/addPn"
             android:textSize="20sp"
             android:textColor="@android:color/black"
-            app:layout_constraintTop_toBottomOf="@id/write_ti_2"
+            app:layout_constraintBottom_toTopOf="@id/write_et_3"
             app:layout_constraintStart_toStartOf="@id/write_gl_1"
-            app:layout_constraintBottom_toTopOf="@id/write_ti_3"
+            app:layout_constraintTop_toBottomOf="@id/write_et_2"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"/>
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/write_ti_3"
+            android:id="@+id/write_et_3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/backgroundColor"
@@ -174,7 +174,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/write_tl_3"
+                android:text="@={vm.description}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:maxLines="20"
@@ -189,12 +189,12 @@
             android:text="@string/keywords2"
             android:textSize="20sp"
             android:textColor="@android:color/black"
-            app:layout_constraintTop_toBottomOf="@id/write_ti_3"
+            app:layout_constraintBottom_toTopOf="@id/write_et_4"
             app:layout_constraintStart_toStartOf="@id/write_gl_1"
-            app:layout_constraintBottom_toTopOf="@id/write_ti_4"/>
+            app:layout_constraintTop_toBottomOf="@id/write_et_3" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/write_ti_4"
+            android:id="@+id/write_et_4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
@@ -209,41 +209,30 @@
                 android:id="@+id/addTag"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@={viewModel}"
                 android:lines="1"
                 android:inputType="text"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-<!--        <com.google.android.material.button.MaterialButton-->
-<!--            android:id="@+id/write_bt_3"-->
-<!--            android:layout_width="110dp"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:text="@string/addchip"-->
-<!--            app:layout_constraintTop_toTopOf="@id/write_ti_4"-->
-<!--            app:layout_constraintBottom_toBottomOf="@id/write_ti_4"-->
-<!--            app:layout_constraintStart_toEndOf="@id/write_ti_4"-->
-<!--            app:layout_constraintEnd_toEndOf="@id/write_gl_2"/>-->
-
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/write_chipGroup"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/write_ti_4"
-            app:layout_constraintBottom_toTopOf="@id/write_bt_4"
+            app:layout_constraintBottom_toTopOf="@id/write_btn_1"
+            app:layout_constraintTop_toBottomOf="@id/write_et_4"
             app:layout_constraintStart_toStartOf="@id/write_gl_1"
-            app:layout_constraintEnd_toEndOf="@id/write_gl_2"/>
+            app:layout_constraintEnd_toEndOf="@id/write_gl_2" />
 
         <com.google.android.material.button.MaterialButton
-        app:rippleColor="@color/iconbackgroundColor"
-            android:id="@+id/write_bt_4"
+            app:rippleColor="@color/iconbackgroundColor"
+            android:id="@+id/write_btn_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/publishArticle"
             android:backgroundTint="@color/colorPrimary"
             android:textColor="@android:color/white"
-            app:layout_constraintTop_toBottomOf="@id/write_ti_4"
+            app:layout_constraintTop_toBottomOf="@id/write_et_4"
             app:layout_constraintStart_toStartOf="@id/write_gl_1"
             app:layout_constraintEnd_toEndOf="@id/write_gl_2"
             app:layout_constraintBottom_toTopOf="@id/write_gl_4"

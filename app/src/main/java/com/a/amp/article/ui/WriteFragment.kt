@@ -1,43 +1,28 @@
 package com.a.amp.article.ui
 
 import android.graphics.Color
-import android.nfc.Tag
 import android.os.Bundle
-import android.provider.CalendarContract
-import android.renderscript.ScriptGroup
 import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.res.ResourcesCompat
-import androidx.core.view.get
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.a.amp.R
-import com.a.amp.article.data.ArticleRemote
-import com.a.amp.core.resource.Resource
+import com.a.amp.core.resource.Status
 import com.a.amp.databinding.FragmentWriteBinding
 import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipDrawable
-import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_write.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class WriteFragment : Fragment() {
 
-    val tagList = mutableListOf<String>()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-    }
+    private val tagList = mutableListOf<String>()
+    private lateinit var Binding: FragmentWriteBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,41 +31,73 @@ class WriteFragment : Fragment() {
         val binding: FragmentWriteBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_write, container, false
         )
+        Binding = binding
         return binding.root
-
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        val writeViewModel = ViewModelProvider(this)
+            .get(WriteViewModel::class.java)
+
+        Binding.also {
+            it.vm = writeViewModel
+            it.lifecycleOwner = this
+        }
+
         write_appbar_start_icon.setOnClickListener {
             Navigation.findNavController(it).navigateUp()
         }
-        write_bt_4.setOnClickListener {
-            Navigation.findNavController(it).navigateUp()
+
+        writeViewModel.result.observe(viewLifecycleOwner, { result ->
+            if (result.status == Status.SUCCESS && result.code == 200) {
+                Toast.makeText(context, "مقاله ایجاد شد", Toast.LENGTH_SHORT)
+                    .show()
+                findNavController().navigateUp()
+            } else if (result.status == Status.SUCCESS && result.code != 200) {
+                Toast.makeText(context, "خطا", Toast.LENGTH_SHORT)
+                    .show()
+            } else if (result.status == Status.ERROR) {
+                Toast.makeText(context, "عدم اتصال به اینترنت", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        })
+
+        write_btn_1.setOnClickListener {
+            if (isValid()) {
+                writeViewModel.create(tagList)
+            }
         }
 
         addTag.setOnClickListener {
             addTag()
         }
 
-        write_bt_4.setOnClickListener {
-            lifecycleScope.launch(Dispatchers.IO) {
-                val crPost = ArticleRemote()
-                val createPost = crPost.createArticleForServer(
-                    title = write_tl_1.text.toString(),
-                    body = write_tl_2.text.toString(),
-                    description = write_tl_3.text.toString(),
-                    tagList = tagList
-                )
-            }
-        }
-
-
+//        write_chipGroup.setOnClickListener {
+//
+//        }
 
     }
 
-    private fun addTag(){
+    private fun isValid(): Boolean {
+        write_et_1.error = null
+        write_et_2.error = null
+        write_et_1.isErrorEnabled = false
+        write_et_2.isErrorEnabled = false
+        if (write_et_1.editText?.text.toString() == "") {
+            write_et_1.error = "عنوان را وارد کنید"
+            write_et_1.requestFocus()
+            return false
+        } else if (write_et_2.editText?.text.toString() == "") {
+            write_et_2.error = "متن مقاله را وارد کنید"
+            write_et_2.requestFocus()
+            return false
+        }
+        return true
+    }
 
+    private fun addTag() {
         addTag.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
                 Toast.makeText(context, "Tag added", Toast.LENGTH_LONG).show()

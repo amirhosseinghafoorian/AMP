@@ -12,8 +12,9 @@ object RetrofitBuilder {
         .addNetworkInterceptor(FlipperOkhttpInterceptor(MyApp.networkFlipperPlugin))
         .addInterceptor{chain ->
             var newBuilder = chain.request().newBuilder()
-            setting().getString("token")?.let {
-                newBuilder = newBuilder.addHeader("Authorization", "Token $it"
+            setting().getString("token").let {
+                newBuilder = newBuilder.addHeader(
+                    "Authorization", "Token $it"
                 )
             }
             val request = newBuilder.build()
