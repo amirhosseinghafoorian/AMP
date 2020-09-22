@@ -4,6 +4,7 @@ import android.app.Application
 import android.widget.Toast
 import com.a.amp.MyApp
 import com.a.amp.article.apimodel2.ArticleResponse
+import com.a.amp.article.apimodel2.ArticleResponse2
 import com.a.amp.article.apimodel2.ArticleX
 import com.a.amp.core.resource.Resource
 import com.a.amp.core.resource.Status
@@ -23,6 +24,16 @@ class ArticleRepository(application: Application) {
     suspend fun fillRelatedFromRepo(): MutableList<ArticleRelatedCvDataItem> {
         val article = ArticleLocal(app)
         return article.fillRelatedFromLocal()
+    }
+
+    suspend fun createArticleFromRepo(
+        body: String,
+        description: String,
+        tagList: List<String>,
+        title: String
+    ): Resource<ArticleResponse2> {
+        val at = ArticleRemote()
+        return at.createArticleForServer(body, description, tagList, title)
     }
 
     suspend fun fillSingleArticleFromRepo(id: String): MutableList<WritingCvDataItem> {

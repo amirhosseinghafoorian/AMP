@@ -22,7 +22,7 @@ import kotlinx.coroutines.withContext
 class ProfileListViewModel(application: Application) : AndroidViewModel(application) {
     var writeList = MutableLiveData<MutableList<WritingCvDataItem>>()
     val app = application
-    val isFollowing: MutableLiveData<Boolean> = MutableLiveData()
+    private val isFollowing: MutableLiveData<Boolean> = MutableLiveData()
 
 
     init {

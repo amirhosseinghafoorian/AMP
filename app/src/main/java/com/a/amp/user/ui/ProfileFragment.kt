@@ -57,47 +57,43 @@ class ProfileFragment : Fragment(), MoreClickListner {
         binding.profileBind = ProfileDataItem(username, id)
 
 
-
-
         if (currentUser == username) {
             profile_cv_btn_1.visibility = View.GONE
         }
 
-        val myAdapter = profileViewModel.writeList.value?.let {
-            var myAdapter = profileViewModel.writeList.value?.let {
-                WritingCvAdapter(
-                    it, this, currentUser, username
-                    //        ,
-                    //            {
-                    //              call back body
-                    //            }
-                )
+        var myAdapter = profileViewModel.writeList.value?.let {
+            WritingCvAdapter(
+                it, this, currentUser, username
+                //        ,
+                //            {
+                //              call back body
+                //            }
+            )
+        }
+
+        profile_recycler.apply {
+            adapter = myAdapter
+            setHasFixedSize(true)
+        }
+
+        profileViewModel.writeList.observe(viewLifecycleOwner, { list ->
+            if (list != null) {
+                myAdapter?.list = list
+                myAdapter?.notifyDataSetChanged()
             }
+        })
 
-            profile_recycler.apply {
-                adapter = myAdapter
-                setHasFixedSize(true)
-            }
+        profileViewModel.fillWrite(username)
 
-            profileViewModel.writeList.observe(viewLifecycleOwner, { list ->
-                if (list != null) {
-                    myAdapter?.list = list
-                    myAdapter?.notifyDataSetChanged()
-                }
-            })
+        profile_appbar_start_icon.setOnClickListener {
+            Navigation.findNavController(it).navigateUp()
+        }
 
-            profileViewModel.fillWrite(username)
-
-            profile_appbar_start_icon.setOnClickListener {
-                Navigation.findNavController(it).navigateUp()
-            }
-
-            profile_cv_btn_1.setOnClickListener {
-                profileViewModel.followOtherProfile(username)
-            }
+        profile_cv_btn_1.setOnClickListener {
+            profileViewModel.followOtherProfile(username)
+        }
 
 //        profileViewModel.isFollowing.observe(this as)
-        }
     }
 
     override fun onClick(id: String, layoutPosition: Int) {

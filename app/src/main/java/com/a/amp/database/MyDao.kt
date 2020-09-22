@@ -31,7 +31,7 @@ interface MyDao {
     fun getTags(): List<TagEntity>
 
     @Query("select *, count(article.title) as count from users as user  join articles as article on user.userId = article.UserOwnerId group by user.UserName")
-    fun UserWithArticleCount(): List<UserEntity>
+    fun userWithArticleCount(): List<UserEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertArticles(vararg articles: ArticleEntity)
