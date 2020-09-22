@@ -13,7 +13,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.a.amp.R
+import com.a.amp.article.data.ArticleRemote
 import com.a.amp.databinding.FragmentArticleBinding
+import kotlinx.android.synthetic.main.comment_dialog.*
 import kotlinx.android.synthetic.main.fragment_article.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -111,6 +113,14 @@ class ArticleFragment : Fragment() {
 
         article_btn_1.setOnClickListener {
             dialog.show()
+            dialog.comment_btn.setOnClickListener {
+                val body = dialog.comment_et.editText?.text.toString()
+                CoroutineScope(Dispatchers.IO).launch {
+                    val ar = ArticleRemote()
+                    val g1 = ar.addCommentToServer(slug, body)
+                    val g = ""
+                }
+            }
         }
 
     }

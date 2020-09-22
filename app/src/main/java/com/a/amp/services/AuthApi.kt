@@ -1,8 +1,6 @@
 package com.a.amp.services
 
-import com.a.amp.article.apimodel2.ArticleResponse
-import com.a.amp.article.apimodel2.ArticleResponse2
-import com.a.amp.article.apimodel2.ArticleResponse3
+import com.a.amp.article.apimodel2.*
 import com.a.amp.user.apimodel1.Follow
 import com.a.amp.user.apimodel1.LoginRequest
 import com.a.amp.user.apimodel1.LoginResponse
@@ -36,6 +34,12 @@ interface AuthApi {
     @POST("articles")
     suspend fun createArticle(@Body articleRequest: ArticleResponse3): Response<ArticleResponse2>
 
+    @POST("articles/{slug}/comments")
+    suspend fun addComment(
+        @Path("slug") slug: String,
+        @Body commentRequest: CommentRequest
+    ): Response<CommentResponse>
+
     @POST("profiles/{username}/follow")
     suspend fun follow(
         @Path("username") username: String,
@@ -43,7 +47,7 @@ interface AuthApi {
     ): Response<followResponse>
 
     @DELETE("/profiles/{USERNAME}/follow")
-    suspend fun onFollow(@Path("username") username: String): Response<Unit>
+    suspend fun unFollow(@Path("username") username: String): Response<Unit>
 
     @DELETE("articles/{slug}")
     suspend fun deleteArticle(@Path("slug") slug: String): Response<Unit>

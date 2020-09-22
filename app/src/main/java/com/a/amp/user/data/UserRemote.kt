@@ -56,7 +56,7 @@ class UserRemote {
         username: String
     ): Resource<Unit>{
         return safeApiCall {
-            authApi.onFollow(username = username)
+            authApi.unFollow(username = username)
         }
     }
 

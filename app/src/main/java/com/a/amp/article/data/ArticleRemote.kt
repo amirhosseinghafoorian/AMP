@@ -1,15 +1,10 @@
 package com.a.amp.article.data
 
-import com.a.amp.article.apimodel2.ArticleResponse
-import com.a.amp.article.apimodel2.ArticleResponse2
-import com.a.amp.article.apimodel2.ArticleResponse3
-import com.a.amp.article.apimodel2.ArticleXX
+import com.a.amp.article.apimodel2.*
 import com.a.amp.core.resource.Resource
 import com.a.amp.core.safeApiCall
 import com.a.amp.services.AuthApi
 import com.a.amp.services.RetrofitBuilder
-import retrofit2.Response
-import retrofit2.create
 
 class ArticleRemote {
     suspend fun getArticlesFromServer(): Resource<ArticleResponse> {
@@ -35,13 +30,17 @@ class ArticleRemote {
 
     suspend fun deleteArticleFormServer(
         id: String
-    ): Resource<Unit>{
+    ): Resource<Unit> {
         val auth = RetrofitBuilder.retrofit.create(AuthApi::class.java)
-        return deleteArticle(auth,id)
+        return deleteArticle(auth, id)
     }
 
+    suspend fun addCommentToServer(id: String, body: String): Resource<CommentResponse> {
+        val auth = RetrofitBuilder.retrofit.create(AuthApi::class.java)
+        return addComment(auth, id, body)
+    }
 
-    private suspend fun deleteArticle(authApi: AuthApi, id: String): Resource<Unit>{
+    private suspend fun deleteArticle(authApi: AuthApi, id: String): Resource<Unit> {
         return safeApiCall {
             authApi.deleteArticle(slug = id)
         }
@@ -50,6 +49,21 @@ class ArticleRemote {
     private suspend fun allArticles(authApi: AuthApi): Resource<ArticleResponse> {
         return safeApiCall {
             authApi.allArticles()
+        }
+    }
+
+    private suspend fun addComment(
+        authApi: AuthApi,
+        id: String,
+        body: String
+    ): Resource<CommentResponse> {
+        return safeApiCall {
+            authApi.addComment(
+                id,
+                commentRequest = CommentRequest(
+                    comment = Comment(body)
+                )
+            )
         }
     }
 
