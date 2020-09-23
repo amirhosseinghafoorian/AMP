@@ -1,6 +1,7 @@
 package com.a.amp.user.ui
 
 import android.app.Application
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
@@ -24,7 +25,7 @@ import kotlinx.coroutines.withContext
 class ProfileListViewModel(application: Application) : AndroidViewModel(application) {
     var writeList = MutableLiveData<MutableList<WritingCvDataItem>>()
     val app = application
-    private val isFollowing: MutableLiveData<Boolean> = MutableLiveData()
+    val isFollowing: MutableLiveData<Boolean> = MutableLiveData()
 
 
     init {
@@ -73,15 +74,27 @@ class ProfileListViewModel(application: Application) : AndroidViewModel(applicat
             isFollowing.postValue(
                 result.data?.profile?.following
             )
+        }
+        Log.i("tag", isFollowing.toString())
+    }
 
+    fun unFollowOtherProfile(username: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = UserRepository(application = Application()).unFollowResult(
+                username = username
+            )
+            isFollowing.postValue(
+                result.data?.profile?.following
+            )
         }
     }
 
-    fun onFollowOtherProfile(username: String) {
+    fun getProfile(username: String){
         viewModelScope.launch(Dispatchers.IO) {
-            val result = UserRepository(application = Application()).onFollowResult(
+            val result = UserRepository(application = Application()).getUserProfile(
                 username = username
             )
+            isFollowing.postValue(result.data?.profile?.following)
         }
     }
 

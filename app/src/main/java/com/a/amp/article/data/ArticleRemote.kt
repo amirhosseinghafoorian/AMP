@@ -13,9 +13,9 @@ class ArticleRemote {
     }
     //TODO put article by author in repo
 
-    suspend fun getSingleArticleBySlug(id: String): Resource<ArticleResponse2> {
+    suspend fun getSingleArticleBySlug(slug: String): Resource<ArticleResponse2> {
         val auth = RetrofitBuilder.retrofit.create(AuthApi::class.java)
-        return singleArticleBySlug(auth, id)
+        return singleArticleBySlug(auth, slug)
     }
 
     suspend fun createArticleForServer(
@@ -107,5 +107,8 @@ class ArticleRemote {
             authApi.getSingleArticleBySlug(slug)
         }
     }
+
+
+
 
 }

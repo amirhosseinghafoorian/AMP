@@ -23,14 +23,19 @@ class UserRepository(application: Application) {
         return remote.registerInServer(user, pass, email)
     }
 
+    suspend fun getUserProfile(username: String): Resource<followResponse> {
+        val remote = UserRemote()
+        return remote.getUserServer(username)
+    }
+
     suspend fun followResult(username: String,email: String): Resource<followResponse> {
         val  remote = UserRemote()
         return remote.followOtherUser(username, email)
     }
 
-    suspend fun onFollowResult(username: String): Resource<Unit> {
+    suspend fun unFollowResult(username: String): Resource<followResponse> {
         val  remote = UserRemote()
-        return remote.onFollowOtherUser(username)
+        return remote.unFollowOtherUser(username)
     }
 
 }

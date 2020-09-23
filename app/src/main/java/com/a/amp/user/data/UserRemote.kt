@@ -22,6 +22,12 @@ class UserRemote {
         return signUp(auth, user, pass, email)
     }
 
+
+    suspend fun getUserServer(username: String): Resource<followResponse>{
+        val  auth = RetrofitBuilder.retrofit.create(AuthApi::class.java)
+        return getProfile(auth,username)
+    }
+
     suspend fun followOtherUser(
         username: String,
         email: String
@@ -30,36 +36,11 @@ class UserRemote {
         return following(followuser, username, email)
     }
 
-    suspend fun following(
-        authApi: AuthApi,
-        username: String,
-        email: String
-    ): Resource<followResponse>{
-        return safeApiCall {
-            authApi.follow(
-                username = username,
-                followRequest = Follow(
-                    User(
-                        email = email,
 
-                        )
-                )
-            )
-        }
-    }suspend fun onFollowOtherUser(username: String):Resource<Unit>{
-        val onfollowuser = RetrofitBuilder.retrofit.create(AuthApi::class.java)
-        return onFollowing(onfollowuser,username)
+    suspend fun unFollowOtherUser(username: String):Resource<followResponse>{
+        val unFollowUser = RetrofitBuilder.retrofit.create(AuthApi::class.java)
+        return unFollowUser(unFollowUser,username)
     }
-
-    suspend fun onFollowing(
-        authApi: AuthApi,
-        username: String
-    ): Resource<Unit>{
-        return safeApiCall {
-            authApi.unFollow(username = username)
-        }
-    }
-
 
     suspend fun getArticlesByAuthorFromServer(username: String): Resource<ArticleResponse> {
         val auth = RetrofitBuilder.retrofit.create(AuthApi::class.java)
@@ -112,5 +93,43 @@ class UserRemote {
             )
         }
     }
+
+
+    private suspend fun getProfile(
+        authApi: AuthApi,
+        username: String
+    ): Resource<followResponse>{
+        return safeApiCall {
+            authApi.getUser(username)
+        }
+    }
+
+    suspend fun following(
+        authApi: AuthApi,
+        username: String,
+        email: String
+    ): Resource<followResponse>{
+        return safeApiCall {
+            authApi.follow(
+                username = username,
+                followRequest = Follow(
+                    User(
+                        email = email,
+
+                        )
+                )
+            )
+        }
+    }
+
+    suspend fun unFollowUser(
+        authApi: AuthApi,
+        username: String
+    ): Resource<followResponse>{
+        return safeApiCall {
+            authApi.unFollow(username = username)
+        }
+    }
+
 
 }

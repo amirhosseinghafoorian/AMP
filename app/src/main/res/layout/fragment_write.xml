@@ -110,6 +110,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/title"
                 android:text="@={vm.title}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -140,6 +141,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/body"
                 android:text="@={vm.body}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -174,6 +176,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/description"
                 android:text="@={vm.description}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
