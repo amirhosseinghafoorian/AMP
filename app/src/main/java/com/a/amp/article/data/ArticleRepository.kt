@@ -6,6 +6,7 @@ import com.a.amp.MyApp
 import com.a.amp.article.apimodel2.ArticleResponse
 import com.a.amp.article.apimodel2.ArticleResponse2
 import com.a.amp.article.apimodel2.ArticleX
+import com.a.amp.article.apimodel2.CommentResponse2
 import com.a.amp.core.resource.Resource
 import com.a.amp.core.resource.Status
 import com.a.amp.database.AppDataBase
@@ -16,9 +17,9 @@ import kotlinx.coroutines.withContext
 class ArticleRepository(application: Application) {
     val app = application
 
-    suspend fun fillCommentFromRepo(commentList: MutableList<CommentCvDataItem>) {
+    suspend fun fillCommentFromRepo(slug: String): MutableList<CommentCvDataItem> {
         val article = ArticleLocal(app)
-        article.fillCommentFromLocal(commentList)
+        return article.fillCommentFromLocal(slug)
     }
 
     suspend fun fillRelatedFromRepo(): MutableList<ArticleRelatedCvDataItem> {
@@ -67,5 +68,10 @@ class ArticleRepository(application: Application) {
     suspend fun syncArticles(): Resource<ArticleResponse> {
         val remote = ArticleRemote()
         return remote.getArticlesFromServer()
+    }
+
+    suspend fun getSingleArticleCommentsFromRepo(id: String): Resource<CommentResponse2> {
+        val ar = ArticleRemote()
+        return ar.getSingleArticleCommentsFromServer(id)
     }
 }

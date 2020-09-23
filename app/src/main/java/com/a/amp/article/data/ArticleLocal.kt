@@ -9,11 +9,8 @@ class ArticleLocal(application: Application) {
 
     private val db = AppDataBase.buildDatabase(context = application)
 
-    suspend fun fillCommentFromLocal(CommentList: MutableList<CommentCvDataItem>) {
-//        CoroutineScope(Dispatchers.IO).launch {
-        CommentList.addAll(CommentEntity.convertToDataItem(db.myDao().getComments()))
-//        }
-
+    suspend fun fillCommentFromLocal(slug: String): MutableList<CommentCvDataItem> {
+        return CommentEntity.convertToDataItem(db.myDao().getComments(slug))
     }
 
     suspend fun fillRelatedFromLocal(): MutableList<ArticleRelatedCvDataItem> {

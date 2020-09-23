@@ -9,7 +9,7 @@ import com.a.amp.article.data.CommentCvDataItem
 import com.a.amp.databinding.ComentCvBinding
 
 class CommentCvAdapter(
-    private val list: MutableList<CommentCvDataItem>
+    var list: MutableList<CommentCvDataItem>
 ) :
     RecyclerView.Adapter<CommentCvAdapter.MyViewHolder>() {
 

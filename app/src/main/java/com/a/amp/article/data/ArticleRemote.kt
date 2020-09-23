@@ -40,6 +40,20 @@ class ArticleRemote {
         return addComment(auth, id, body)
     }
 
+    suspend fun getSingleArticleCommentsFromServer(id: String): Resource<CommentResponse2> {
+        val auth = RetrofitBuilder.retrofit.create(AuthApi::class.java)
+        return singleArticleComments(auth, id)
+    }
+
+    private suspend fun singleArticleComments(
+        authApi: AuthApi,
+        id: String
+    ): Resource<CommentResponse2> {
+        return safeApiCall {
+            authApi.getSingleArticleComments(id)
+        }
+    }
+
     private suspend fun deleteArticle(authApi: AuthApi, id: String): Resource<Unit> {
         return safeApiCall {
             authApi.deleteArticle(slug = id)

@@ -31,6 +31,11 @@ interface AuthApi {
         username: String
     ): Response<ArticleResponse>
 
+    @GET("articles/{slug}/comments")
+    suspend fun getSingleArticleComments(
+        @Path("slug") slug: String
+    ): Response<CommentResponse2>
+
     @POST("articles")
     suspend fun createArticle(@Body articleRequest: ArticleResponse3): Response<ArticleResponse2>
 

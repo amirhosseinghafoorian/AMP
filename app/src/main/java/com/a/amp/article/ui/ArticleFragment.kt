@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -14,12 +15,14 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.a.amp.R
 import com.a.amp.article.data.ArticleRemote
+import com.a.amp.core.resource.Status
 import com.a.amp.databinding.FragmentArticleBinding
 import kotlinx.android.synthetic.main.comment_dialog.*
 import kotlinx.android.synthetic.main.fragment_article.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ArticleFragment : Fragment() {
     private lateinit var binding: FragmentArticleBinding
@@ -68,7 +71,10 @@ class ArticleFragment : Fragment() {
         })
 
         articleViewModel.commentList.observe(viewLifecycleOwner, { list ->
-            myAdapter2?.notifyDataSetChanged()
+            if (list != null) {
+                myAdapter2?.list = list
+                myAdapter2?.notifyDataSetChanged()
+            }
         })
 
         articleViewModel.singleArticle.observe(viewLifecycleOwner, { list ->
@@ -79,7 +85,7 @@ class ArticleFragment : Fragment() {
 
         CoroutineScope(Dispatchers.IO).launch {
             articleViewModel.fillRelated()
-            articleViewModel.fillComment()
+            articleViewModel.fillComment(slug)
             articleViewModel.fillSingleArticle(slug)
         }
 
@@ -117,8 +123,24 @@ class ArticleFragment : Fragment() {
                 val body = dialog.comment_et.editText?.text.toString()
                 CoroutineScope(Dispatchers.IO).launch {
                     val ar = ArticleRemote()
-                    val g1 = ar.addCommentToServer(slug, body)
-                    val g = ""
+                    val result = ar.addCommentToServer(slug, body)
+                    if (result.status == Status.SUCCESS && result.code == 200) {
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(context, "کامنت اضافه شد", Toast.LENGTH_SHORT)
+                                .show()
+                            dialog.dismiss()
+                        }
+                    } else if (result.status == Status.SUCCESS && result.code != 200) {
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(context, "خطا", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    } else if (result.status == Status.ERROR) {
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(context, "عدم اتصال به اینترنت", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    }
                 }
             }
         }

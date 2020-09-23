@@ -1,10 +1,7 @@
 package com.a.amp.database
 
 import androidx.room.*
-import com.a.amp.article.data.ArticleEntity
-import com.a.amp.article.data.ArticleWithCommentsAndTags
-import com.a.amp.article.data.CommentEntity
-import com.a.amp.article.data.TagEntity
+import com.a.amp.article.data.*
 import com.a.amp.user.data.UserEntity
 import com.a.amp.user.data.UserWithArticles
 import com.a.amp.user.data.UserWithArticlesWithCommentsAndTags
@@ -21,11 +18,15 @@ interface MyDao {
     @Query("select * from articles where ArticleId == :id")
     suspend fun getSingleArticleById(id: String): List<ArticleEntity>
 
+    @Transaction
+    @Query("select * from articles where ArticleId == :id")
+    suspend fun getSingleArticleWithComments(id: String): List<ArticleWithComments>
+
     @Query("select * from users")
     fun getUsers(): List<UserEntity>
 
-    @Query("select * from comments")
-    fun getComments(): List<CommentEntity>
+    @Query("select * from comments where ConnectedArticleId == :slug")
+    suspend fun getComments(slug: String): List<CommentEntity>
 
     @Query("select * from tags")
     fun getTags(): List<TagEntity>
@@ -56,9 +57,6 @@ interface MyDao {
 
     @Delete
     fun deleteTags(vararg tag: TagEntity)
-
-    @Delete
-    fun deleteUsers(vararg user: UserEntity)
 
     @Transaction
     @Query("select * from articles")

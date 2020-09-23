@@ -122,3 +122,12 @@ data class ArticleWithCommentsAndTags(
     val tags: List<TagEntity>
 )
 
+data class ArticleWithComments(
+    @Embedded val article: ArticleEntity,
+    @Relation(
+        parentColumn = "ArticleId",
+        entityColumn = "ConnectedArticleId"
+    )
+    val comments: List<CommentEntity>
+)
+
