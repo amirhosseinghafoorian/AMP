@@ -119,11 +119,9 @@ class ProfileFragment : Fragment(), MoreClickListner {
             if (isfollowing != null) {
                 if (isfollowing) {
                     isfollow = true
-                    Toast.makeText(context, "followed", Toast.LENGTH_SHORT).show()
                     profile_cv_btn_1.text = "لغو دنبال کردن"
                     profile_cv_btn_1.setBackgroundColor(Color.RED)
                 }else if (!isfollowing){
-                    Toast.makeText(context, "unfollowed", Toast.LENGTH_SHORT).show()
                     isfollow = false
                     profile_cv_btn_1.text = "دنبال کردن"
                     profile_cv_btn_1.setBackgroundColor(Color.parseColor("#286de6"))

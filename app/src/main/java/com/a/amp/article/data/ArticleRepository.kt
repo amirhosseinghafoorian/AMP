@@ -3,10 +3,7 @@ package com.a.amp.article.data
 import android.app.Application
 import android.widget.Toast
 import com.a.amp.MyApp
-import com.a.amp.article.apimodel2.ArticleResponse
-import com.a.amp.article.apimodel2.ArticleResponse2
-import com.a.amp.article.apimodel2.ArticleX
-import com.a.amp.article.apimodel2.CommentResponse2
+import com.a.amp.article.apimodel2.*
 import com.a.amp.core.resource.Resource
 import com.a.amp.core.resource.Status
 import com.a.amp.database.AppDataBase
@@ -37,6 +34,27 @@ class ArticleRepository(application: Application) {
         return at.createArticleForServer(body, description, tagList, title)
     }
 
+    suspend fun editArticleFromRepo(
+        body: String,
+        description: String,
+        tagList: List<String>,
+        title: String,
+        slug: String
+    ): Resource<ArticleResponse4> {
+        val at = ArticleRemote()
+        return at.editArticleForServer(body, description, tagList, title, slug)
+    }
+
+    suspend fun favoriteArticle(slug: String): Resource<ArticleResponse5> {
+        val remote = ArticleRemote()
+        return remote.favoriteArticleForServer(slug)
+    }
+
+    suspend fun unFavoriteArticle(slug: String): Resource<ArticleResponse5> {
+        val remote = ArticleRemote()
+        return remote.unFavoriteArticleForServer(slug)
+    }
+
     suspend fun fillSingleArticleFromRepo(id: String): MutableList<WritingCvDataItem> {
         val art = ArticleRemote()
         val repoResult = art.getSingleArticleBySlug(id)
@@ -64,6 +82,7 @@ class ArticleRepository(application: Application) {
         val article = ArticleLocal(app)
         return article.fillSingleFromLocal(id)
     }
+
 
     suspend fun syncArticles(): Resource<ArticleResponse> {
         val remote = ArticleRemote()

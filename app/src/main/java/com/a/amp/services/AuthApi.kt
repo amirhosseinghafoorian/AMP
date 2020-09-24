@@ -65,5 +65,13 @@ interface AuthApi {
     suspend fun deleteArticle(@Path("slug") slug: String): Response<Unit>
 
     @PUT("articles/{slug}")
-    suspend fun editArticle(articleRequest: ArticleResponse4):Response<ArticleResponse4>
+    suspend fun editArticle(
+        @Path("slug") slug: String,
+        @Body articleRequest: ArticleResponse4):Response<ArticleResponse4>
+
+    @POST("articles/{slug}/favorite")
+    suspend fun favoriteArticle(@Path("slug") slug: String): Response<ArticleResponse5>
+
+    @DELETE("articles/{slug}/favorite")
+    suspend fun unFavoriteArticle(@Path("slug") slug: String): Response<ArticleResponse5>
 }

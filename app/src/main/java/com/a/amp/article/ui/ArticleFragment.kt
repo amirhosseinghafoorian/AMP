@@ -27,6 +27,7 @@ import kotlinx.coroutines.withContext
 class ArticleFragment : Fragment() {
     private lateinit var binding: FragmentArticleBinding
     private var slug = ""
+    var isFavrite = false
 //    private val ARG_PARAM1 = "ID"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,6 +53,9 @@ class ArticleFragment : Fragment() {
 
         val myAdapter = articleViewModel.relatedList.value?.let { ArticleRelatedCvAdapter(it) }
         val myAdapter2 = articleViewModel.commentList.value?.let { CommentCvAdapter(it) }
+
+        articleViewModel.getFavoriteFromServer(slug)
+
 
         article_page_recycle_1.apply {
             adapter = myAdapter
@@ -103,6 +107,22 @@ class ArticleFragment : Fragment() {
 
         article_appbar_start_icon.setOnClickListener {
             Navigation.findNavController(it).navigateUp()
+        }
+
+
+        articleViewModel.favorited.observe(viewLifecycleOwner, {favorited ->
+            if (favorited != null){
+                binding.saved = favorited
+                isFavrite = favorited
+            }
+        })
+
+        article_favorite_ic.setOnClickListener {
+            if (isFavrite){
+                articleViewModel.unFavoriteArticle(slug)
+            }else if(!isFavrite){
+                articleViewModel.favoriteArticle(slug)
+            }
         }
 
     }

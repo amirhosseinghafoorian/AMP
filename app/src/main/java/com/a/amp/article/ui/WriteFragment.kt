@@ -60,15 +60,26 @@ class WriteFragment : Fragment() {
             it.lifecycleOwner = this
         }
 
-        if (slug.isNotEmpty()){
+        if (slug.isNotEmpty()) {
             writeViewModel.getArticle(slug)
-            writeViewModel.resultArticle.observe(this as LifecycleOwner){
+            writeViewModel.resultArticle.observe(this as LifecycleOwner) {
                 title.setText(it[0].title)
                 body.setText(it[0].mainText)
             }
+
+            write_btn_1.text = "تصحیح مقاله"
+            write_btn_1.setOnClickListener {
+                if (isValid()) {
+                    writeViewModel.edit(tagList, slug)
+                }
+            }
+        } else if (slug.isEmpty()) {
+            write_btn_1.setOnClickListener {
+                if (isValid()) {
+                    writeViewModel.create(tagList)
+                }
+            }
         }
-
-
 
 
 //        if (slug != null){
@@ -98,11 +109,19 @@ class WriteFragment : Fragment() {
             }
         })
 
-        write_btn_1.setOnClickListener {
-            if (isValid()) {
-                writeViewModel.create(tagList)
+        writeViewModel.editResult.observe(viewLifecycleOwner, { result ->
+            if (result.status == Status.SUCCESS && result.code == 200) {
+                Toast.makeText(context, "مقاله ایجاد شد", Toast.LENGTH_SHORT)
+                    .show()
+                findNavController().navigateUp()
+            } else if (result.status == Status.SUCCESS && result.code != 200) {
+                Toast.makeText(context, "خطا", Toast.LENGTH_SHORT)
+                    .show()
+            } else if (result.status == Status.ERROR) {
+                Toast.makeText(context, "عدم اتصال به اینترنت", Toast.LENGTH_SHORT)
+                    .show()
             }
-        }
+        })
 
 
 

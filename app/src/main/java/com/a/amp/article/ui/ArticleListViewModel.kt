@@ -1,18 +1,18 @@
 package com.a.amp.article.ui
 
 import android.app.Application
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.a.amp.MyApp
-import com.a.amp.article.data.ArticleRelatedCvDataItem
-import com.a.amp.article.data.ArticleRepository
-import com.a.amp.article.data.CommentCvDataItem
-import com.a.amp.article.data.CommentEntity
+import com.a.amp.article.data.*
 import com.a.amp.core.resource.Status
 import com.a.amp.database.AppDataBase
 import com.a.amp.user.data.WritingCvDataItem
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class ArticleListViewModel(application: Application) : AndroidViewModel(application) {
@@ -20,6 +20,7 @@ class ArticleListViewModel(application: Application) : AndroidViewModel(applicat
     var commentList = MutableLiveData<MutableList<CommentCvDataItem>>()
     var singleArticle = MutableLiveData<MutableList<WritingCvDataItem>>()
     val app = application
+    var favorited = MutableLiveData<Boolean>()
 
     init {
         commentList.value = mutableListOf()
@@ -67,6 +68,29 @@ class ArticleListViewModel(application: Application) : AndroidViewModel(applicat
     suspend fun fillSingleArticle(id: String) {
         val article = ArticleRepository(app)
         singleArticle.postValue(article.fillSingleArticleFromRepo(id))
+    }
+
+    fun favoriteArticle(slug: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val favArt = ArticleRepository(app).favoriteArticle(slug)
+            if (favArt.code == 200){favorited.postValue(true)}
+        }
+
+    }
+
+    fun unFavoriteArticle(slug: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val favArt = ArticleRepository(app).unFavoriteArticle(slug)
+            if (favArt.code == 200){favorited.postValue(false)}
+        }
+
+    }
+
+    fun getFavoriteFromServer(slug: String){
+        viewModelScope.launch(Dispatchers.IO) {
+            val resFavorite = ArticleRemote().getSingleArticleBySlug(slug)
+            favorited.postValue(resFavorite.data?.article?.favorited)
+        }
     }
 
 }

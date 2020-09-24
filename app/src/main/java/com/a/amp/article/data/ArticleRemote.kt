@@ -28,6 +28,32 @@ class ArticleRemote {
         return createArticle(auth, body, description, tagList, title)
     }
 
+    suspend fun editArticleForServer(
+        body: String,
+        description: String,
+        tagList: List<String>,
+        title: String,
+        slug: String
+    ): Resource<ArticleResponse4> {
+        val auth = RetrofitBuilder.retrofit.create(AuthApi::class.java)
+        return editArticle(auth, body, description, tagList, title,slug)
+    }
+
+    suspend fun favoriteArticleForServer(
+        slug: String
+    ):Resource<ArticleResponse5>{
+        val auth = RetrofitBuilder.retrofit.create(AuthApi::class.java)
+        return favoriteArticle(auth,slug)
+    }
+
+    suspend fun unFavoriteArticleForServer(
+        slug: String
+    ):Resource<ArticleResponse5>{
+        val auth = RetrofitBuilder.retrofit.create(AuthApi::class.java)
+        return unFavoriteArticle(auth,slug)
+    }
+
+
     suspend fun deleteArticleFormServer(
         id: String
     ): Resource<Unit> {
@@ -98,6 +124,51 @@ class ArticleRemote {
             )
         }
     }
+
+
+    private suspend fun editArticle(
+        authApi: AuthApi,
+        body: String,
+        description: String,
+        tagList: List<String>,
+        title: String,
+        slug: String
+    ): Resource<ArticleResponse4> {
+        return safeApiCall {
+            authApi.editArticle(
+                slug = slug,
+                articleRequest = ArticleResponse4(
+                    article = ArticleXXX(
+                        body, description, tagList, title
+                    )
+                )
+            )
+        }
+    }
+
+
+    private suspend fun favoriteArticle(
+        authApi: AuthApi,
+        slug: String
+    ): Resource<ArticleResponse5>{
+        return safeApiCall {
+            authApi.favoriteArticle(
+                slug = slug
+            )
+        }
+    }
+
+    private suspend fun unFavoriteArticle(
+        authApi: AuthApi,
+        slug: String
+    ): Resource<ArticleResponse5>{
+        return safeApiCall {
+            authApi.favoriteArticle(
+                slug = slug
+            )
+        }
+    }
+
 
     private suspend fun singleArticleBySlug(
         authApi: AuthApi,
