@@ -81,6 +81,12 @@ class ArticleFragment : Fragment() {
             }
         })
 
+        articleViewModel.tagList.observe(viewLifecycleOwner, { list ->
+            if (list != null) {
+
+            }
+        })
+
         articleViewModel.singleArticle.observe(viewLifecycleOwner, { list ->
             if (list.size > 0) {
                 binding.articleBind = list[0]
@@ -89,8 +95,7 @@ class ArticleFragment : Fragment() {
 
         CoroutineScope(Dispatchers.IO).launch {
             articleViewModel.fillRelated()
-            articleViewModel.fillComment(slug)
-            articleViewModel.fillSingleArticle(slug)
+            articleViewModel.fillSingleArticleWithComments(slug) // and also tags
         }
 
         article_iv_1.setOnClickListener {

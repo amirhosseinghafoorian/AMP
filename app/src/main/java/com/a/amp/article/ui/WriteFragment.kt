@@ -14,17 +14,11 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import androidx.room.Database
-import com.a.amp.MyApp
 import com.a.amp.R
-import com.a.amp.article.apimodel2.Article
 import com.a.amp.core.resource.Status
-import com.a.amp.database.AppDataBase
 import com.a.amp.databinding.FragmentWriteBinding
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.fragment_write.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 
 class WriteFragment : Fragment() {
 
@@ -80,6 +74,7 @@ class WriteFragment : Fragment() {
                 }
             }
         }
+
 
 
 //        if (slug != null){

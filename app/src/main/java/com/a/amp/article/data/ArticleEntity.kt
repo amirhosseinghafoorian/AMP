@@ -13,14 +13,6 @@ import java.util.*
 
 @Entity(
     tableName = "articles", primaryKeys = ["ArticleId"]
-//    , foreignKeys = [
-//        ForeignKey(
-//            onDelete = CASCADE,
-//            parentColumns = ["UserId"],
-//            childColumns = ["UserOwnerId"],
-//            entity = UserEntity::class
-//        )
-//    ]
 )
 data class ArticleEntity(
     @NonNull @ColumnInfo(name = "ArticleId") val articleId: String,
