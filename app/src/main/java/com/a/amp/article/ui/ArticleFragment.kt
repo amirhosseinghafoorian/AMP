@@ -27,12 +27,9 @@ import kotlinx.coroutines.withContext
 class ArticleFragment : Fragment() {
     private lateinit var binding: FragmentArticleBinding
     private var slug = ""
-//    private val ARG_PARAM1 = "ID"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        val args : ArticleFragment by navArgs()
-//        slug = args.slug
         slug = arguments?.let { ArticleFragmentArgs.fromBundle(it).slug }.toString()
     }
 
@@ -55,12 +52,10 @@ class ArticleFragment : Fragment() {
 
         article_page_recycle_1.apply {
             adapter = myAdapter
-//            setHasFixedSize(true)
         }
 
         article_page_recycle_2.apply {
             adapter = myAdapter2
-//            setHasFixedSize(true)
         }
 
         articleViewModel.relatedList.observe(viewLifecycleOwner, { list ->
@@ -77,6 +72,12 @@ class ArticleFragment : Fragment() {
             }
         })
 
+        articleViewModel.tagList.observe(viewLifecycleOwner, { list ->
+            if (list != null) {
+
+            }
+        })
+
         articleViewModel.singleArticle.observe(viewLifecycleOwner, { list ->
             if (list.size > 0) {
                 binding.articleBind = list[0]
@@ -85,8 +86,7 @@ class ArticleFragment : Fragment() {
 
         CoroutineScope(Dispatchers.IO).launch {
             articleViewModel.fillRelated()
-            articleViewModel.fillComment(slug)
-            articleViewModel.fillSingleArticle(slug)
+            articleViewModel.fillSingleArticleWithComments(slug) // and also tags
         }
 
         article_iv_1.setOnClickListener {

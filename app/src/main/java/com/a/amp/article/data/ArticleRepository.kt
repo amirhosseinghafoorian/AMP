@@ -6,21 +6,14 @@ import com.a.amp.MyApp
 import com.a.amp.article.apimodel2.ArticleResponse
 import com.a.amp.article.apimodel2.ArticleResponse2
 import com.a.amp.article.apimodel2.ArticleX
-import com.a.amp.article.apimodel2.CommentResponse2
 import com.a.amp.core.resource.Resource
 import com.a.amp.core.resource.Status
 import com.a.amp.database.AppDataBase
-import com.a.amp.user.data.WritingCvDataItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class ArticleRepository(application: Application) {
     val app = application
-
-    suspend fun fillCommentFromRepo(slug: String): MutableList<CommentCvDataItem> {
-        val article = ArticleLocal(app)
-        return article.fillCommentFromLocal(slug)
-    }
 
     suspend fun fillRelatedFromRepo(): MutableList<ArticleRelatedCvDataItem> {
         val article = ArticleLocal(app)
@@ -37,10 +30,18 @@ class ArticleRepository(application: Application) {
         return at.createArticleForServer(body, description, tagList, title)
     }
 
-    suspend fun fillSingleArticleFromRepo(id: String): MutableList<WritingCvDataItem> {
+    suspend fun fillSingleArticleWithCommentsFromRepo(slug: String): MutableList<Any> {
+        val returnList = mutableListOf<Any>()
         val art = ArticleRemote()
-        val repoResult = art.getSingleArticleBySlug(id)
-        if (repoResult.status == Status.SUCCESS && repoResult.code == 200) {
+        val repoResult = art.getSingleArticleBySlug(slug)
+        val repoResult2 = art.getSingleArticleCommentsFromServer(slug)
+
+        if (repoResult.status == Status.SUCCESS &&
+            repoResult.code == 200 &&
+            repoResult2.status == Status.SUCCESS &&
+            repoResult2.code == 200
+        ) {
+
             val unformattedList = repoResult.data?.article
             val formattedList = mutableListOf<ArticleX>()
             unformattedList?.let { formattedList.add(it) }
@@ -49,6 +50,20 @@ class ArticleRepository(application: Application) {
             for (i in resultList.indices) {
                 db.myDao().insertArticles(resultList[i])
             }
+
+            val unformattedList2 = repoResult2.data?.comments
+            val formattedList2 =
+                unformattedList2?.let { CommentEntity.convertToDataItem2(it, slug) }
+            for (i in 0 until formattedList2?.size!!) {
+                db.myDao().insertComments(formattedList2[i])
+            }
+
+            val unformattedList3 = repoResult.data?.article?.tagList
+            val formattedList3 = unformattedList3?.let { TagEntity.convertToDataItem(it, slug) }
+            for (i in 0 until formattedList3?.size!!) {
+                db.myDao().insertTags(formattedList3[i])
+            }
+
             withContext(Dispatchers.Main) {
                 Toast.makeText(MyApp.publicApp, "بروزرسانی انجام شد", Toast.LENGTH_SHORT).show()
             }
@@ -62,16 +77,14 @@ class ArticleRepository(application: Application) {
             }
         }
         val article = ArticleLocal(app)
-        return article.fillSingleFromLocal(id)
+        returnList.add(article.fillSingleArticleFromLocal(slug))
+        returnList.add(article.fillCommentFromLocal(slug))
+        returnList.add(article.fillTagFromLocal(slug))
+        return returnList
     }
 
     suspend fun syncArticles(): Resource<ArticleResponse> {
         val remote = ArticleRemote()
         return remote.getArticlesFromServer()
-    }
-
-    suspend fun getSingleArticleCommentsFromRepo(id: String): Resource<CommentResponse2> {
-        val ar = ArticleRemote()
-        return ar.getSingleArticleCommentsFromServer(id)
     }
 }
