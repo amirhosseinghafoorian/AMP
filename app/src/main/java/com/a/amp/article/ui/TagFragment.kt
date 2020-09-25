@@ -33,7 +33,6 @@ class TagFragment : Fragment() {
 
         val myAdapter = tagViewModel.summaryList.value?.let { ArticleSummaryCvAdapter(it) }
 
-
         tag_recycler.apply {
             adapter = myAdapter
 //            setHasFixedSize(true)
@@ -45,6 +44,7 @@ class TagFragment : Fragment() {
                 myAdapter?.notifyDataSetChanged()
             }
         })
+
 
         CoroutineScope(Dispatchers.IO).launch {
             tagViewModel.fillSummary()

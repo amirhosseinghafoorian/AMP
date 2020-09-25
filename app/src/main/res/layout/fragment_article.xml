@@ -215,52 +215,11 @@
                 app:layout_constraintTop_toBottomOf="@id/article_tv_4">
 
                 <com.google.android.material.chip.ChipGroup
-                    android:layout_width="wrap_content"
+                    android:id="@+id/article_chipGroup"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:singleLine="true">
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/article_chip_1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/tab1"
-                        app:chipBackgroundColor="@android:color/white"
-                        app:rippleColor="@color/colorPrimary" />
-
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/tab2"
-                        app:chipBackgroundColor="@android:color/white"
-                        app:rippleColor="@color/colorPrimary" />
-
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/tab3"
-                        app:chipBackgroundColor="@android:color/white"
-                        app:rippleColor="@color/colorPrimary" />
-
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/tab4"
-                        app:chipBackgroundColor="@android:color/white"
-                        app:rippleColor="@color/colorPrimary" />
-
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/tab5"
-                        app:chipBackgroundColor="@android:color/white"
-                        app:rippleColor="@color/colorPrimary" />
-
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/tab6"
-                        app:chipBackgroundColor="@android:color/white"
-                        app:rippleColor="@color/colorPrimary" />
+                    app:singleLine="true"
+                    >
 
                 </com.google.android.material.chip.ChipGroup>
             </HorizontalScrollView>

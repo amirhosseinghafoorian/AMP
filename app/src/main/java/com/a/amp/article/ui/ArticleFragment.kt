@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,17 +18,17 @@ import com.a.amp.R
 import com.a.amp.article.data.ArticleRemote
 import com.a.amp.core.resource.Status
 import com.a.amp.databinding.FragmentArticleBinding
+import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.comment_dialog.*
 import kotlinx.android.synthetic.main.fragment_article.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.android.synthetic.main.fragment_write.*
+import kotlinx.coroutines.*
 
 class ArticleFragment : Fragment() {
     private lateinit var binding: FragmentArticleBinding
     private var slug = ""
     var isFavrite = false
+    lateinit var tagList: MutableList<String>
 //    private val ARG_PARAM1 = "ID"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +56,7 @@ class ArticleFragment : Fragment() {
         val myAdapter2 = articleViewModel.commentList.value?.let { CommentCvAdapter(it) }
 
         articleViewModel.getFavoriteFromServer(slug)
+        suspend { articleViewModel.fillSingleArticleWithComments(slug) }
 
 
         article_page_recycle_1.apply {
@@ -83,9 +85,20 @@ class ArticleFragment : Fragment() {
 
         articleViewModel.tagList.observe(viewLifecycleOwner, { list ->
             if (list != null) {
-
+                tagList = list
+                if (tagList != null) {
+                    for (i in tagList.indices) {
+                        val chip = Chip(context)
+                        chip.text = tagList[i]
+                        chip.setTextColor(Color.BLACK)
+                        chip.setChipBackgroundColorResource(R.color.chipBackColor)
+                        chip.chipCornerRadius = 50f
+                        article_chipGroup.addView(chip)
+                    }
+                }
             }
         })
+
 
         articleViewModel.singleArticle.observe(viewLifecycleOwner, { list ->
             if (list.size > 0) {
@@ -106,26 +119,26 @@ class ArticleFragment : Fragment() {
             )
         }
 
-        article_chip_1.setOnClickListener {
-            findNavController().navigate(ArticleFragmentDirections.actionArticleFragmentToTagFragment())
-        }
+//        article_chip_1.setOnClickListener {
+//            findNavController().navigate(ArticleFragmentDirections.actionArticleFragmentToTagFragment())
+//        }
 
         article_appbar_start_icon.setOnClickListener {
             Navigation.findNavController(it).navigateUp()
         }
 
 
-        articleViewModel.favorited.observe(viewLifecycleOwner, {favorited ->
-            if (favorited != null){
+        articleViewModel.favorited.observe(viewLifecycleOwner, { favorited ->
+            if (favorited != null) {
                 binding.saved = favorited
                 isFavrite = favorited
             }
         })
 
         article_favorite_ic.setOnClickListener {
-            if (isFavrite){
+            if (isFavrite) {
                 articleViewModel.unFavoriteArticle(slug)
-            }else if(!isFavrite){
+            } else if (!isFavrite) {
                 articleViewModel.favoriteArticle(slug)
             }
         }
@@ -169,6 +182,22 @@ class ArticleFragment : Fragment() {
                 }
             }
         }
+
+//        Log.i("bang", tagList.toString())
+
+
+//        if (tagList.isNotEmpty()) {
+//            for (i in tagList.indices) {
+//                val chip = Chip(context)
+//                chip.text = tagList[i]
+//                chip.setTextColor(Color.BLACK)
+//                chip.setChipBackgroundColorResource(R.color.chipBackColor)
+//                chip.chipCornerRadius = 50f
+//                chip.setCloseIconResource(R.drawable.ic_baseline_clear_24)
+//                article_chipGroup.addView(chip)
+//            }
+//
+//        }
 
     }
 }

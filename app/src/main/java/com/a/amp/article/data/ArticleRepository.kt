@@ -10,6 +10,7 @@ import com.a.amp.article.apimodel2.ArticleX
 import com.a.amp.core.resource.Resource
 import com.a.amp.core.resource.Status
 import com.a.amp.database.AppDataBase
+import com.a.amp.user.data.WritingCvDataItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -19,6 +20,11 @@ class ArticleRepository(application: Application) {
     suspend fun fillRelatedFromRepo(): MutableList<ArticleRelatedCvDataItem> {
         val article = ArticleLocal(app)
         return article.fillRelatedFromLocal()
+    }
+
+    suspend fun getArticleTag(slug: String): MutableList<String> {
+        val tagList = ArticleLocal(app)
+        return  tagList.fillTagFromLocal(slug)
     }
 
     suspend fun createArticleFromRepo(
@@ -52,7 +58,7 @@ class ArticleRepository(application: Application) {
         return remote.unFavoriteArticleForServer(slug)
     }
 
-    suspend fun fillSingleArticleFromRepo(id: String): MutableList<WritingCvDataItem> {
+    
     suspend fun fillSingleArticleWithCommentsFromRepo(slug: String): MutableList<Any> {
         val returnList = mutableListOf<Any>()
         val art = ArticleRemote()
@@ -96,7 +102,8 @@ class ArticleRepository(application: Application) {
             }
         } else if (repoResult.status == Status.ERROR) {
             withContext(Dispatchers.Main) {
-                Toast.makeText(MyApp.publicApp, "عدم اتصال به اینترنت", Toast.LENGTH_SHORT).show()
+                Toast.makeText(MyApp.publicApp, "عدم اتصال به اینترنت", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
         val article = ArticleLocal(app)
@@ -111,4 +118,5 @@ class ArticleRepository(application: Application) {
         val remote = ArticleRemote()
         return remote.getArticlesFromServer()
     }
+
 }

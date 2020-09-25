@@ -9,6 +9,7 @@ import com.a.amp.article.data.ArticleRepository
 class TagListViewModel(application: Application) : AndroidViewModel(application) {
     var summaryList = MutableLiveData<MutableList<ArticleRelatedCvDataItem>>()
     val app = application
+    lateinit var tagList: MutableList<String>
 
     init {
         summaryList.value = mutableListOf()

@@ -49,6 +49,9 @@ class WriteFragment : Fragment() {
         val writeViewModel = ViewModelProvider(this)
             .get(WriteViewModel::class.java)
 
+        val tagListViewModel = ViewModelProvider(this)
+            .get(TagListViewModel::class.java)
+
         Binding.also {
             it.vm = writeViewModel
             it.lifecycleOwner = this
@@ -60,6 +63,11 @@ class WriteFragment : Fragment() {
                 title.setText(it[0].title)
                 body.setText(it[0].mainText)
             }
+//            tagListViewModel.summaryList
+//            tagListViewModel.summaryList.observe(this as LifecycleOwner) {
+//                description.setText(it[0].text)
+//            }
+
 
             write_btn_1.text = "تصحیح مقاله"
             write_btn_1.setOnClickListener {
