@@ -8,10 +8,9 @@ import androidx.room.TypeConverters
 import com.a.amp.article.data.ArticleEntity
 import com.a.amp.article.data.CommentEntity
 import com.a.amp.article.data.TagEntity
-import com.a.amp.user.data.UserEntity
 
 @Database(
-    entities = [UserEntity::class, ArticleEntity::class, CommentEntity::class, TagEntity::class],
+    entities = [ArticleEntity::class, CommentEntity::class, TagEntity::class],
     version = 1
 )
 @TypeConverters(DateConverter::class)

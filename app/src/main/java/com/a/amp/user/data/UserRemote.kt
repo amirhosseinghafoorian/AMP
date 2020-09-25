@@ -32,10 +32,9 @@ class UserRemote {
         username: String,
         email: String
     ):Resource<followResponse>{
-        val followuser = RetrofitBuilder.retrofit.create(AuthApi::class.java)
-        return following(followuser, username, email)
+        val followUser = RetrofitBuilder.retrofit.create(AuthApi::class.java)
+        return following(followUser, username, email)
     }
-
 
     suspend fun unFollowOtherUser(username: String):Resource<followResponse>{
         val unFollowUser = RetrofitBuilder.retrofit.create(AuthApi::class.java)
@@ -44,10 +43,10 @@ class UserRemote {
 
     suspend fun getArticlesByAuthorFromServer(username: String): Resource<ArticleResponse> {
         val auth = RetrofitBuilder.retrofit.create(AuthApi::class.java)
-        return ArticlesByAuthor(auth, username)
+        return articlesByAuthor(auth, username)
     }
 
-    private suspend fun ArticlesByAuthor(
+    private suspend fun articlesByAuthor(
         authApi: AuthApi,
         username: String
     ): Resource<ArticleResponse> {
@@ -89,7 +88,7 @@ class UserRemote {
                         password = pass,
                         username = username
                     )
-                )//test@part.ir , 11111111
+                )
             )
         }
     }
@@ -104,11 +103,11 @@ class UserRemote {
         }
     }
 
-    suspend fun following(
+    private suspend fun following(
         authApi: AuthApi,
         username: String,
         email: String
-    ): Resource<followResponse>{
+    ): Resource<followResponse> {
         return safeApiCall {
             authApi.follow(
                 username = username,
@@ -122,10 +121,10 @@ class UserRemote {
         }
     }
 
-    suspend fun unFollowUser(
+    private suspend fun unFollowUser(
         authApi: AuthApi,
         username: String
-    ): Resource<followResponse>{
+    ): Resource<followResponse> {
         return safeApiCall {
             authApi.unFollow(username = username)
         }

@@ -87,4 +87,9 @@ class ArticleRepository(application: Application) {
         val remote = ArticleRemote()
         return remote.getArticlesFromServer()
     }
+
+    suspend fun syncFeed(): Resource<ArticleResponse> {
+        val remote = ArticleRemote()
+        return remote.getFeedFromServer()
+    }
 }

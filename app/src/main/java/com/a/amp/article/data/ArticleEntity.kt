@@ -19,6 +19,10 @@ data class ArticleEntity(
     @ColumnInfo(name = "UserOwnerId") val userOwnerId: String,
     @ColumnInfo(name = "Title") val title: String?,
     @ColumnInfo(name = "MainText") val mainText: String?,
+    @ColumnInfo(name = "IsFeed") val isFeed: Boolean = false,
+    @ColumnInfo(name = "Favorited") val favorited: Boolean = false,
+    @ColumnInfo(name = "FavoritesCount") val favoritesCount: Int = 0,
+    @ColumnInfo(name = "Description") val description: String? = null,
     @ColumnInfo(name = "PublishDate") val publishDate: Date? = null
 ) {
     companion object {
@@ -97,6 +101,19 @@ data class ArticleEntity(
             }
             return resultList
         }
+
+        fun convertToDataItem6(list: List<Article>): MutableList<ArticleEntity> {
+            val resultList: MutableList<ArticleEntity> = mutableListOf()
+            for (i in list.indices) {
+                resultList.add(
+                    ArticleEntity(
+                        list[i].slug,
+                        list[i].author.username, list[i].title, list[i].body, true
+                    )
+                )
+            }
+            return resultList
+        }
     }
 }
 
@@ -112,14 +129,5 @@ data class ArticleWithCommentsAndTags(
         entityColumn = "ConnectedArticleId"
     )
     val tags: List<TagEntity>
-)
-
-data class ArticleWithComments(
-    @Embedded val article: ArticleEntity,
-    @Relation(
-        parentColumn = "ArticleId",
-        entityColumn = "ConnectedArticleId"
-    )
-    val comments: List<CommentEntity>
 )
 

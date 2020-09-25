@@ -51,23 +51,31 @@ class LoginFragment : Fragment() {
 
         loginViewModel.isLogin.observe(viewLifecycleOwner, { isLogin ->
             if (isLogin != null) {
-                if (isLogin == LoginAction.LOGIN) {
-                    setting.putString("id", login_et_1.editText?.text.toString())
-                    setting.putString(
-                        "username",
-                        loginViewModel.result.value?.data?.user?.username.toString(),
-                    )
-                    setting.putString(
-                        "token",
-                        loginViewModel.result.value?.data?.user?.token.toString()
-                    )
-                    findNavController().navigate(LoginFragmentDirections.actionGlobalHomeFragment())
-                } else if (isLogin == LoginAction.WRONG) {
-                    Toast.makeText(context, "نام کاربری یا رمز عبور اشتباه است", Toast.LENGTH_SHORT)
-                        .show()
-                } else if (isLogin == LoginAction.FAIL) {
-                    Toast.makeText(context, "عدم اتصال به اینترنت", Toast.LENGTH_SHORT)
-                        .show()
+                when (isLogin) {
+                    LoginAction.LOGIN -> {
+                        setting.putString("id", login_et_1.editText?.text.toString())
+                        setting.putString(
+                            "username",
+                            loginViewModel.result.value?.data?.user?.username.toString(),
+                        )
+                        setting.putString(
+                            "token",
+                            loginViewModel.result.value?.data?.user?.token.toString()
+                        )
+                        findNavController().navigate(LoginFragmentDirections.actionGlobalHomeFragment())
+                    }
+                    LoginAction.WRONG -> {
+                        Toast.makeText(
+                            context,
+                            "نام کاربری یا رمز عبور اشتباه است",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }
+                    LoginAction.FAIL -> {
+                        Toast.makeText(context, "عدم اتصال به اینترنت", Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 }
             }
         })

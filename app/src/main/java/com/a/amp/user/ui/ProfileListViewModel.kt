@@ -5,16 +5,13 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import com.a.amp.MyApp
 import com.a.amp.article.apimodel2.Article
 import com.a.amp.article.data.ArticleEntity
-import com.a.amp.article.data.ArticleRemote
 import com.a.amp.core.resource.Status
 import com.a.amp.database.AppDataBase
 import com.a.amp.storage.setting
-import com.a.amp.user.data.UserRemote
 import com.a.amp.user.data.UserRepository
 import com.a.amp.user.data.WritingCvDataItem
 import kotlinx.coroutines.CoroutineScope
@@ -35,9 +32,9 @@ class ProfileListViewModel(application: Application) : AndroidViewModel(applicat
     fun fillWrite(username: String) {
         writeList.value?.clear()
         val db = AppDataBase.buildDatabase(context = MyApp.publicApp)
-        val ut = UserRemote()
+        val repo = UserRepository(app)
         CoroutineScope(Dispatchers.IO).launch {
-            val repoResult = ut.getArticlesByAuthorFromServer(username)
+            val repoResult = repo.getArticlesByAuthorFromRepo(username)
             if (repoResult.status == Status.SUCCESS && repoResult.code == 200) {
                 db.myDao().deleteArticlesByAuthor(username)
                 val unformattedList = repoResult.data?.articles
