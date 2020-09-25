@@ -11,6 +11,9 @@ import androidx.viewpager2.widget.ViewPager2
 import com.a.amp.R
 import com.a.amp.storage.setting
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
@@ -54,8 +57,10 @@ class HomeFragment : Fragment() {
             myAdapter?.notifyDataSetChanged()
         })
 
-        loginViewModel.fillSummary()
-        loginViewModel.fillRelated()
+        CoroutineScope(Dispatchers.IO).launch {
+            loginViewModel.fillSummary()
+            loginViewModel.fillRelated()
+        }
 
         home_appbar_end_icon.setOnClickListener {
             findNavController().navigate(
@@ -70,6 +75,8 @@ class HomeFragment : Fragment() {
         }
         home_appbar_end_icon_power.setOnClickListener {
             setting.remove("username")
+            setting.remove("id")
+            setting.remove("token")
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAuthenticate())
         }
     }

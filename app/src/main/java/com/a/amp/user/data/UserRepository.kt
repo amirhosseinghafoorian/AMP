@@ -1,6 +1,7 @@
 package com.a.amp.user.data
 
 import android.app.Application
+import com.a.amp.article.apimodel2.ArticleResponse
 import com.a.amp.core.resource.Resource
 import com.a.amp.user.apimodel1.LoginResponse
 import com.a.amp.user.apimodel1.followResponse
@@ -11,6 +12,11 @@ class UserRepository(application: Application) {
     suspend fun fillWriteFromRepo(username: String): MutableList<WritingCvDataItem> {
         val user = UserLocal(application = app)
         return user.fillWriteFromLocal(username)
+    }
+
+    suspend fun getArticlesByAuthorFromRepo(username: String): Resource<ArticleResponse> {
+        val ur = UserRemote()
+        return ur.getArticlesByAuthorFromServer(username)
     }
 
     suspend fun loginResult(user: String, pass: String): Resource<LoginResponse> {

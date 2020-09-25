@@ -1,10 +1,6 @@
 package com.a.amp.services
 
 import com.a.amp.article.apimodel2.*
-import com.a.amp.article.apimodel2.ArticleResponse
-import com.a.amp.article.apimodel2.ArticleResponse2
-import com.a.amp.article.apimodel2.ArticleResponse3
-import com.a.amp.article.apimodel2.ArticleResponse4
 import com.a.amp.user.apimodel1.Follow
 import com.a.amp.user.apimodel1.LoginRequest
 import com.a.amp.user.apimodel1.LoginResponse
@@ -22,6 +18,9 @@ interface AuthApi {
 
     @GET("articles")
     suspend fun allArticles(): Response<ArticleResponse>
+
+    @GET("articles/feed")
+    suspend fun feed(): Response<ArticleResponse>
 
     @GET("articles/{slug}")
     suspend fun getSingleArticleBySlug(

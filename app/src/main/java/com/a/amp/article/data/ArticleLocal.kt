@@ -10,7 +10,7 @@ class ArticleLocal(application: Application) {
 
     suspend fun fillCommentFromLocal(slug: String): MutableList<CommentCvDataItem> {
         val resultList = mutableListOf<CommentEntity>()
-        resultList.addAll(db.myDao().getSingleArticleWithComments(slug)[0].comments)
+        resultList.addAll(db.myDao().getArticleWithCommentsAndTags(slug)[0].comments)
         return CommentEntity.convertToDataItem(resultList)
     }
 
@@ -29,7 +29,7 @@ class ArticleLocal(application: Application) {
 
     suspend fun fillSingleArticleFromLocal(slug: String): MutableList<WritingCvDataItem> {
         val resultList = mutableListOf<ArticleEntity>()
-        resultList.add(db.myDao().getSingleArticleWithComments(slug)[0].article)
+        resultList.add(db.myDao().getArticleWithCommentsAndTags(slug)[0].article)
         return ArticleEntity.convertToDataItem2(resultList)
     }
 }

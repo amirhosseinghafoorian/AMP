@@ -68,13 +68,18 @@ class SplashFragment : Fragment() {
         Looper.prepare()
         val repoResult = repo.syncArticles()
         if (repoResult.status == Status.SUCCESS && repoResult.code == 200) {
+
             val unformattedList = repoResult.data?.articles
             val formattedList = mutableListOf<Article>()
             unformattedList?.let { formattedList.addAll(it) }
             val resultList = ArticleEntity.convertToDataItem4(formattedList)
+
             for (i in resultList.indices) {
                 db.myDao().insertArticles(resultList[i])
             }
+
+
+
             withContext(Dispatchers.Main) {
                 Toast.makeText(MyApp.publicApp, "بروزرسانی انجام شد", Toast.LENGTH_SHORT).show()
             }
@@ -85,6 +90,33 @@ class SplashFragment : Fragment() {
         } else if (repoResult.status == Status.ERROR) {
             withContext(Dispatchers.Main) {
                 Toast.makeText(MyApp.publicApp, "عدم اتصال به اینترنت", Toast.LENGTH_SHORT).show()
+            }
+        }
+        if (currentUser != "***" && currentUser != "") {
+            val repoResult2 = repo.syncFeed()
+            if (repoResult2.status == Status.SUCCESS && repoResult2.code == 200) {
+
+                val unformattedList2 = repoResult2.data?.articles
+                val formattedList2 = mutableListOf<Article>()
+                unformattedList2?.let { formattedList2.addAll(it) }
+                val resultList2 = ArticleEntity.convertToDataItem6(formattedList2)
+
+                for (i in resultList2.indices) {
+                    db.myDao().insertArticles(resultList2[i])
+                }
+
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(MyApp.publicApp, "بروزرسانی انجام شد", Toast.LENGTH_SHORT).show()
+                }
+            } else if (repoResult.status == Status.SUCCESS && repoResult.code != 200) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(context, "خطا", Toast.LENGTH_SHORT).show()
+                }
+            } else if (repoResult.status == Status.ERROR) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(MyApp.publicApp, "عدم اتصال به اینترنت", Toast.LENGTH_SHORT)
+                        .show()
+                }
             }
         }
 

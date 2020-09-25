@@ -11,7 +11,11 @@ class ArticleRemote {
         val auth = RetrofitBuilder.retrofit.create(AuthApi::class.java)
         return allArticles(auth)
     }
-    //TODO put article by author in repo
+
+    suspend fun getFeedFromServer(): Resource<ArticleResponse> {
+        val auth = RetrofitBuilder.retrofit.create(AuthApi::class.java)
+        return feed(auth)
+    }
 
     suspend fun getSingleArticleBySlug(slug: String): Resource<ArticleResponse2> {
         val auth = RetrofitBuilder.retrofit.create(AuthApi::class.java)
@@ -89,6 +93,12 @@ class ArticleRemote {
     private suspend fun allArticles(authApi: AuthApi): Resource<ArticleResponse> {
         return safeApiCall {
             authApi.allArticles()
+        }
+    }
+
+    private suspend fun feed(authApi: AuthApi): Resource<ArticleResponse> {
+        return safeApiCall {
+            authApi.feed()
         }
     }
 

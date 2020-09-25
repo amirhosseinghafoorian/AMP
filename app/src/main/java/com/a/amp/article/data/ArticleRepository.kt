@@ -3,14 +3,12 @@ package com.a.amp.article.data
 import android.app.Application
 import android.widget.Toast
 import com.a.amp.MyApp
-import com.a.amp.article.apimodel2.*
 import com.a.amp.article.apimodel2.ArticleResponse
 import com.a.amp.article.apimodel2.ArticleResponse2
 import com.a.amp.article.apimodel2.ArticleX
 import com.a.amp.core.resource.Resource
 import com.a.amp.core.resource.Status
 import com.a.amp.database.AppDataBase
-import com.a.amp.user.data.WritingCvDataItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -58,7 +56,7 @@ class ArticleRepository(application: Application) {
         return remote.unFavoriteArticleForServer(slug)
     }
 
-    
+
     suspend fun fillSingleArticleWithCommentsFromRepo(slug: String): MutableList<Any> {
         val returnList = mutableListOf<Any>()
         val art = ArticleRemote()
@@ -102,8 +100,7 @@ class ArticleRepository(application: Application) {
             }
         } else if (repoResult.status == Status.ERROR) {
             withContext(Dispatchers.Main) {
-                Toast.makeText(MyApp.publicApp, "عدم اتصال به اینترنت", Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(MyApp.publicApp, "عدم اتصال به اینترنت", Toast.LENGTH_SHORT).show()
             }
         }
         val article = ArticleLocal(app)
@@ -113,10 +110,13 @@ class ArticleRepository(application: Application) {
         return returnList
     }
 
-
     suspend fun syncArticles(): Resource<ArticleResponse> {
         val remote = ArticleRemote()
         return remote.getArticlesFromServer()
     }
 
+    suspend fun syncFeed(): Resource<ArticleResponse> {
+        val remote = ArticleRemote()
+        return remote.getFeedFromServer()
+    }
 }
