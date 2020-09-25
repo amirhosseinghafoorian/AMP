@@ -3,9 +3,7 @@ package com.a.amp.article.data
 import android.app.Application
 import android.widget.Toast
 import com.a.amp.MyApp
-import com.a.amp.article.apimodel2.ArticleResponse
-import com.a.amp.article.apimodel2.ArticleResponse2
-import com.a.amp.article.apimodel2.ArticleX
+import com.a.amp.article.apimodel2.*
 import com.a.amp.core.resource.Resource
 import com.a.amp.core.resource.Status
 import com.a.amp.database.AppDataBase
