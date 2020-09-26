@@ -1,22 +1,16 @@
 package com.a.amp.article.ui
 
 import android.app.Application
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.a.amp.MyApp
-import com.a.amp.article.data.*
-import com.a.amp.core.resource.Status
-import com.a.amp.database.AppDataBase
 import com.a.amp.article.data.ArticleRelatedCvDataItem
+import com.a.amp.article.data.ArticleRemote
 import com.a.amp.article.data.ArticleRepository
 import com.a.amp.article.data.CommentCvDataItem
 import com.a.amp.user.data.WritingCvDataItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ArticleListViewModel(application: Application) : AndroidViewModel(application) {
     var relatedList = MutableLiveData<MutableList<ArticleRelatedCvDataItem>>()
@@ -64,10 +58,10 @@ class ArticleListViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     fun unFavoriteArticle(slug: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val favArt = ArticleRepository(app).unFavoriteArticle(slug)
-            if (favArt.code == 200){favorited.postValue(false)}
-        }
+            viewModelScope.launch(Dispatchers.IO) {
+                val favArt = ArticleRepository(app).unFavoriteArticle(slug)
+                if (favArt.code == 200){favorited.postValue(false)}
+            }
 
     }
 

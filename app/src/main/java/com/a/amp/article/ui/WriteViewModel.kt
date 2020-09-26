@@ -14,10 +14,12 @@ import com.a.amp.article.data.ArticleEntity
 import com.a.amp.article.data.ArticleRepository
 import com.a.amp.core.resource.Resource
 import com.a.amp.database.AppDataBase
+import com.a.amp.user.data.WritingCvDataItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class WriteViewModel(application: Application) : AndroidViewModel(application) {
+    var tagList = MutableLiveData<MutableList<String>>()
     val slug = MutableLiveData<String>()
     val title = MutableLiveData<String>()
     val body = MutableLiveData<String>()
@@ -25,7 +27,12 @@ class WriteViewModel(application: Application) : AndroidViewModel(application) {
     val result = MutableLiveData<Resource<ArticleResponse2>>()
     val editResult = MutableLiveData<Resource<ArticleResponse4>>()
     val app = application
-    var resultArticle: MutableLiveData<List<ArticleEntity>> = MutableLiveData()
+    var resultArticle = MutableLiveData<MutableList<WritingCvDataItem>>()
+
+    init {
+        resultArticle.value = mutableListOf()
+        tagList.value = mutableListOf()
+    }
 
     fun create(tagList: MutableList<String>) {
         val ar = ArticleRepository(app)
@@ -59,12 +66,12 @@ class WriteViewModel(application: Application) : AndroidViewModel(application) {
     }
 
 
-    fun getArticle(slug: String) {
-        viewModelScope.launch(Dispatchers.Main) {
-            val db = AppDataBase.buildDatabase(context = MyApp.publicApp)
-            resultArticle.postValue(db.myDao().getSingleArticleById(slug))
-        }
-
+    suspend fun getArticleAndTags(slug: String) {
+        val db = AppDataBase.buildDatabase(context = MyApp.publicApp)
+        val article = ArticleRepository(app)
+        val res = article.fillSingleArticleWithCommentsFromRepo(slug)
+        resultArticle.postValue(res[0] as MutableList<WritingCvDataItem>)
+        tagList.postValue(res[2] as MutableList<String>)
     }
 
 }
