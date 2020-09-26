@@ -94,6 +94,9 @@ class ArticleFragment : Fragment() {
                         chip.setChipBackgroundColorResource(R.color.chipBackColor)
                         chip.chipCornerRadius = 50f
                         article_chipGroup.addView(chip)
+                        chip.setOnClickListener {
+                            val text = chip.text
+                        }
                     }
                 }
             }
