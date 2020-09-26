@@ -65,6 +65,9 @@ class SplashFragment : Fragment() {
         val db = AppDataBase.buildDatabase(context = MyApp.publicApp)
         val repo = ArticleRepository(MyApp.publicApp)
 
+        val a = db.myDao().getArticlesInTag("music")
+        val b = ""
+
         Looper.prepare()
         val repoResult = repo.syncArticles()
         if (repoResult.status == Status.SUCCESS && repoResult.code == 200) {
@@ -77,8 +80,6 @@ class SplashFragment : Fragment() {
             for (i in resultList.indices) {
                 db.myDao().insertArticles(resultList[i])
             }
-
-
 
             withContext(Dispatchers.Main) {
                 Toast.makeText(MyApp.publicApp, "بروزرسانی انجام شد", Toast.LENGTH_SHORT).show()
@@ -119,7 +120,6 @@ class SplashFragment : Fragment() {
                 }
             }
         }
-
 
     }
 }

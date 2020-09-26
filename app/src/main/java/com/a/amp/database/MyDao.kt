@@ -21,6 +21,9 @@ interface MyDao {
     @Query("select * from articles where ArticleId == :slug")
     suspend fun getSingleArticleById(slug: String): List<ArticleEntity>
 
+    @Query("select * from articles inner join tags as tag on ArticleId == ConnectedArticleId where tag.Body == :myTag")
+    suspend fun getArticlesInTag(myTag: String): List<ArticleEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertArticles(vararg articles: ArticleEntity)
 
