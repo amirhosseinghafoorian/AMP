@@ -87,43 +87,10 @@
             app:tabContentStart="0dp"
             app:tabMode="scrollable">
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/forYou"
-                />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tab1"
-                />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tab2"
-                />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tab3"
-                />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tab4"
-                />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tab5"
-                />
 
         </com.google.android.material.tabs.TabLayout>
+
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_marginRight="4dp"
@@ -148,6 +115,13 @@
                 android:layout_height="match_parent"
                 />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/home_page_et_1"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/home_page_recycle_2"
