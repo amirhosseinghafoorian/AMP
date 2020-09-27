@@ -1,25 +1,20 @@
 package com.a.amp.user.ui
 
-import android.app.Application
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.a.amp.MyApp
 import com.a.amp.R
 import com.a.amp.article.data.ArticleEntity
-import com.a.amp.article.data.ArticleLocal
 import com.a.amp.article.data.ArticleRemote
 import com.a.amp.core.resource.Status
 import com.a.amp.database.AppDataBase
@@ -28,10 +23,10 @@ import com.a.amp.storage.setting
 import com.a.amp.user.apimodel1.followResponse
 import com.a.amp.user.data.MoreClickListner
 import com.a.amp.user.data.ProfileDataItem
-import com.a.amp.user.data.WritingCvDataItem
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
-import kotlinx.android.synthetic.main.bottom_sheet.*
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -79,6 +74,7 @@ class ProfileFragment : Fragment(), MoreClickListner {
 //        val l = mutableListOf<String>()
 //        l[0].
 
+        profileViewPagerInit()
         binding.profileBind = ProfileDataItem(username, id)
 
         if (currentUser == username) {
@@ -121,7 +117,7 @@ class ProfileFragment : Fragment(), MoreClickListner {
                     isfollow = true
                     profile_cv_btn_1.text = "لغو دنبال کردن"
                     profile_cv_btn_1.setBackgroundColor(Color.RED)
-                }else if (!isfollowing){
+                } else if (!isfollowing) {
                     isfollow = false
                     profile_cv_btn_1.text = "دنبال کردن"
                     profile_cv_btn_1.setBackgroundColor(Color.parseColor("#286de6"))
@@ -133,30 +129,25 @@ class ProfileFragment : Fragment(), MoreClickListner {
         profile_cv_btn_1.setOnClickListener {
             if (!isfollow) {
                 profileViewModel.followOtherProfile(username)
-            }else if (isfollow){
+            } else if (isfollow) {
                 profileViewModel.unFollowOtherProfile(username)
             }
         }
 
-//        if (!isfollow.value!!) {
-//            profile_cv_btn_1.setOnClickListener {
-//                isfollow = profileViewModel.isFollowing
-//                profileViewModel.followOtherProfile(username)
-//                if (isfollow.value!!) {
-//                    profile_cv_btn_1.text = "درسته"
-//                    isfollow.postValue(true)
-//                }
-//            }
-//        } else {
-//            profile_cv_btn_1.text = "خودشه"
-//            profile_cv_btn_1.setOnClickListener {
-//                isfollow = profileViewModel.isFollowing
-//                profileViewModel.onFollowOtherProfile(username)
-//                if (!isfollow.value!!){isfollow.postValue(false)}
-//            }
-//        }
 
-//        profileViewModel.isFollowing.observe(this as)
+
+    }
+
+
+    fun profileViewPagerInit() {
+        val viewPagerAdapter = ProfileViewPagerAdapter(childFragmentManager, lifecycle)
+        viewPagerAdapter.addFragment(ProfileTabFragment(), "نوشته ها")
+        viewPagerAdapter.addFragment(ProfileTabFragment2(), "علاقه مندی ها")
+        viewPager.adapter = viewPagerAdapter
+        TabLayoutMediator((tab_profile as TabLayout), (viewPager as ViewPager2)) { tab, position ->
+            tab.text = viewPagerAdapter.getName(position)
+        }.attach()
+//        viewPager.addFragment()
     }
 
     override fun onClick(id: String, layoutPosition: Int) {

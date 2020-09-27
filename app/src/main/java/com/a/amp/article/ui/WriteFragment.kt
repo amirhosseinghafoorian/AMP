@@ -18,17 +18,21 @@ import com.a.amp.R
 import com.a.amp.core.resource.Status
 import com.a.amp.databinding.FragmentWriteBinding
 import com.google.android.material.chip.Chip
+import kotlinx.android.synthetic.main.fragment_article.*
 import kotlinx.android.synthetic.main.fragment_write.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class WriteFragment : Fragment() {
 
-    private val tagList = mutableListOf<String>()
+    private var tagList = mutableListOf<String>()
     private lateinit var Binding: FragmentWriteBinding
     lateinit var slug: String
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         slug = arguments?.let { WriteFragmentArgs.fromBundle(it).slug }.toString()
     }
 
@@ -58,11 +62,37 @@ class WriteFragment : Fragment() {
         }
 
         if (slug.isNotEmpty()) {
-            writeViewModel.getArticle(slug)
-            writeViewModel.resultArticle.observe(this as LifecycleOwner) {
-                title.setText(it[0].title)
-                body.setText(it[0].mainText)
+            CoroutineScope(Dispatchers.IO).launch{
+                writeViewModel.getArticleAndTags(slug)
             }
+            writeViewModel.resultArticle.observe(this as LifecycleOwner) {list ->
+                if (list.size > 0) {
+                    title.setText(list[0].title)
+                    body.setText(list[0].text)
+                }
+            }
+
+            writeViewModel.tagList.observe(viewLifecycleOwner, { list ->
+                if (list != null) {
+                    tagList = list
+                    for (i in tagList.indices) {
+                        val chip = Chip(context)
+                        chip.text = tagList[i]
+                        chip.setTextColor(Color.BLACK)
+                        chip.setChipBackgroundColorResource(R.color.chipBackColor)
+                        chip.chipCornerRadius = 50f
+                        chip.isCloseIconVisible=true
+                        write_chipGroup.addView(chip)
+                        chip.setOnCloseIconClickListener {
+                            write_chipGroup.removeView(it)
+                            tagList.remove(tagList.indexOf(chip.text).toString())
+                        }
+                        chip.setOnClickListener {
+                            val text = chip.text
+                        }
+                    }
+                }
+            })
 //            tagListViewModel.summaryList
 //            tagListViewModel.summaryList.observe(this as LifecycleOwner) {
 //                description.setText(it[0].text)
@@ -82,16 +112,6 @@ class WriteFragment : Fragment() {
                 }
             }
         }
-
-
-
-//        if (slug != null){
-////            writeViewModel.getArticle(slug = slug.toString())
-//            write_btn_1.text = "تصحیح مقاله"
-////            title.setText(r.title)
-//
-//
-//        }
 
 
         write_appbar_start_icon.setOnClickListener {
@@ -161,7 +181,7 @@ class WriteFragment : Fragment() {
                 chip.setTextColor(Color.BLACK)
                 chip.setChipBackgroundColorResource(R.color.chipBackColor)
                 chip.chipCornerRadius = 50f
-//                chip.setCloseIconResource(R.drawable.ic_baseline_clear_24)
+                chip.isCloseIconVisible = true
                 write_chipGroup.addView(chip)
                 chip.requestFocus()
                 tagList.add(chip.text.toString())
