@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,8 +20,10 @@ import com.a.amp.databinding.FragmentArticleBinding
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.comment_dialog.*
 import kotlinx.android.synthetic.main.fragment_article.*
-import kotlinx.android.synthetic.main.fragment_write.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ArticleFragment : Fragment() {
     private lateinit var binding: FragmentArticleBinding
@@ -86,17 +87,21 @@ class ArticleFragment : Fragment() {
         articleViewModel.tagList.observe(viewLifecycleOwner, { list ->
             if (list != null) {
                 tagList = list
-                if (tagList != null) {
-                    for (i in tagList.indices) {
-                        val chip = Chip(context)
-                        chip.text = tagList[i]
-                        chip.setTextColor(Color.BLACK)
-                        chip.setChipBackgroundColorResource(R.color.chipBackColor)
-                        chip.chipCornerRadius = 50f
-                        article_chipGroup.addView(chip)
-                        chip.setOnClickListener {
-                            val text = chip.text
-                        }
+                article_chipGroup.removeAllViews()
+                for (i in tagList.indices) {
+                    val chip = Chip(context)
+                    chip.text = tagList[i]
+                    chip.setTextColor(Color.BLACK)
+                    chip.setChipBackgroundColorResource(R.color.chipBackColor)
+                    chip.chipCornerRadius = 50f
+                    article_chipGroup.addView(chip)
+                    chip.setOnClickListener {
+                        val text = chip.text.toString()
+                        findNavController().navigate(
+                            ArticleFragmentDirections.actionArticleFragmentToTagFragment(
+                                text
+                            )
+                        )
                     }
                 }
             }
@@ -123,7 +128,7 @@ class ArticleFragment : Fragment() {
         }
 
 //        article_chip_1.setOnClickListener {
-//            findNavController().navigate(ArticleFragmentDirections.actionArticleFragmentToTagFragment())
+
 //        }
 
         article_appbar_start_icon.setOnClickListener {

@@ -17,6 +17,12 @@ import kotlinx.coroutines.launch
 
 class TagFragment : Fragment() {
     private lateinit var binding: FragmentTagBinding
+    private var text = ""
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        text = arguments?.let { TagFragmentArgs.fromBundle(it).text }.toString()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,7 +53,7 @@ class TagFragment : Fragment() {
 
 
         CoroutineScope(Dispatchers.IO).launch {
-            tagViewModel.fillSummary()
+            tagViewModel.fillSummary(text)
         }
 
         tag_appbar_start_icon.setOnClickListener {

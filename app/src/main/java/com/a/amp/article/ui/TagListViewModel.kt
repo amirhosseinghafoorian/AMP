@@ -15,10 +15,10 @@ class TagListViewModel(application: Application) : AndroidViewModel(application)
         summaryList.value = mutableListOf()
     }
 
-    suspend fun fillSummary() {
+    suspend fun fillSummary(text: String) {
         summaryList.postValue(null)
         val article = ArticleRepository(app)
-        summaryList.postValue(article.fillRelatedFromRepo())
+        summaryList.postValue(article.fillRelatedFromRepo2(text))
     }
 
 }

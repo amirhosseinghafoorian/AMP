@@ -107,6 +107,9 @@
         android:id="@+id/tagFragment"
         android:name="com.a.amp.article.ui.TagFragment"
         android:label="TagFragment">
+        <argument
+            android:name="text"
+            app:argType="string" />
         <action
             android:id="@+id/action_tagFragment_to_articleFragment"
             app:destination="@id/articleFragment" />

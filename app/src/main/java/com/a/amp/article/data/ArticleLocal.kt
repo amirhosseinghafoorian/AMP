@@ -27,6 +27,10 @@ class ArticleLocal(application: Application) {
         return ArticleEntity.convertToDataItem1(db.myDao().getArticles())
     }
 
+    suspend fun fillRelatedFromLocal2(text: String): MutableList<ArticleRelatedCvDataItem> {
+        return ArticleEntity.convertToDataItem1(db.myDao().getArticlesInTag(text))
+    }
+
     suspend fun fillSingleArticleFromLocal(slug: String): MutableList<WritingCvDataItem> {
         val resultList = mutableListOf<ArticleEntity>()
         resultList.add(db.myDao().getArticleWithCommentsAndTags(slug)[0].article)

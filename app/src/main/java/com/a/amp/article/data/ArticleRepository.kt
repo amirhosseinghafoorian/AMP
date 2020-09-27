@@ -18,9 +18,9 @@ class ArticleRepository(application: Application) {
         return article.fillRelatedFromLocal()
     }
 
-    suspend fun getArticleTag(slug: String): MutableList<String> {
-        val tagList = ArticleLocal(app)
-        return  tagList.fillTagFromLocal(slug)
+    suspend fun fillRelatedFromRepo2(text: String): MutableList<ArticleRelatedCvDataItem> {
+        val article = ArticleLocal(app)
+        return article.fillRelatedFromLocal2(text)
     }
 
     suspend fun createArticleFromRepo(
