@@ -14,20 +14,18 @@ class HomeListViewModel(application: Application) : AndroidViewModel(application
     init {
         summaryList.value = mutableListOf()
         relatedList.value = ArrayList()
-        // can be used by each of above
     }
 
     suspend fun fillSummary() {
-        summaryList.value?.clear()
+        summaryList.postValue(null)
         val home = HomeRepository(app)
-        summaryList.value?.let { home.fillSummaryFromRepo(it) }
+        summaryList.postValue(home.fillSummaryFromRepo())
     }
 
     suspend fun fillRelated() {
-        relatedList.value?.clear()
+        relatedList.postValue(null)
         val home = HomeRepository(app)
-        relatedList.value?.let { home.fillRelatedFromRepo(it) }
-        // Todo edit this and change them to post value
+        relatedList.postValue(home.fillRelatedFromRepo())
     }
 
 }

@@ -5,14 +5,14 @@ import android.app.Application
 class HomeRepository(application: Application) {
     val app = application
 
-    suspend fun fillSummaryFromRepo(summaryList: MutableList<HomeRelatedCvDataItem>) {
+    suspend fun fillSummaryFromRepo(): MutableList<HomeRelatedCvDataItem> {
         val home = HomeLocal(app)
-        home.fillSummaryFromLocal(summaryList)
+        return home.fillSummaryFromLocal()
     }
 
-    suspend fun fillRelatedFromRepo(RelatedList: MutableList<HomeRelatedCvDataItem>) {
+    suspend fun fillRelatedFromRepo(): MutableList<HomeRelatedCvDataItem> {
         val home = HomeLocal(app)
-        home.fillRelatedFromLocal(RelatedList)
+        return home.fillRelatedFromLocal()
     }
 
 }
