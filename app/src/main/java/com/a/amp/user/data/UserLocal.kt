@@ -12,6 +12,11 @@ class UserLocal(application: Application) {
         return ArticleEntity.convertToDataItem2(
             db.myDao().getArticlesByAuthor(username)
         )
+    }
 
+    suspend fun fillLikedFromLocal(): MutableList<WritingCvDataItem> {
+        return ArticleEntity.convertToDataItem2(
+            db.myDao().getLikedArticles(true)
+        )
     }
 }

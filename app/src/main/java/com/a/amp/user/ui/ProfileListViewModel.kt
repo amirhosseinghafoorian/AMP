@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.a.amp.MyApp
 import com.a.amp.article.apimodel2.Article
 import com.a.amp.article.data.ArticleEntity
+import com.a.amp.article.data.ArticleRepository
 import com.a.amp.core.resource.Status
 import com.a.amp.database.AppDataBase
 import com.a.amp.storage.setting
@@ -32,6 +33,7 @@ class ProfileListViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     suspend fun fillWrite(username: String) {
+        //Todo it should be moved into repo
         writeList.postValue(null)
         val db = AppDataBase.buildDatabase(context = MyApp.publicApp)
         val repo = UserRepository(app)
@@ -43,15 +45,15 @@ class ProfileListViewModel(application: Application) : AndroidViewModel(applicat
             unformattedList?.let { formattedList.addAll(it) }
             val resultList = ArticleEntity.convertToDataItem4(formattedList)
             for (i in resultList.indices) {
-                    db.myDao().insertArticles(resultList[i])
-                }
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(MyApp.publicApp, "بروزرسانی انجام شد", Toast.LENGTH_SHORT).show()
-                }
-            } else if (repoResult.status == Status.SUCCESS && repoResult.code != 200) {
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(MyApp.publicApp, "خطا", Toast.LENGTH_SHORT).show()
-                }
+                db.myDao().insertArticles(resultList[i])
+            }
+            withContext(Dispatchers.Main) {
+                Toast.makeText(MyApp.publicApp, "بروزرسانی انجام شد", Toast.LENGTH_SHORT).show()
+            }
+        } else if (repoResult.status == Status.SUCCESS && repoResult.code != 200) {
+            withContext(Dispatchers.Main) {
+                Toast.makeText(MyApp.publicApp, "خطا", Toast.LENGTH_SHORT).show()
+            }
         } else if (repoResult.status == Status.ERROR) {
             withContext(Dispatchers.Main) {
                 Toast.makeText(MyApp.publicApp, "عدم اتصال به اینترنت", Toast.LENGTH_SHORT)
@@ -63,11 +65,11 @@ class ProfileListViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     fun fillWrite2(username: String) {
-        writeList2.value?.clear()
+        writeList2.postValue(null)
         val db = AppDataBase.buildDatabase(context = MyApp.publicApp)
-        val repo = UserRepository(app)
+        val repo = ArticleRepository(app)
         CoroutineScope(Dispatchers.IO).launch {
-            val repoResult = repo.getArticlesByAuthorFromRepo(username)
+            val repoResult = repo.syncArticles()
             if (repoResult.status == Status.SUCCESS && repoResult.code == 200) {
                 db.myDao().deleteArticlesByAuthor(username)
                 val unformattedList = repoResult.data?.articles
@@ -91,7 +93,7 @@ class ProfileListViewModel(application: Application) : AndroidViewModel(applicat
                 }
             }
             val user = UserRepository(app)
-            writeList2.postValue(user.fillWriteFromRepo(username))
+            writeList2.postValue(user.fillLikedFromRepo())
         }
     }
 
@@ -119,7 +121,7 @@ class ProfileListViewModel(application: Application) : AndroidViewModel(applicat
         }
     }
 
-    fun getProfile(username: String){
+    fun getProfile(username: String) {
         viewModelScope.launch(Dispatchers.IO) {
             val result = UserRepository(application = Application()).getUserProfile(
                 username = username

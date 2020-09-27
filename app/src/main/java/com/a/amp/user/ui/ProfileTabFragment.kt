@@ -71,7 +71,6 @@ class ProfileTabFragment(private val username: String) : Fragment(), MoreClickLi
         super.onStart()
         val setting = setting()
         currentUser = setting.getString("username")
-
     }
 
     @SuppressLint("InflateParams")

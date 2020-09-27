@@ -82,7 +82,12 @@ data class ArticleEntity(
                 resultList.add(
                     ArticleEntity(
                         list[i].slug,
-                        list[i].author.username, list[i].title, list[i].body
+                        list[i].author.username,
+                        list[i].title,
+                        list[i].body,
+                        favorited = list[i].favorited,
+                        favoritesCount = list[i].favoritesCount,
+                        description = list[i].description
                     )
                 )
             }
@@ -108,7 +113,13 @@ data class ArticleEntity(
                 resultList.add(
                     ArticleEntity(
                         list[i].slug,
-                        list[i].author.username, list[i].title, list[i].body, true
+                        list[i].author.username,
+                        list[i].title,
+                        list[i].body,
+                        true,
+                        favorited = list[i].favorited,
+                        favoritesCount = list[i].favoritesCount,
+                        description = list[i].description
                     )
                 )
             }

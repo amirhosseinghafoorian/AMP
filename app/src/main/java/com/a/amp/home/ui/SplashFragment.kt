@@ -2,25 +2,14 @@ package com.a.amp.home.ui
 
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.a.amp.MyApp
 import com.a.amp.R
-import com.a.amp.article.apimodel2.Article
-import com.a.amp.article.data.ArticleEntity
-import com.a.amp.article.data.ArticleRepository
-import com.a.amp.core.resource.Status
-import com.a.amp.database.AppDataBase
 import com.a.amp.storage.setting
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 class SplashFragment : Fragment() {
@@ -28,9 +17,7 @@ class SplashFragment : Fragment() {
     private var currentUser = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        CoroutineScope((Dispatchers.IO)).launch {
-            fillDataBase()
-        }
+
         val setting = setting()
         currentUser = setting.getString("username")
     }
@@ -58,68 +45,5 @@ class SplashFragment : Fragment() {
                 findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment())
             }
         }, 3000)
-    }
-
-    private suspend fun fillDataBase() {
-
-        val db = AppDataBase.buildDatabase(context = MyApp.publicApp)
-        val repo = ArticleRepository(MyApp.publicApp)
-
-        val a = db.myDao().getArticlesInTag("music")
-        val b = ""
-
-        Looper.prepare()
-        val repoResult = repo.syncArticles()
-        if (repoResult.status == Status.SUCCESS && repoResult.code == 200) {
-
-            val unformattedList = repoResult.data?.articles
-            val formattedList = mutableListOf<Article>()
-            unformattedList?.let { formattedList.addAll(it) }
-            val resultList = ArticleEntity.convertToDataItem4(formattedList)
-
-            for (i in resultList.indices) {
-                db.myDao().insertArticles(resultList[i])
-            }
-
-            withContext(Dispatchers.Main) {
-                Toast.makeText(MyApp.publicApp, "بروزرسانی انجام شد", Toast.LENGTH_SHORT).show()
-            }
-        } else if (repoResult.status == Status.SUCCESS && repoResult.code != 200) {
-            withContext(Dispatchers.Main) {
-                Toast.makeText(context, "خطا", Toast.LENGTH_SHORT).show()
-            }
-        } else if (repoResult.status == Status.ERROR) {
-            withContext(Dispatchers.Main) {
-                Toast.makeText(MyApp.publicApp, "عدم اتصال به اینترنت", Toast.LENGTH_SHORT).show()
-            }
-        }
-        if (currentUser != "***" && currentUser != "") {
-            val repoResult2 = repo.syncFeed()
-            if (repoResult2.status == Status.SUCCESS && repoResult2.code == 200) {
-
-                val unformattedList2 = repoResult2.data?.articles
-                val formattedList2 = mutableListOf<Article>()
-                unformattedList2?.let { formattedList2.addAll(it) }
-                val resultList2 = ArticleEntity.convertToDataItem6(formattedList2)
-
-                for (i in resultList2.indices) {
-                    db.myDao().insertArticles(resultList2[i])
-                }
-
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(MyApp.publicApp, "بروزرسانی انجام شد", Toast.LENGTH_SHORT).show()
-                }
-            } else if (repoResult.status == Status.SUCCESS && repoResult.code != 200) {
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(context, "خطا", Toast.LENGTH_SHORT).show()
-                }
-            } else if (repoResult.status == Status.ERROR) {
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(MyApp.publicApp, "عدم اتصال به اینترنت", Toast.LENGTH_SHORT)
-                        .show()
-                }
-            }
-        }
-
     }
 }

@@ -18,6 +18,9 @@ interface MyDao {
     @Query("select * from articles where UserOwnerId == :username")
     suspend fun getArticlesByAuthor(username: String): List<ArticleEntity>
 
+    @Query("select * from articles where Favorited == :myTrue")
+    suspend fun getLikedArticles(myTrue: Boolean): List<ArticleEntity>
+
     @Query("select * from articles where ArticleId == :slug")
     suspend fun getSingleArticleById(slug: String): List<ArticleEntity>
 

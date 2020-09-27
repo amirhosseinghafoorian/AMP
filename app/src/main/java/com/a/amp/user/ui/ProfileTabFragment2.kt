@@ -30,7 +30,7 @@ class ProfileTabFragment2(private val username: String) : Fragment(), MoreClickL
 
         profileViewModel = ViewModelProvider(this).get(ProfileListViewModel::class.java)
 
-        myAdapter = profileViewModel.writeList.value?.let {
+        myAdapter = profileViewModel.writeList2.value?.let {
             WritingCvAdapter(
                 it, this, currentUser, username
             )
@@ -41,7 +41,7 @@ class ProfileTabFragment2(private val username: String) : Fragment(), MoreClickL
             setHasFixedSize(true)
         }
 
-        profileViewModel.writeList.observe(viewLifecycleOwner, { list ->
+        profileViewModel.writeList2.observe(viewLifecycleOwner, { list ->
             if (list != null) {
                 myAdapter?.list = list
                 myAdapter?.notifyDataSetChanged()

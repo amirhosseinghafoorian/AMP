@@ -119,8 +119,8 @@ class ProfileFragment : Fragment() {
 
     private fun profileViewPagerInit() {
         val viewPagerAdapter = ProfileViewPagerAdapter(childFragmentManager, lifecycle)
-        viewPagerAdapter.addFragment(ProfileTabFragment("selena"), "نوشته ها")
-        viewPagerAdapter.addFragment(ProfileTabFragment2("baby"), "علاقه مندی ها")
+        viewPagerAdapter.addFragment(ProfileTabFragment(username), "نوشته ها")
+        viewPagerAdapter.addFragment(ProfileTabFragment2(username), "علاقه مندی ها")
         viewPager.adapter = viewPagerAdapter
         TabLayoutMediator((tab_profile as TabLayout), (viewPager as ViewPager2)) { tab, position ->
             tab.text = viewPagerAdapter.getName(position)
