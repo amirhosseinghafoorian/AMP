@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/profile_recycler"
+        android:id="@+id/profile_recycler_2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -20,11 +20,3 @@
         tools:listitem="@layout/writing_cv"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <!--    <androidx.recyclerview.widget.RecyclerView-->
-    <!--        android:id="@+id/rv_articles"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:orientation="vertical"-->
-    <!--        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />-->

@@ -21,16 +21,49 @@ import kotlinx.coroutines.withContext
 
 class ProfileListViewModel(application: Application) : AndroidViewModel(application) {
     var writeList = MutableLiveData<MutableList<WritingCvDataItem>>()
+    var writeList2 = MutableLiveData<MutableList<WritingCvDataItem>>()
     val app = application
     val isFollowing: MutableLiveData<Boolean> = MutableLiveData()
 
 
     init {
         writeList.value = mutableListOf()
+        writeList2.value = mutableListOf()
     }
 
-    fun fillWrite(username: String) {
-        writeList.value?.clear()
+    suspend fun fillWrite(username: String) {
+        writeList.postValue(null)
+        val db = AppDataBase.buildDatabase(context = MyApp.publicApp)
+        val repo = UserRepository(app)
+        val repoResult = repo.getArticlesByAuthorFromRepo(username)
+        if (repoResult.status == Status.SUCCESS && repoResult.code == 200) {
+            db.myDao().deleteArticlesByAuthor(username)
+            val unformattedList = repoResult.data?.articles
+            val formattedList = mutableListOf<Article>()
+            unformattedList?.let { formattedList.addAll(it) }
+            val resultList = ArticleEntity.convertToDataItem4(formattedList)
+            for (i in resultList.indices) {
+                    db.myDao().insertArticles(resultList[i])
+                }
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(MyApp.publicApp, "بروزرسانی انجام شد", Toast.LENGTH_SHORT).show()
+                }
+            } else if (repoResult.status == Status.SUCCESS && repoResult.code != 200) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(MyApp.publicApp, "خطا", Toast.LENGTH_SHORT).show()
+                }
+        } else if (repoResult.status == Status.ERROR) {
+            withContext(Dispatchers.Main) {
+                Toast.makeText(MyApp.publicApp, "عدم اتصال به اینترنت", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+        val user = UserRepository(app)
+        writeList.postValue(user.fillWriteFromRepo(username))
+    }
+
+    fun fillWrite2(username: String) {
+        writeList2.value?.clear()
         val db = AppDataBase.buildDatabase(context = MyApp.publicApp)
         val repo = UserRepository(app)
         CoroutineScope(Dispatchers.IO).launch {
@@ -58,7 +91,7 @@ class ProfileListViewModel(application: Application) : AndroidViewModel(applicat
                 }
             }
             val user = UserRepository(app)
-            writeList.postValue(user.fillWriteFromRepo(username))
+            writeList2.postValue(user.fillWriteFromRepo(username))
         }
     }
 

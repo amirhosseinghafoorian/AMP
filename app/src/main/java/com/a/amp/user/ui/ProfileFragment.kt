@@ -8,42 +8,28 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
-import com.a.amp.MyApp
 import com.a.amp.R
-import com.a.amp.article.data.ArticleEntity
-import com.a.amp.article.data.ArticleRemote
-import com.a.amp.core.resource.Status
-import com.a.amp.database.AppDataBase
 import com.a.amp.databinding.FragmentProfileBinding
 import com.a.amp.storage.setting
 import com.a.amp.user.apimodel1.followResponse
-import com.a.amp.user.data.MoreClickListner
 import com.a.amp.user.data.ProfileDataItem
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_profile.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class ProfileFragment : Fragment(), MoreClickListner {
+class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
     private var username = ""
     private var id = ""
     lateinit var result: Response<followResponse>
 
-
     lateinit var currentUser: String
     var isfollow = false
 
-    var myAdapter: WritingCvAdapter? = null
     lateinit var profileViewModel: ProfileListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +39,6 @@ class ProfileFragment : Fragment(), MoreClickListner {
 
         val setting = setting()
         currentUser = setting.getString("username")
-
 
     }
 
@@ -70,9 +55,6 @@ class ProfileFragment : Fragment(), MoreClickListner {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         profileViewModel = ViewModelProvider(this).get(ProfileListViewModel::class.java)
-//         result
-//        val l = mutableListOf<String>()
-//        l[0].
 
         profileViewPagerInit()
         binding.profileBind = ProfileDataItem(username, id)
@@ -81,29 +63,29 @@ class ProfileFragment : Fragment(), MoreClickListner {
             profile_cv_btn_1.visibility = View.GONE
         }
 
-        myAdapter = profileViewModel.writeList.value?.let {
-            WritingCvAdapter(
-                it, this, currentUser, username
-                //        ,
-                //            {
-                //              call back body
-                //            }
-            )
-        }
+//        myAdapter = profileViewModel.writeList.value?.let {
+//            WritingCvAdapter(
+//                it, this, currentUser, username
+//                //        ,
+//                //            {
+//                //              call back body
+//                //            }
+//            )
+//        }
 
-        profile_recycler.apply {
-            adapter = myAdapter
-            setHasFixedSize(true)
-        }
+//        profile_recycler.apply {
+//            adapter = myAdapter
+//            setHasFixedSize(true)
+//        }
 
-        profileViewModel.writeList.observe(viewLifecycleOwner, { list ->
-            if (list != null) {
-                myAdapter?.list = list
-                myAdapter?.notifyDataSetChanged()
-            }
-        })
-
-        profileViewModel.fillWrite(username)
+//        profileViewModel.writeList.observe(viewLifecycleOwner, { list ->
+//            if (list != null) {
+//                myAdapter?.list = list
+//                myAdapter?.notifyDataSetChanged()
+//            }
+//        })
+//
+//        profileViewModel.fillWrite(username)
 
         profile_appbar_start_icon.setOnClickListener {
             Navigation.findNavController(it).navigateUp()
@@ -125,7 +107,6 @@ class ProfileFragment : Fragment(), MoreClickListner {
             }
         })
 
-
         profile_cv_btn_1.setOnClickListener {
             if (!isfollow) {
                 profileViewModel.followOtherProfile(username)
@@ -134,15 +115,12 @@ class ProfileFragment : Fragment(), MoreClickListner {
             }
         }
 
-
-
     }
 
-
-    fun profileViewPagerInit() {
+    private fun profileViewPagerInit() {
         val viewPagerAdapter = ProfileViewPagerAdapter(childFragmentManager, lifecycle)
-        viewPagerAdapter.addFragment(ProfileTabFragment(), "نوشته ها")
-        viewPagerAdapter.addFragment(ProfileTabFragment2(), "علاقه مندی ها")
+        viewPagerAdapter.addFragment(ProfileTabFragment("selena"), "نوشته ها")
+        viewPagerAdapter.addFragment(ProfileTabFragment2("baby"), "علاقه مندی ها")
         viewPager.adapter = viewPagerAdapter
         TabLayoutMediator((tab_profile as TabLayout), (viewPager as ViewPager2)) { tab, position ->
             tab.text = viewPagerAdapter.getName(position)
@@ -150,35 +128,34 @@ class ProfileFragment : Fragment(), MoreClickListner {
 //        viewPager.addFragment()
     }
 
-    override fun onClick(id: String, layoutPosition: Int) {
-        val buttonSheetDialog = BottomSheetDialog(requireContext())
-        val view = layoutInflater.inflate(R.layout.bottom_sheet, null)
-
-        view.findViewById<MaterialButton>(R.id.botton_sheet_2).setOnClickListener {
-            lifecycleScope.launch(Dispatchers.IO) {
-                val delresult = ArticleRemote().deleteArticleFormServer(id)
-                if (delresult.status == Status.SUCCESS) {
-                    buttonSheetDialog.dismiss()
-                    val db = AppDataBase.buildDatabase(context = MyApp.publicApp)
-                    db.myDao().deleteArticles(ArticleEntity(id, "", "", ""))
-                    profileViewModel.fillWrite(username)
-                }
-            }
-
-        }
-        view.findViewById<MaterialButton>(R.id.botton_sheet_1).setOnClickListener {
-            findNavController().navigate(
-                ProfileFragmentDirections.actionProfileFragmentToWriteFragment(
-                    id
-                )
-            )
-            buttonSheetDialog.dismiss()
-        }
-
-        buttonSheetDialog.setContentView(view)
-
-        buttonSheetDialog.show()
-    }
+//    override fun onClick(id: String, layoutPosition: Int) {
+//        val buttonSheetDialog = BottomSheetDialog(requireContext())
+//        val view = layoutInflater.inflate(R.layout.bottom_sheet, null)
+//
+//        view.findViewById<MaterialButton>(R.id.botton_sheet_2).setOnClickListener {
+//            lifecycleScope.launch(Dispatchers.IO) {
+//                val delResult = ArticleRemote().deleteArticleFormServer(id)
+//                if (delResult.status == Status.SUCCESS) {
+//                    buttonSheetDialog.dismiss()
+//                    val db = AppDataBase.buildDatabase(context = MyApp.publicApp)
+//                    db.myDao().deleteArticles(ArticleEntity(id, "", "", ""))
+//                    profileViewModel.fillWrite(username)
+//                }
+//            }
+//        }
+//        view.findViewById<MaterialButton>(R.id.botton_sheet_1).setOnClickListener {
+//            findNavController().navigate(
+//                ProfileFragmentDirections.actionProfileFragmentToWriteFragment(
+//                    id
+//                )
+//            )
+//            buttonSheetDialog.dismiss()
+//        }
+//
+//        buttonSheetDialog.setContentView(view)
+//
+//        buttonSheetDialog.show()
+//    }
 
 //    override fun deleteUserArticle(id: String, layoutPosition: Int){
 //        lifecycleScope.launch(Dispatchers.IO){
