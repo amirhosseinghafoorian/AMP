@@ -59,21 +59,27 @@ class HomeFragment : Fragment() {
 //        homeViewPagerInit()
                 home_page_recycle_2.apply {
                     adapter = myAdapter2
-                    setHasFixedSize(true)
+//                    setHasFixedSize(true)
                 }
 
                 home_page_recycle_1.apply {
                     adapter = myAdapter
-                    setHasFixedSize(true)
+//                    setHasFixedSize(true)
                 }
 
 
                 loginViewModel.summaryList.observe(viewLifecycleOwner, { list ->
-                    myAdapter2?.notifyDataSetChanged()
+                    if (list != null) {
+                        myAdapter2?.list = list
+                        myAdapter2?.notifyDataSetChanged()
+                    }
                 })
 
                 loginViewModel.relatedList.observe(viewLifecycleOwner, { list ->
-                    myAdapter?.notifyDataSetChanged()
+                    if (list != null) {
+                        myAdapter?.list = list
+                        myAdapter?.notifyDataSetChanged()
+                    }
                 })
             }
         }

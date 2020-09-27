@@ -27,6 +27,7 @@ class HomeListViewModel(application: Application) : AndroidViewModel(application
         relatedList.value?.clear()
         val home = HomeRepository(app)
         relatedList.value?.let { home.fillRelatedFromRepo(it) }
+        // Todo edit this and change them to post value
     }
 
 }

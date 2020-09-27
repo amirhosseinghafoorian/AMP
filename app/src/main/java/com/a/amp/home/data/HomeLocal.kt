@@ -13,6 +13,6 @@ class HomeLocal(application: Application) {
     }
 
     suspend fun fillRelatedFromLocal(relatedList: MutableList<HomeRelatedCvDataItem>) {
-        relatedList.addAll(ArticleEntity.convertToDataItem3(db.myDao().getArticles()))
+        relatedList.addAll(ArticleEntity.convertToDataItem3(db.myDao().getTopArticles()))
     }
 }

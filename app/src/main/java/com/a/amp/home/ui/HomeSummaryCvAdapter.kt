@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.summary_cv.view.*
 
 
 class HomeSummaryCvAdapter(
-    private val list: MutableList<HomeRelatedCvDataItem>
+    var list: MutableList<HomeRelatedCvDataItem>
 ) :
     RecyclerView.Adapter<HomeSummaryCvAdapter.MyViewHolder>() {
 

@@ -12,13 +12,12 @@ import com.a.amp.home.data.HomeRelatedCvDataItem
 import kotlinx.android.synthetic.main.related_cv.view.*
 
 class HomeRelatedCvAdapter(
-    private val list: MutableList<HomeRelatedCvDataItem>
+    var list: MutableList<HomeRelatedCvDataItem>
 ) :
     RecyclerView.Adapter<HomeRelatedCvAdapter.MyViewHolder>() {
 
-    inner class MyViewHolder(binding: RelatedCvBinding) : RecyclerView.ViewHolder(binding.root) {
-
-        var binding: RelatedCvBinding = binding
+    inner class MyViewHolder(var binding: RelatedCvBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         init {
             itemView.setOnClickListener {
