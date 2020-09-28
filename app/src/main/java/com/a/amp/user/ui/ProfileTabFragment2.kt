@@ -8,10 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.a.amp.R
 import com.a.amp.storage.setting
-import com.a.amp.user.data.MoreClickListner
+import com.a.amp.user.data.MoreClickListener
 import kotlinx.android.synthetic.main.fragment_profile_tab2.*
 
-class ProfileTabFragment2(private val username: String) : Fragment(), MoreClickListner {
+class ProfileTabFragment2(private val username: String) : Fragment(), MoreClickListener {
 
     lateinit var profileViewModel: ProfileListViewModel
     var myAdapter: WritingCvAdapter? = null
@@ -25,10 +25,19 @@ class ProfileTabFragment2(private val username: String) : Fragment(), MoreClickL
         return layoutInflater.inflate(R.layout.fragment_profile_tab2, container, false)
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        profileViewModel = ViewModelProvider(this).get(ProfileListViewModel::class.java)
+
+
+    }
+
+
     override fun onResume() {
         super.onResume()
 
-        profileViewModel = ViewModelProvider(this).get(ProfileListViewModel::class.java)
+//        profileViewModel = ViewModelProvider(this).get(ProfileListViewModel::class.java)
 
         myAdapter = profileViewModel.writeList2.value?.let {
             WritingCvAdapter(
@@ -58,7 +67,7 @@ class ProfileTabFragment2(private val username: String) : Fragment(), MoreClickL
         currentUser = setting.getString("username")
     }
 
-    override fun onClick(id: String, layoutPosition: Int) {
+    override fun onClick(id: String, layoutPosition: Int,text : String) {
 
     }
 }

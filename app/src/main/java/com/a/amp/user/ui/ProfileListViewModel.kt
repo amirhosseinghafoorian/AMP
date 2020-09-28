@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.a.amp.MyApp
 import com.a.amp.article.apimodel2.Article
 import com.a.amp.article.data.ArticleEntity
+import com.a.amp.article.data.ArticleRemote
 import com.a.amp.article.data.ArticleRepository
 import com.a.amp.core.resource.Status
 import com.a.amp.database.AppDataBase
@@ -25,6 +26,7 @@ class ProfileListViewModel(application: Application) : AndroidViewModel(applicat
     var writeList2 = MutableLiveData<MutableList<WritingCvDataItem>>()
     val app = application
     val isFollowing: MutableLiveData<Boolean> = MutableLiveData()
+    var favorited = MutableLiveData<Boolean>()
 
 
     init {
@@ -99,10 +101,11 @@ class ProfileListViewModel(application: Application) : AndroidViewModel(applicat
 
     fun followOtherProfile(username: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val result = UserRepository(application = Application()).followResult(
-                username = username,
-                email = setting().getString("id")
-            )
+            val result = UserRepository(application = Application())
+                .followResult(
+                    username = username,
+                    email = setting().getString("id")
+                )
             isFollowing.postValue(
                 result.data?.profile?.following
             )
@@ -129,5 +132,29 @@ class ProfileListViewModel(application: Application) : AndroidViewModel(applicat
             isFollowing.postValue(result.data?.profile?.following)
         }
     }
+
+    fun favoriteArticle(slug: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val favArt = ArticleRepository(app).favoriteArticle(slug)
+            if (favArt.code == 200){favorited.postValue(true)}
+        }
+
+    }
+
+    fun unFavoriteArticle(slug: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val favArt = ArticleRepository(app).unFavoriteArticle(slug)
+            if (favArt.code == 200){favorited.postValue(false)}
+        }
+
+    }
+
+    fun getFavoriteFromServer(slug: String){
+        viewModelScope.launch(Dispatchers.IO) {
+            val resFavorite = ArticleRemote().getSingleArticleBySlug(slug)
+            favorited.postValue(resFavorite.data?.article?.favorited)
+        }
+    }
+
 
 }

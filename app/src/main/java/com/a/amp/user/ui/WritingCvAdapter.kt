@@ -8,13 +8,13 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.a.amp.R
 import com.a.amp.databinding.WritingCvBinding
-import com.a.amp.user.data.MoreClickListner
+import com.a.amp.user.data.MoreClickListener
 import com.a.amp.user.data.WritingCvDataItem
 import kotlinx.android.synthetic.main.writing_cv.view.*
 
 class WritingCvAdapter(
     var list: MutableList<WritingCvDataItem>,
-    var clickListener: MoreClickListner? = null,
+    var clickListener: MoreClickListener? = null,
     var current: String?,
     var username: String?
 //,var clickcallback:(id : Int) -> Unit
@@ -40,18 +40,24 @@ class WritingCvAdapter(
                 itemView.writing_cv_ic_more.visibility = View.GONE
             }
             itemView.writing_cv_ic_more.setOnClickListener {
-//                clickcallback.invoke(2)
-                clickListener?.onClick(list[layoutPosition].id, layoutPosition)
+//                clickCallBack.invoke(2)
+                clickListener?.onClick(list[layoutPosition].id, layoutPosition,"more")
             }
             itemView.writing_cv_ic_bookmark.setOnClickListener {
                 list[position].isTag = list[position].isTag.not()
                 notifyItemChanged(position)
             }
+
             itemView.writing_cv_icon_like.setOnClickListener {
+                clickListener?.onClick(list[layoutPosition].id, layoutPosition , "like")
                 list[position].isFav = list[position].isFav.not()
-                list[position].cont = list[position].cont + 1
+                if (list[position].isFav){
+                    list[position].FavCont += 1
+                }else{list[position].FavCont -= 1
+                }
                 notifyItemChanged(position)
             }
+
         }
     }
 

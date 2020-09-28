@@ -85,7 +85,7 @@
             app:tabIndicator="@drawable/tabindicator"
             app:tabIndicatorGravity="stretch"
             app:tabContentStart="0dp"
-            app:tabMode="scrollable">
+            app:tabMode="fixed">
 
 
         </com.google.android.material.tabs.TabLayout>
