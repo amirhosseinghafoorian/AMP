@@ -13,8 +13,8 @@ interface MyDao {
     @Query("select * from articles")
     suspend fun getArticles(): List<ArticleEntity>
 
-    @Query("select * from articles where IsFeed == :myTrue")
-    suspend fun getFeed(myTrue: Boolean): List<ArticleEntity>
+    @Query("select * from articles where IsFeed == :myTrue and Title like '{:text}%' ")
+    suspend fun getFeed(myTrue: Boolean, text: String): List<ArticleEntity>
 
     @Query("select * from articles where UserOwnerId == :username")
     suspend fun getArticlesByAuthor(username: String): List<ArticleEntity>

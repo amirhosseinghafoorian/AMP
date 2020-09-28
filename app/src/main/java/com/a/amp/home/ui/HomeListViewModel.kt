@@ -16,10 +16,10 @@ class HomeListViewModel(application: Application) : AndroidViewModel(application
         relatedList.value = ArrayList()
     }
 
-    suspend fun fillSummary() {
+    suspend fun fillSummary(text: String) {
         summaryList.postValue(null)
         val home = HomeRepository(app)
-        summaryList.postValue(home.fillSummaryFromRepo())
+        summaryList.postValue(home.fillSummaryFromRepo(text))
     }
 
     suspend fun fillRelated() {

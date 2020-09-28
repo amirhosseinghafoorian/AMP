@@ -10,6 +10,29 @@
         android:layout_height="wrap_content"
         tools:context=".home.ui.HomeTabFragment">
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/home_page_et_1"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:textColor="@android:color/black"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:hintTextColor="@android:color/black"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:startIconDrawable="@drawable/ic_baseline_search_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/et_corner"
+                android:hint="@string/searchArticle"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/home_page_recycle_2"
             android:layout_width="0dp"
@@ -22,7 +45,7 @@
             app:layout_constraintBottom_toTopOf="@id/home_page_tv_1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/home_page_et_1"
             app:reverseLayout="false"
             tools:listitem="@layout/summary_cv" />
 

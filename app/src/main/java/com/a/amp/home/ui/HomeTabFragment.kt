@@ -1,6 +1,8 @@
 package com.a.amp.home.ui
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,7 +29,7 @@ class HomeTabFragment : Fragment() {
         val homeViewModel = ViewModelProvider(this).get(HomeListViewModel::class.java)
 
         CoroutineScope((Dispatchers.IO)).launch {
-            homeViewModel.fillSummary()
+            homeViewModel.fillSummary("")
             homeViewModel.fillRelated()
 
             withContext(Dispatchers.Main) {
@@ -53,6 +55,26 @@ class HomeTabFragment : Fragment() {
                     if (list != null) {
                         myAdapter?.list = list
                         myAdapter?.notifyDataSetChanged()
+                    }
+                })
+
+                home_page_et_1.editText?.addTextChangedListener(object : TextWatcher {
+                    override fun afterTextChanged(s: Editable) {}
+                    override fun beforeTextChanged(
+                        s: CharSequence, start: Int,
+                        count: Int, after: Int
+                    ) {
+                    }
+
+                    override fun onTextChanged(
+                        s: CharSequence,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+                        CoroutineScope(Dispatchers.IO).launch {
+                            homeViewModel.fillSummary(s.toString())
+                        }
                     }
                 })
 

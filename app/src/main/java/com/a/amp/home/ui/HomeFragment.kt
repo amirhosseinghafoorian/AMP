@@ -3,8 +3,6 @@ package com.a.amp.home.ui
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Looper
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,24 +55,6 @@ class HomeFragment : Fragment() {
 
             withContext(Dispatchers.Main) {
                 homeViewPagerInit()
-
-                home_page_et_1.editText?.addTextChangedListener(object : TextWatcher {
-                    override fun afterTextChanged(s: Editable) {}
-                    override fun beforeTextChanged(
-                        s: CharSequence, start: Int,
-                        count: Int, after: Int
-                    ) {
-                    }
-
-                    override fun onTextChanged(
-                        s: CharSequence,
-                        start: Int,
-                        before: Int,
-                        count: Int
-                    ) {
-
-                    }
-                })
 
                 home_appbar_end_icon.setOnClickListener {
                     findNavController().navigate(
