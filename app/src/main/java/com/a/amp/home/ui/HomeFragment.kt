@@ -3,6 +3,8 @@ package com.a.amp.home.ui
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Looper
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,6 +57,25 @@ class HomeFragment : Fragment() {
 
             withContext(Dispatchers.Main) {
                 homeViewPagerInit()
+
+                home_page_et_1.editText?.addTextChangedListener(object : TextWatcher {
+                    override fun afterTextChanged(s: Editable) {}
+                    override fun beforeTextChanged(
+                        s: CharSequence, start: Int,
+                        count: Int, after: Int
+                    ) {
+                    }
+
+                    override fun onTextChanged(
+                        s: CharSequence,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+
+                    }
+                })
+
                 home_appbar_end_icon.setOnClickListener {
                     findNavController().navigate(
                         HomeFragmentDirections.actionHomeFragmentToProfileFragment(
@@ -81,7 +102,11 @@ class HomeFragment : Fragment() {
     }
 
     private suspend fun fillDataBase() {
+        fillAllArticles()
+        fillFeed()
+    }
 
+    private suspend fun fillAllArticles() {
         val db = AppDataBase.buildDatabase(context = MyApp.publicApp)
         val repo = ArticleRepository(MyApp.publicApp)
 
@@ -109,6 +134,11 @@ class HomeFragment : Fragment() {
                 Toast.makeText(MyApp.publicApp, "عدم اتصال به اینترنت", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private suspend fun fillFeed() {
+        val db = AppDataBase.buildDatabase(context = MyApp.publicApp)
+        val repo = ArticleRepository(MyApp.publicApp)
         val repoResult2 = repo.syncFeed()
         if (repoResult2.status == Status.SUCCESS && repoResult2.code == 200) {
 
@@ -121,14 +151,11 @@ class HomeFragment : Fragment() {
                 db.myDao().insertArticles(resultList2[i])
             }
 
-            withContext(Dispatchers.Main) {
-                Toast.makeText(MyApp.publicApp, "بروزرسانی انجام شد", Toast.LENGTH_SHORT).show()
-            }
-        } else if (repoResult.status == Status.SUCCESS && repoResult.code != 200) {
+        } else if (repoResult2.status == Status.SUCCESS && repoResult2.code != 200) {
             withContext(Dispatchers.Main) {
                 Toast.makeText(context, "خطا", Toast.LENGTH_SHORT).show()
             }
-        } else if (repoResult.status == Status.ERROR) {
+        } else if (repoResult2.status == Status.ERROR) {
             withContext(Dispatchers.Main) {
                 Toast.makeText(MyApp.publicApp, "عدم اتصال به اینترنت", Toast.LENGTH_SHORT)
                     .show()

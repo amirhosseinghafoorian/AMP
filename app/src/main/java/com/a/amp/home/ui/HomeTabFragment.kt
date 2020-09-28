@@ -42,7 +42,6 @@ class HomeTabFragment : Fragment() {
                     adapter = myAdapter
                 }
 
-
                 homeViewModel.summaryList.observe(viewLifecycleOwner, { list ->
                     if (list != null) {
                         myAdapter2?.list = list
@@ -56,6 +55,8 @@ class HomeTabFragment : Fragment() {
                         myAdapter?.notifyDataSetChanged()
                     }
                 })
+
+
             }
         }
     }
