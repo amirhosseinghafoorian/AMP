@@ -53,7 +53,8 @@ data class ArticleEntity(
                         list[i].publishDate.toString(),
                         list[i].articleId,
                         isTag = false,
-                        isFav = false
+                        isFav = list[i].favorited,
+                        FavCont = list[i].favoritesCount
                     )
                 )
             }

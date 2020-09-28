@@ -8,5 +8,5 @@ data class WritingCvDataItem(
     var id: String,
     var isTag: Boolean,
     var isFav: Boolean,
-    var cont: Long = 0
+    var FavCont: Int = 0
 )
