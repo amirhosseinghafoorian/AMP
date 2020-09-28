@@ -64,10 +64,6 @@ class ProfileTabFragment(private val username: String) : Fragment(), MoreClickLi
         CoroutineScope(Dispatchers.IO).launch {
             profileViewModel.fillWrite(username)
         }
-
-
-
-
     }
 
     override fun onStart() {

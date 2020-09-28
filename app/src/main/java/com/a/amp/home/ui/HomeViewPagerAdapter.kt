@@ -8,8 +8,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 class HomeViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
 
-    val listNames = mutableListOf<String>()
-    val listFragments = mutableListOf<Fragment>()
+    private val listNames = mutableListOf<String>()
+    private val listFragments = mutableListOf<Fragment>()
 
     override fun getItemCount(): Int {
         return listFragments.size

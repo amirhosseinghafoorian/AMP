@@ -1,5 +1,6 @@
 package com.a.amp.home.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Looper
 import android.view.LayoutInflater
@@ -7,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.a.amp.MyApp
 import com.a.amp.R
 import com.a.amp.article.apimodel2.Article
@@ -17,11 +18,14 @@ import com.a.amp.article.data.ArticleRepository
 import com.a.amp.core.resource.Status
 import com.a.amp.database.AppDataBase
 import com.a.amp.storage.setting
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+
 
 class HomeFragment : Fragment() {
 
@@ -45,61 +49,34 @@ class HomeFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val loginViewModel = ViewModelProvider(this).get(HomeListViewModel::class.java)
 
         CoroutineScope((Dispatchers.IO)).launch {
             fillDataBase()
-            loginViewModel.fillSummary()
-            loginViewModel.fillRelated()
 
             withContext(Dispatchers.Main) {
-                val myAdapter2 = loginViewModel.summaryList.value?.let { HomeSummaryCvAdapter(it) }
-                val myAdapter = loginViewModel.relatedList.value?.let { HomeRelatedCvAdapter(it) }
-
-//        homeViewPagerInit()
-                home_page_recycle_2.apply {
-                    adapter = myAdapter2
-//                    setHasFixedSize(true)
+                homeViewPagerInit()
+                home_appbar_end_icon.setOnClickListener {
+                    findNavController().navigate(
+                        HomeFragmentDirections.actionHomeFragmentToProfileFragment(
+                            setting.getString("username"),
+                            setting.getString("id")
+                        )
+                    )
                 }
-
-                home_page_recycle_1.apply {
-                    adapter = myAdapter
-//                    setHasFixedSize(true)
+                home_appbar_start_icon.setOnClickListener {
+                    findNavController().navigate(
+                        HomeFragmentDirections.actionHomeFragmentToWriteFragment(
+                            ""
+                        )
+                    )
                 }
-
-
-                loginViewModel.summaryList.observe(viewLifecycleOwner, { list ->
-                    if (list != null) {
-                        myAdapter2?.list = list
-                        myAdapter2?.notifyDataSetChanged()
-                    }
-                })
-
-                loginViewModel.relatedList.observe(viewLifecycleOwner, { list ->
-                    if (list != null) {
-                        myAdapter?.list = list
-                        myAdapter?.notifyDataSetChanged()
-                    }
-                })
+                home_appbar_end_icon_power.setOnClickListener {
+                    setting.remove("username")
+                    setting.remove("id")
+                    setting.remove("token")
+                    findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAuthenticate())
+                }
             }
-        }
-
-        home_appbar_end_icon.setOnClickListener {
-            findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToProfileFragment(
-                    setting.getString("username"),
-                    setting.getString("id")
-                )
-            )
-        }
-        home_appbar_start_icon.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToWriteFragment(""))
-        }
-        home_appbar_end_icon_power.setOnClickListener {
-            setting.remove("username")
-            setting.remove("id")
-            setting.remove("token")
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAuthenticate())
         }
     }
 
@@ -159,15 +136,19 @@ class HomeFragment : Fragment() {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
+    private fun homeViewPagerInit() {
+        val viewPagerAdapter = HomeViewPagerAdapter(childFragmentManager, lifecycle)
+        viewPagerAdapter.addFragment(HomeTabFragment(), "برای شما")
+        viewPagerAdapter.addFragment(HomeTabFragment2(), "تگ ها")
+        HomeViewPager.adapter = viewPagerAdapter
+        HomeViewPager.isUserInputEnabled = false
+        TabLayoutMediator(
+            (home_page_TL as TabLayout),
+            (HomeViewPager as ViewPager2)
+        ) { tab, position ->
+            tab.text = viewPagerAdapter.getName(position)
+        }.attach()
+//        viewPager.addFragment()
+    }
 }
-
-//    private fun homeViewPagerInit() {
-//        val viewPagerAdapter = HomeViewPagerAdapter(childFragmentManager, lifecycle)
-//        viewPagerAdapter.addFragment(ProfileTabFragment("selena"), "اقتصاد")
-//        viewPagerAdapter.addFragment(ProfileTabFragment2(""), "بورس")
-//        viewPager.adapter = viewPagerAdapter
-//        TabLayoutMediator((home_page_TL as TabLayout), (viewPager as ViewPager2)) { tab, position ->
-//            tab.text = viewPagerAdapter.getName(position)
-//        }.attach()
-////        viewPager.addFragment()
-//    }

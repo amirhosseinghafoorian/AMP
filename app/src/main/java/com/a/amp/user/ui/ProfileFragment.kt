@@ -63,30 +63,6 @@ class ProfileFragment : Fragment() {
             profile_cv_btn_1.visibility = View.GONE
         }
 
-//        myAdapter = profileViewModel.writeList.value?.let {
-//            WritingCvAdapter(
-//                it, this, currentUser, username
-//                //        ,
-//                //            {
-//                //              call back body
-//                //            }
-//            )
-//        }
-
-//        profile_recycler.apply {
-//            adapter = myAdapter
-//            setHasFixedSize(true)
-//        }
-
-//        profileViewModel.writeList.observe(viewLifecycleOwner, { list ->
-//            if (list != null) {
-//                myAdapter?.list = list
-//                myAdapter?.notifyDataSetChanged()
-//            }
-//        })
-//
-//        profileViewModel.fillWrite(username)
-
         profile_appbar_start_icon.setOnClickListener {
             Navigation.findNavController(it).navigateUp()
         }
@@ -127,41 +103,6 @@ class ProfileFragment : Fragment() {
         }.attach()
 //        viewPager.addFragment()
     }
-
-//    override fun onClick(id: String, layoutPosition: Int) {
-//        val buttonSheetDialog = BottomSheetDialog(requireContext())
-//        val view = layoutInflater.inflate(R.layout.bottom_sheet, null)
-//
-//        view.findViewById<MaterialButton>(R.id.botton_sheet_2).setOnClickListener {
-//            lifecycleScope.launch(Dispatchers.IO) {
-//                val delResult = ArticleRemote().deleteArticleFormServer(id)
-//                if (delResult.status == Status.SUCCESS) {
-//                    buttonSheetDialog.dismiss()
-//                    val db = AppDataBase.buildDatabase(context = MyApp.publicApp)
-//                    db.myDao().deleteArticles(ArticleEntity(id, "", "", ""))
-//                    profileViewModel.fillWrite(username)
-//                }
-//            }
-//        }
-//        view.findViewById<MaterialButton>(R.id.botton_sheet_1).setOnClickListener {
-//            findNavController().navigate(
-//                ProfileFragmentDirections.actionProfileFragmentToWriteFragment(
-//                    id
-//                )
-//            )
-//            buttonSheetDialog.dismiss()
-//        }
-//
-//        buttonSheetDialog.setContentView(view)
-//
-//        buttonSheetDialog.show()
-//    }
-
-//    override fun deleteUserArticle(id: String, layoutPosition: Int){
-//        lifecycleScope.launch(Dispatchers.IO){
-//            val result = ArticleRemote().deleteArticleFormServer(id)
-//        }
-//    }
 
 
 }
