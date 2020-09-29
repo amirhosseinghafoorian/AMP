@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.a.amp.R
 import com.a.amp.article.data.ArticleRelatedCvDataItem
 import com.a.amp.databinding.RelatedCvBinding
-import com.a.amp.home.ui.HomeFragmentDirections
 import kotlinx.android.synthetic.main.related_cv.view.*
 
 class ArticleRelatedCvAdapter(
@@ -28,10 +27,9 @@ class ArticleRelatedCvAdapter(
             itemView.setOnClickListener {
                 try {
                     it.findNavController()
-                        .navigate(HomeFragmentDirections.actionHomeFragmentToArticleFragment(list[position].id))
-                } catch (E: IllegalArgumentException) {
-                    it.findNavController()
                         .navigate(ArticleFragmentDirections.actionArticleFragmentSelf(list[position].id))
+                } catch (E: Exception) {
+
                 }
             }
             itemView.related_bookmark.setOnClickListener {

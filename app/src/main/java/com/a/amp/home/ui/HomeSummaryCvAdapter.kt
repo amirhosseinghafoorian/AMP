@@ -5,17 +5,21 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.a.amp.MyApp
 import com.a.amp.R
+import com.a.amp.database.AppDataBase
 import com.a.amp.databinding.SummaryCvBinding
 import com.a.amp.home.data.HomeRelatedCvDataItem
 import kotlinx.android.synthetic.main.summary_cv.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class HomeSummaryCvAdapter(
     var list: MutableList<HomeRelatedCvDataItem>
 ) :
     RecyclerView.Adapter<HomeSummaryCvAdapter.MyViewHolder>() {
-
 
     inner class MyViewHolder(binding: SummaryCvBinding) : RecyclerView.ViewHolder(binding.root) {
         var binding: SummaryCvBinding = binding
@@ -25,9 +29,21 @@ class HomeSummaryCvAdapter(
 //        var days: TextView = itemView.summary_tv_2
 //        var id : Int = 0
         init {
+            val db = AppDataBase.buildDatabase(context = MyApp.publicApp)
+            CoroutineScope(Dispatchers.IO).launch {
+                for (i in 0 until list.size) {
+                    val a = db.myDao().getBookmark(list[i].id)
+                    if (a.isNotEmpty()) {
+                        list[i].isTag = true
+                    }
+                }
+            }
             itemView.setOnClickListener {
-                it.findNavController()
-                    .navigate(HomeFragmentDirections.actionHomeFragmentToArticleFragment(list[position].id))
+                try {
+                    it.findNavController()
+                        .navigate(HomeFragmentDirections.actionHomeFragmentToArticleFragment(list[position].id))
+                } catch (e: Exception) {
+                }
             }
             itemView.summary_bookmark.setOnClickListener {
                 list[position].isTag = list[position].isTag.not()
@@ -47,7 +63,6 @@ class HomeSummaryCvAdapter(
     }
 
     override fun getItemCount() = list.size
-
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 //        holder.mainText.text = list[position].text

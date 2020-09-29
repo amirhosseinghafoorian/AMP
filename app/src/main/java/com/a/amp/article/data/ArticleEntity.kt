@@ -9,7 +9,6 @@ import com.a.amp.article.apimodel2.Article
 import com.a.amp.article.apimodel2.ArticleX
 import com.a.amp.home.data.HomeRelatedCvDataItem
 import com.a.amp.user.data.WritingCvDataItem
-import java.util.*
 
 @Entity(
     tableName = "articles", primaryKeys = ["ArticleId"]
@@ -23,7 +22,7 @@ data class ArticleEntity(
     @ColumnInfo(name = "Favorited") val favorited: Boolean = false,
     @ColumnInfo(name = "FavoritesCount") val favoritesCount: Int = 0,
     @ColumnInfo(name = "Description") val description: String? = null,
-    @ColumnInfo(name = "PublishDate") val publishDate: Date? = null
+    @ColumnInfo(name = "PublishDate") val publishDate: String? = null
 ) {
     companion object {
         fun convertToDataItem1(list: List<ArticleEntity>): MutableList<ArticleRelatedCvDataItem> {
@@ -86,6 +85,7 @@ data class ArticleEntity(
                         list[i].author.username,
                         list[i].title,
                         list[i].body,
+                        publishDate = list[i].createdAt,
                         favorited = list[i].favorited,
                         favoritesCount = list[i].favoritesCount,
                         description = list[i].description
@@ -101,7 +101,10 @@ data class ArticleEntity(
                 resultList.add(
                     ArticleEntity(
                         list[i].slug,
-                        list[i].author.username, list[i].title, list[i].body
+                        list[i].author.username,
+                        list[i].title,
+                        list[i].body,
+                        publishDate = list[i].createdAt
                     )
                 )
             }
@@ -118,6 +121,7 @@ data class ArticleEntity(
                         list[i].title,
                         list[i].body,
                         true,
+                        publishDate = list[i].createdAt,
                         favorited = list[i].favorited,
                         favoritesCount = list[i].favoritesCount,
                         description = list[i].description
