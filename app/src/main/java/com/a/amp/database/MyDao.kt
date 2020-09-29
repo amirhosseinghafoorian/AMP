@@ -10,6 +10,9 @@ interface MyDao {
     @Query("select * from articles")
     suspend fun getArticles(): List<ArticleEntity>
 
+    @Query("select * from articles where ArticleId == :slug")
+    suspend fun getArticlesById(slug: String): List<ArticleEntity>
+
     @Query("select * from articles where IsFeed == :myTrue and Title like :text ")
     suspend fun getFeed(myTrue: Boolean, text: String): List<ArticleEntity>
 
@@ -27,6 +30,9 @@ interface MyDao {
 
     @Query("select * from bookmarks where Slg == :slug")
     suspend fun getBookmark(slug: String): List<BookmarkEntity>
+
+    @Query("select * from UserFav where UserName == :username")
+    suspend fun getUserFavs(username: String): List<UserFavEntity>
 
     @Query("select * from availableTags")
     suspend fun getAllAvailableTags(): List<AvailableTagEntity>

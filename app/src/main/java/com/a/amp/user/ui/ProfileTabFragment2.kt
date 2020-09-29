@@ -29,15 +29,11 @@ class ProfileTabFragment2(private val username: String) : Fragment(), MoreClickL
         super.onActivityCreated(savedInstanceState)
 
         profileViewModel = ViewModelProvider(this).get(ProfileListViewModel::class.java)
-
-
     }
 
 
     override fun onResume() {
         super.onResume()
-
-//        profileViewModel = ViewModelProvider(this).get(ProfileListViewModel::class.java)
 
         myAdapter = profileViewModel.writeList2.value?.let {
             WritingCvAdapter(
@@ -57,7 +53,11 @@ class ProfileTabFragment2(private val username: String) : Fragment(), MoreClickL
             }
         })
 
-        profileViewModel.fillWrite2(username)
+        if (username == currentUser) {
+            profileViewModel.fillWrite2(username)
+        } else {
+            profileViewModel.fillWrite3(username)
+        }
 
     }
 

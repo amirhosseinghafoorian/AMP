@@ -25,13 +25,9 @@ class ArticleSummaryCvAdapter(
     RecyclerView.Adapter<ArticleSummaryCvAdapter.MyViewHolder>() {
 
 
-    inner class MyViewHolder(binding: SummaryCvBinding) : RecyclerView.ViewHolder(binding.root) {
-        var binding: SummaryCvBinding = binding
+    inner class MyViewHolder(var binding: SummaryCvBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        //        var mainText: TextView = itemView.summary_tv_3
-//        var userFullName: TextView = itemView.summary_tv_1
-//        var days: TextView = itemView.summary_tv_2
-//        var id : Int = 0
         init {
             val db = AppDataBase.buildDatabase(context = MyApp.publicApp)
             CoroutineScope(Dispatchers.IO).launch {
@@ -71,7 +67,7 @@ class ArticleSummaryCvAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding: SummaryCvBinding = DataBindingUtil.inflate(
-            LayoutInflater.from(parent.getContext()),
+            LayoutInflater.from(parent.context),
             R.layout.summary_cv, parent, false
         )
 //        val textView =
