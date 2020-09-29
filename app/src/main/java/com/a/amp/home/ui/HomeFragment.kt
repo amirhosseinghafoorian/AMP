@@ -15,7 +15,6 @@ import com.a.amp.R
 import com.a.amp.article.apimodel2.Article
 import com.a.amp.article.data.ArticleEntity
 import com.a.amp.article.data.ArticleRepository
-import com.a.amp.article.data.BookmarkEntity
 import com.a.amp.article.data.TagEntity
 import com.a.amp.core.resource.Status
 import com.a.amp.database.AppDataBase

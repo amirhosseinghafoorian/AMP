@@ -5,14 +5,12 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.a.amp.article.data.ArticleEntity
-import com.a.amp.article.data.BookmarkEntity
-import com.a.amp.article.data.CommentEntity
-import com.a.amp.article.data.TagEntity
+import com.a.amp.article.data.*
 import com.a.amp.user.data.UserFavEntity
 
 @Database(
-    entities = [ArticleEntity::class, CommentEntity::class, TagEntity::class, UserFavEntity::class, BookmarkEntity::class],
+    entities = [ArticleEntity::class, CommentEntity::class, TagEntity::class,
+        UserFavEntity::class, BookmarkEntity::class, AvailableTagEntity::class],
     version = 1
 )
 @TypeConverters(DateConverter::class)

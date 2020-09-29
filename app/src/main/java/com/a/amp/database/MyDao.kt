@@ -3,10 +3,6 @@ package com.a.amp.database
 import androidx.room.*
 import com.a.amp.article.data.*
 import com.a.amp.user.data.UserFavEntity
-import com.a.amp.article.data.ArticleEntity
-import com.a.amp.article.data.ArticleWithCommentsAndTags
-import com.a.amp.article.data.CommentEntity
-import com.a.amp.article.data.TagEntity
 
 @Dao
 interface MyDao {
@@ -32,6 +28,9 @@ interface MyDao {
     @Query("select * from bookmarks where Slg == :slug")
     suspend fun getBookmark(slug: String): List<BookmarkEntity>
 
+    @Query("select * from availableTags")
+    suspend fun getAllAvailableTags(): List<AvailableTagEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertArticles(vararg articles: ArticleEntity)
 
@@ -46,6 +45,9 @@ interface MyDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertBookmarks(vararg bookmark: BookmarkEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAvailableTags(vararg tags: AvailableTagEntity)
 
     @Query("delete from bookmarks where Slg == :slug")
     suspend fun deleteBookmark(slug: String)
