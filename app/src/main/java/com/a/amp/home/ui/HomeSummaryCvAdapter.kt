@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.a.amp.MyApp
 import com.a.amp.R
+import com.a.amp.article.data.BookmarkEntity
 import com.a.amp.database.AppDataBase
 import com.a.amp.databinding.SummaryCvBinding
 import com.a.amp.home.data.HomeRelatedCvDataItem
@@ -14,6 +15,7 @@ import kotlinx.android.synthetic.main.summary_cv.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class HomeSummaryCvAdapter(
@@ -38,6 +40,7 @@ class HomeSummaryCvAdapter(
                     }
                 }
             }
+
             itemView.setOnClickListener {
                 try {
                     it.findNavController()
@@ -46,8 +49,17 @@ class HomeSummaryCvAdapter(
                 }
             }
             itemView.summary_bookmark.setOnClickListener {
-                list[position].isTag = list[position].isTag.not()
-                notifyItemChanged(position)
+                CoroutineScope(Dispatchers.IO).launch {
+                    if (list[position].isTag) {
+                        db.myDao().deleteBookmark(list[position].id)
+                    }else{
+                        db.myDao().insertBookmarks(BookmarkEntity( list[position].id))
+                    }
+                    withContext(Dispatchers.Main){
+                        list[position].isTag = list[position].isTag.not()
+                        notifyItemChanged(position)
+                    }
+                }
             }
         }
     }

@@ -144,7 +144,6 @@ class HomeFragment : Fragment() {
 
             for (i in resultList2.indices) {
                 db.myDao().insertArticles(resultList2[i])
-                db.myDao().insertBookmarks(BookmarkEntity(resultList2[i].articleId))
             }
 
 

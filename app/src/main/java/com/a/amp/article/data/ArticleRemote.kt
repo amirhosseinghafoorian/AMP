@@ -173,7 +173,7 @@ class ArticleRemote {
         slug: String
     ): Resource<ArticleResponse5>{
         return safeApiCall {
-            authApi.favoriteArticle(
+            authApi.unFavoriteArticle(
                 slug = slug
             )
         }
