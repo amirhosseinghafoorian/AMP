@@ -19,6 +19,45 @@ class ArticleRepository(application: Application) {
     }
 
     suspend fun fillRelatedFromRepo2(text: String): MutableList<ArticleRelatedCvDataItem> {
+        val resArticle = ArticleRemote()
+        val repoResult = resArticle.getArticlesByTagFromServer(text)
+        if (repoResult.status == Status.SUCCESS &&
+            repoResult.code == 200 &&
+            repoResult.status == Status.SUCCESS &&
+            repoResult.code == 200
+        ) {
+
+            val unformattedList = repoResult.data?.articles
+            val formattedList = mutableListOf<Article>()
+            unformattedList?.let { formattedList.addAll(it) }
+            val resultList = ArticleEntity.convertToDataItem4(formattedList)
+            val db = AppDataBase.buildDatabase(context = MyApp.publicApp)
+            for (i in resultList.indices) {
+                db.myDao().insertArticles(resultList[i])
+            }
+
+            for (i in 0 until repoResult.data?.articles?.size!!){
+                val unformattedList3 = repoResult.data?.articles[i]?.tagList
+                val formattedList3 = unformattedList3?.let {
+                    TagEntity.convertToDataItem(it, repoResult.data?.articles[i].slug) }
+                for (i in 0 until formattedList3?.size!!) {
+                    db.myDao().insertTags(formattedList3[i])
+                }
+
+            }
+
+            withContext(Dispatchers.Main) {
+                Toast.makeText(MyApp.publicApp, "بروزرسانی انجام شد", Toast.LENGTH_SHORT).show()
+            }
+        } else if (repoResult.status == Status.SUCCESS && repoResult.code != 200) {
+            withContext(Dispatchers.Main) {
+                Toast.makeText(MyApp.publicApp, "خطا", Toast.LENGTH_SHORT).show()
+            }
+        } else if (repoResult.status == Status.ERROR) {
+            withContext(Dispatchers.Main) {
+                Toast.makeText(MyApp.publicApp, "عدم اتصال به اینترنت", Toast.LENGTH_SHORT).show()
+            }
+        }
         val article = ArticleLocal(app)
         return article.fillRelatedFromLocal2(text)
     }

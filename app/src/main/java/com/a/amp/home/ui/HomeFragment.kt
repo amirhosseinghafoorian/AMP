@@ -103,6 +103,8 @@ class HomeFragment : Fragment() {
                 db.myDao().insertArticles(resultList[i])
             }
 
+            val list = mutableListOf<String>()
+
             for (j in 0 until repoResult.data?.articles?.size!!) {
                 val unformattedList3 = repoResult.data.articles[j].tagList
                 val formattedList3 = unformattedList3.let {
@@ -112,9 +114,13 @@ class HomeFragment : Fragment() {
                     )
                 }
                 for (i in 0 until formattedList3.size) {
+                    list.add(formattedList3[i].body.toString())
                     db.myDao().insertTags(formattedList3[i])
                 }
             }
+
+            val a = list
+            val b = ""
 
             withContext(Dispatchers.Main) {
                 Toast.makeText(MyApp.publicApp, "بروزرسانی انجام شد", Toast.LENGTH_SHORT).show()

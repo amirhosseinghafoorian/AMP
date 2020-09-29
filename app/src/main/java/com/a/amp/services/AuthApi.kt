@@ -17,6 +17,9 @@ interface AuthApi {
     @GET("articles")
     suspend fun allArticles(): Response<ArticleResponse>
 
+    @GET("articles")
+    suspend fun allArticlesByTags(@Query("tag") tag: String): Response<ArticleResponse>
+
     @GET("articles/feed")
     suspend fun feed(): Response<ArticleResponse>
 

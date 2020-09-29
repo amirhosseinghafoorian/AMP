@@ -12,6 +12,11 @@ class ArticleRemote {
         return allArticles(auth)
     }
 
+    suspend fun getArticlesByTagFromServer(tag: String): Resource<ArticleResponse> {
+        val auth = RetrofitBuilder.retrofit.create(AuthApi::class.java)
+        return allArticlesByTAg(auth,tag)
+    }
+
     suspend fun getFeedFromServer(): Resource<ArticleResponse> {
         val auth = RetrofitBuilder.retrofit.create(AuthApi::class.java)
         return feed(auth)
@@ -93,6 +98,12 @@ class ArticleRemote {
     private suspend fun allArticles(authApi: AuthApi): Resource<ArticleResponse> {
         return safeApiCall {
             authApi.allArticles()
+        }
+    }
+
+    private suspend fun allArticlesByTAg(authApi: AuthApi, tag : String): Resource<ArticleResponse> {
+        return safeApiCall {
+            authApi.allArticlesByTags(tag)
         }
     }
 

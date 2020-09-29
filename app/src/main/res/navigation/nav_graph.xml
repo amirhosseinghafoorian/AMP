@@ -60,6 +60,9 @@
             app:popUpToInclusive="true"
             android:id="@+id/action_homeFragment_to_authenticate"
             app:destination="@id/authenticate" />
+        <action
+            android:id="@+id/action_homeFragment_to_tagFragment"
+            app:destination="@id/tagFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"

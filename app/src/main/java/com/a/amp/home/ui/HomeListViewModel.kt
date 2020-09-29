@@ -6,8 +6,10 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.a.amp.MyApp
 import com.a.amp.article.data.AvailableTagEntity
+import com.a.amp.core.resource.Resource
 import com.a.amp.core.resource.Status
 import com.a.amp.database.AppDataBase
+import com.a.amp.home.apimodel.TagModel
 import com.a.amp.home.data.HomeRelatedCvDataItem
 import com.a.amp.home.data.HomeRepository
 import kotlinx.coroutines.Dispatchers
@@ -17,6 +19,7 @@ class HomeListViewModel(application: Application) : AndroidViewModel(application
     var summaryList = MutableLiveData<MutableList<HomeRelatedCvDataItem>>()
     var relatedList = MutableLiveData<MutableList<HomeRelatedCvDataItem>>()
     var tagList = MutableLiveData<MutableList<String>>()
+    var tagListResult = MutableLiveData<Resource<TagModel>>()
     val app = application
 
     init {
@@ -38,8 +41,10 @@ class HomeListViewModel(application: Application) : AndroidViewModel(application
     }
 
     suspend fun getTags() {
+        tagListResult.postValue(Resource.loading(null))
         tagList.postValue(null)
         val repoResult = HomeRepository(app).getAllTagFromServer()
+        tagListResult.postValue(repoResult)
         val db = AppDataBase.buildDatabase(context = MyApp.publicApp)
         if (repoResult.status == Status.SUCCESS &&
             repoResult.code == 200

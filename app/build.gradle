@@ -72,4 +72,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.7.0'
     implementation 'com.google.code.gson:gson:2.8.6'
     debugImplementation 'com.facebook.flipper:flipper-network-plugin:0.55.0'
+
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
 }
