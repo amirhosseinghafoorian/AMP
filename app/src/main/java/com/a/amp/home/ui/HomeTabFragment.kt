@@ -29,7 +29,7 @@ class HomeTabFragment : Fragment() {
         val homeViewModel = ViewModelProvider(this).get(HomeListViewModel::class.java)
 
         CoroutineScope((Dispatchers.IO)).launch {
-            homeViewModel.fillSummary("")
+            homeViewModel.fillSummary("%")
             homeViewModel.fillRelated()
 
             withContext(Dispatchers.Main) {
@@ -59,7 +59,9 @@ class HomeTabFragment : Fragment() {
                 })
 
                 home_page_et_1.editText?.addTextChangedListener(object : TextWatcher {
-                    override fun afterTextChanged(s: Editable) {}
+                    override fun afterTextChanged(s: Editable) {
+                    }
+
                     override fun beforeTextChanged(
                         s: CharSequence, start: Int,
                         count: Int, after: Int
@@ -73,7 +75,7 @@ class HomeTabFragment : Fragment() {
                         count: Int
                     ) {
                         CoroutineScope(Dispatchers.IO).launch {
-                            homeViewModel.fillSummary(s.toString())
+                            homeViewModel.fillSummary("$s%")
                         }
                     }
                 })

@@ -15,6 +15,7 @@ import com.a.amp.R
 import com.a.amp.article.apimodel2.Article
 import com.a.amp.article.data.ArticleEntity
 import com.a.amp.article.data.ArticleRepository
+import com.a.amp.article.data.TagEntity
 import com.a.amp.core.resource.Status
 import com.a.amp.database.AppDataBase
 import com.a.amp.storage.setting
@@ -102,6 +103,19 @@ class HomeFragment : Fragment() {
                 db.myDao().insertArticles(resultList[i])
             }
 
+            for (j in 0 until repoResult.data?.articles?.size!!) {
+                val unformattedList3 = repoResult.data.articles[j].tagList
+                val formattedList3 = unformattedList3.let {
+                    TagEntity.convertToDataItem(
+                        it,
+                        repoResult.data.articles[j].slug
+                    )
+                }
+                for (i in 0 until formattedList3.size) {
+                    db.myDao().insertTags(formattedList3[i])
+                }
+            }
+
             withContext(Dispatchers.Main) {
                 Toast.makeText(MyApp.publicApp, "بروزرسانی انجام شد", Toast.LENGTH_SHORT).show()
             }
@@ -129,6 +143,19 @@ class HomeFragment : Fragment() {
 
             for (i in resultList2.indices) {
                 db.myDao().insertArticles(resultList2[i])
+            }
+
+            for (j in 0 until repoResult2.data?.articles?.size!!) {
+                val unformattedList3 = repoResult2.data.articles[j].tagList
+                val formattedList3 = unformattedList3.let {
+                    TagEntity.convertToDataItem(
+                        it,
+                        repoResult2.data.articles[j].slug
+                    )
+                }
+                for (i in 0 until formattedList3.size) {
+                    db.myDao().insertTags(formattedList3[i])
+                }
             }
 
         } else if (repoResult2.status == Status.SUCCESS && repoResult2.code != 200) {
