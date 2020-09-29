@@ -76,6 +76,10 @@ class HomeFragment : Fragment() {
                     setting.remove("username")
                     setting.remove("id")
                     setting.remove("token")
+                    CoroutineScope(Dispatchers.IO).launch {
+                        val db = AppDataBase.buildDatabase(context = MyApp.publicApp)
+                        db.clearAllTables()
+                    }
                     findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAuthenticate())
                 }
             }
@@ -119,8 +123,6 @@ class HomeFragment : Fragment() {
                 }
             }
 
-            val a = list
-            val b = ""
 
             withContext(Dispatchers.Main) {
                 Toast.makeText(MyApp.publicApp, "بروزرسانی انجام شد", Toast.LENGTH_SHORT).show()
