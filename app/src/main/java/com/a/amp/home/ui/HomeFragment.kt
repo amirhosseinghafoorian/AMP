@@ -15,6 +15,7 @@ import com.a.amp.R
 import com.a.amp.article.apimodel2.Article
 import com.a.amp.article.data.ArticleEntity
 import com.a.amp.article.data.ArticleRepository
+import com.a.amp.article.data.BookmarkEntity
 import com.a.amp.article.data.TagEntity
 import com.a.amp.core.resource.Status
 import com.a.amp.database.AppDataBase
@@ -143,7 +144,9 @@ class HomeFragment : Fragment() {
 
             for (i in resultList2.indices) {
                 db.myDao().insertArticles(resultList2[i])
+                db.myDao().insertBookmarks(BookmarkEntity(resultList2[i].articleId))
             }
+
 
             for (j in 0 until repoResult2.data?.articles?.size!!) {
                 val unformattedList3 = repoResult2.data.articles[j].tagList
