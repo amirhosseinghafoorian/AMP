@@ -18,7 +18,6 @@ import com.a.amp.R
 import com.a.amp.core.resource.Status
 import com.a.amp.databinding.FragmentWriteBinding
 import com.google.android.material.chip.Chip
-import kotlinx.android.synthetic.main.fragment_article.*
 import kotlinx.android.synthetic.main.fragment_write.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,7 +28,6 @@ class WriteFragment : Fragment() {
     private var tagList = mutableListOf<String>()
     private lateinit var Binding: FragmentWriteBinding
     lateinit var slug: String
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,11 +91,6 @@ class WriteFragment : Fragment() {
                     }
                 }
             })
-//            tagListViewModel.summaryList
-//            tagListViewModel.summaryList.observe(this as LifecycleOwner) {
-//                description.setText(it[0].text)
-//            }
-
 
             write_btn_1.text = "تصحیح مقاله"
             write_btn_1.setOnClickListener {
@@ -146,13 +139,9 @@ class WriteFragment : Fragment() {
             }
         })
 
-
-
         addTag.setOnClickListener {
             addTag()
         }
-
-
     }
 
     private fun isValid(): Boolean {
@@ -196,6 +185,4 @@ class WriteFragment : Fragment() {
             false
         })
     }
-
-
 }

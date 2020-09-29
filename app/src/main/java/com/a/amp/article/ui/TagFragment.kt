@@ -41,7 +41,6 @@ class TagFragment : Fragment() {
 
         tag_recycler.apply {
             adapter = myAdapter
-//            setHasFixedSize(true)
         }
 
         tagViewModel.summaryList.observe(viewLifecycleOwner, { list ->
@@ -51,8 +50,7 @@ class TagFragment : Fragment() {
             }
         })
 
-        tag_appbar_logo.setText(text)
-
+        tag_appbar_logo.text = text
 
         CoroutineScope(Dispatchers.IO).launch {
             tagViewModel.fillSummary(text)

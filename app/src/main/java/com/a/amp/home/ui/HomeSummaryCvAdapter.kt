@@ -23,13 +23,8 @@ class HomeSummaryCvAdapter(
 ) :
     RecyclerView.Adapter<HomeSummaryCvAdapter.MyViewHolder>() {
 
-    inner class MyViewHolder(binding: SummaryCvBinding) : RecyclerView.ViewHolder(binding.root) {
-        var binding: SummaryCvBinding = binding
-
-        //        var mainText: TextView = itemView.summary_tv_3
-//        var userFullName: TextView = itemView.summary_tv_1
-//        var days: TextView = itemView.summary_tv_2
-//        var id : Int = 0
+    inner class MyViewHolder(var binding: SummaryCvBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         init {
             val db = AppDataBase.buildDatabase(context = MyApp.publicApp)
             CoroutineScope(Dispatchers.IO).launch {
@@ -69,18 +64,12 @@ class HomeSummaryCvAdapter(
             LayoutInflater.from(parent.context),
             R.layout.summary_cv, parent, false
         )
-//        val textView =
-//            LayoutInflater.from(parent.context).inflate(R.layout.summary_cv, parent, false)
         return MyViewHolder(binding)
     }
 
     override fun getItemCount() = list.size
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-//        holder.mainText.text = list[position].text
-//        holder.userFullName.text = list[position].name
-//        holder.days.text = list[position].days
-//        holder.id = list[position].id
         holder.binding.flag = true
         holder.binding.summary = list[position]
         holder.binding.saved = list[position].isTag

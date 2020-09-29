@@ -49,7 +49,6 @@ class ProfileFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
         return binding.root
-//        return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -101,7 +100,6 @@ class ProfileFragment : Fragment() {
         TabLayoutMediator((tab_profile as TabLayout), (viewPager as ViewPager2)) { tab, position ->
             tab.text = viewPagerAdapter.getName(position)
         }.attach()
-//        viewPager.addFragment()
     }
 
 

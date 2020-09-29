@@ -44,11 +44,6 @@ class ArticleListViewModel(application: Application) : AndroidViewModel(applicat
         relatedList.postValue(article.fillRelatedFromRepo())
     }
 
-//    suspend fun fillSingleArticle(id: String) {
-//        val article = ArticleRepository(app)
-//        singleArticle.postValue(article.fillSingleArticleFromRepo(id))
-//    }
-
     fun favoriteArticle(slug: String) {
         viewModelScope.launch(Dispatchers.IO) {
             val favArt = ArticleRepository(app).favoriteArticle(slug)
@@ -62,7 +57,6 @@ class ArticleListViewModel(application: Application) : AndroidViewModel(applicat
                 val favArt = ArticleRepository(app).unFavoriteArticle(slug)
                 if (favArt.code == 200){favorited.postValue(false)}
             }
-
     }
 
     fun getFavoriteFromServer(slug: String){

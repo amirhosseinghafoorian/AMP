@@ -35,7 +35,6 @@ class ProfileListViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     suspend fun fillWrite(username: String) {
-        //Todo it should be moved into repo
         writeList.postValue(null)
         val db = AppDataBase.buildDatabase(context = MyApp.publicApp)
         val repo = UserRepository(app)
@@ -181,14 +180,6 @@ class ProfileListViewModel(application: Application) : AndroidViewModel(applicat
         viewModelScope.launch(Dispatchers.IO) {
             val favArt = ArticleRepository(app).unFavoriteArticle(slug)
             if (favArt.code == 200){favorited.postValue(false)}
-        }
-    }
-
-    fun getArtFavUsername(username: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val res = UserRepository(app).getFavoriteByUsername(username)
-
-            Log.i("bang2", res.data.toString())
         }
     }
 }

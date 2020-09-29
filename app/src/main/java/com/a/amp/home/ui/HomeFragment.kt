@@ -192,6 +192,5 @@ class HomeFragment : Fragment() {
         ) { tab, position ->
             tab.text = viewPagerAdapter.getName(position)
         }.attach()
-//        viewPager.addFragment()
     }
 }

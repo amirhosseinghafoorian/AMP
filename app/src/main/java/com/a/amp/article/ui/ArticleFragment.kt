@@ -30,12 +30,9 @@ class ArticleFragment : Fragment() {
     private var slug = ""
     var isFavrite = false
     lateinit var tagList: MutableList<String>
-//    private val ARG_PARAM1 = "ID"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        val args : ArticleFragment by navArgs()
-//        slug = args.slug
         slug = arguments?.let { ArticleFragmentArgs.fromBundle(it).slug }.toString()
     }
 
@@ -46,7 +43,6 @@ class ArticleFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_article, container, false)
         return binding.root
-//        return inflater.inflate(R.layout.fragment_article, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -62,12 +58,10 @@ class ArticleFragment : Fragment() {
 
         article_page_recycle_1.apply {
             adapter = myAdapter
-//            setHasFixedSize(true)
         }
 
         article_page_recycle_2.apply {
             adapter = myAdapter2
-//            setHasFixedSize(true)
         }
 
         articleViewModel.relatedList.observe(viewLifecycleOwner, { list ->
@@ -97,11 +91,14 @@ class ArticleFragment : Fragment() {
                     article_chipGroup.addView(chip)
                     chip.setOnClickListener {
                         val text = chip.text.toString()
-                        findNavController().navigate(
-                            ArticleFragmentDirections.actionArticleFragmentToTagFragment(
-                                text
+                        try {
+                            findNavController().navigate(
+                                ArticleFragmentDirections.actionArticleFragmentToTagFragment(
+                                    text
+                                )
                             )
-                        )
+                        } catch (E: Exception) {
+                        }
                     }
                 }
             }
@@ -126,14 +123,9 @@ class ArticleFragment : Fragment() {
             )
         }
 
-//        article_chip_1.setOnClickListener {
-
-//        }
-
         article_appbar_start_icon.setOnClickListener {
             Navigation.findNavController(it).navigateUp()
         }
-
 
         articleViewModel.favorited.observe(viewLifecycleOwner, { favorited ->
             if (favorited != null) {
@@ -160,7 +152,6 @@ class ArticleFragment : Fragment() {
 
         dialog.setContentView(view)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-//        dialog.window?.setLayout(1000,1000)
 
         article_btn_1.setOnClickListener {
             dialog.show()
@@ -190,21 +181,6 @@ class ArticleFragment : Fragment() {
             }
         }
 
-//        Log.i("bang", tagList.toString())
-
-
-//        if (tagList.isNotEmpty()) {
-//            for (i in tagList.indices) {
-//                val chip = Chip(context)
-//                chip.text = tagList[i]
-//                chip.setTextColor(Color.BLACK)
-//                chip.setChipBackgroundColorResource(R.color.chipBackColor)
-//                chip.chipCornerRadius = 50f
-//                chip.setCloseIconResource(R.drawable.ic_baseline_clear_24)
-//                article_chipGroup.addView(chip)
-//            }
-//
-//        }
 
     }
 }

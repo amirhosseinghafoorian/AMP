@@ -37,11 +37,12 @@ class ArticleRepository(application: Application) {
             }
 
             for (i in 0 until repoResult.data?.articles?.size!!){
-                val unformattedList3 = repoResult.data?.articles[i]?.tagList
-                val formattedList3 = unformattedList3?.let {
-                    TagEntity.convertToDataItem(it, repoResult.data?.articles[i].slug) }
-                for (i in 0 until formattedList3?.size!!) {
-                    db.myDao().insertTags(formattedList3[i])
+                val unformattedList3 = repoResult.data.articles[i].tagList
+                val formattedList3 = unformattedList3.let {
+                    TagEntity.convertToDataItem(it, repoResult.data.articles[i].slug)
+                }
+                for (j in 0 until formattedList3.size) {
+                    db.myDao().insertTags(formattedList3[j])
                 }
 
             }

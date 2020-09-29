@@ -1,16 +1,12 @@
 package com.a.amp.article.ui
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.a.amp.MyApp
-import com.a.amp.article.apimodel2.Article
 import com.a.amp.article.apimodel2.ArticleResponse2
 import com.a.amp.article.apimodel2.ArticleResponse4
-import com.a.amp.article.data.ArticleEntity
 import com.a.amp.article.data.ArticleRepository
 import com.a.amp.core.resource.Resource
 import com.a.amp.database.AppDataBase
@@ -58,7 +54,7 @@ class WriteViewModel(application: Application) : AndroidViewModel(application) {
                     slug = slug,
                     body = body.value.toString(),
                     description = description.value.toString(),
-                    tagList,
+                    tagList = tagList,
                     title = title.value.toString()
                 )
             )

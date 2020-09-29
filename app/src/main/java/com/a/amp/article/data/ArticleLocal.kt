@@ -34,7 +34,6 @@ class ArticleLocal(application: Application) {
     suspend fun fillSingleArticleFromLocal(slug: String): MutableList<WritingCvDataItem> {
         val resultList = mutableListOf<ArticleEntity>()
         val a = db.myDao().getArticleWithCommentsAndTags(slug)[0].article
-        val b = ""
         resultList.add(a)
         return ArticleEntity.convertToDataItem2(resultList)
     }

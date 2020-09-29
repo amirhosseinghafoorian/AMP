@@ -10,12 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.a.amp.R
-import com.a.amp.core.resource.Resource
 import com.a.amp.core.resource.Status
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.fragment_home_tab2.*
-import kotlinx.android.synthetic.main.fragment_write.*
-import kotlinx.android.synthetic.main.fragment_write.write_chipGroup
 import kotlinx.coroutines.*
 
 class HomeTabFragment2 : Fragment() {
@@ -29,7 +26,7 @@ class HomeTabFragment2 : Fragment() {
         return inflater.inflate(R.layout.fragment_home_tab2, container, false)
     }
 
-    lateinit var homeViewModel: HomeListViewModel
+    private lateinit var homeViewModel: HomeListViewModel
     override fun onResume() {
         super.onResume()
         homeViewModel = ViewModelProvider(this).get(HomeListViewModel::class.java)
@@ -49,16 +46,18 @@ class HomeTabFragment2 : Fragment() {
                             val chip = Chip(context)
                             chip.text = tagsList[i]
                             chip.setTextColor(Color.BLACK)
-                            //chip.setChipBackgroundColorResource(R.color.chipBackColor)
                             chip.chipCornerRadius = 50f
                             chip.setBackgroundColor(Color.GRAY)
                             home_chipGroup.addView(chip)
                             chip.setOnClickListener {
-                                findNavController().navigate(
-                                    HomeFragmentDirections.actionHomeFragmentToTagFragment(
-                                        chip.text.toString()
+                                try {
+                                    findNavController().navigate(
+                                        HomeFragmentDirections.actionHomeFragmentToTagFragment(
+                                            chip.text.toString()
+                                        )
                                     )
-                                )
+                                } catch (E: Exception) {
+                                }
                             }
                         }
                     }

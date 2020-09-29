@@ -64,8 +64,6 @@ class HomeRelatedCvAdapter(
             LayoutInflater.from(parent.context),
             R.layout.related_cv, parent, false
         )
-//        val textView =
-//            LayoutInflater.from(parent.context).inflate(R.layout.related_cv, parent, false)
         return MyViewHolder(binding)
     }
 

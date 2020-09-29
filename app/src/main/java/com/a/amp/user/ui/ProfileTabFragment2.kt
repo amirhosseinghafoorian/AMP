@@ -13,9 +13,9 @@ import kotlinx.android.synthetic.main.fragment_profile_tab2.*
 
 class ProfileTabFragment2(private val username: String) : Fragment(), MoreClickListener {
 
-    lateinit var profileViewModel: ProfileListViewModel
-    var myAdapter: WritingCvAdapter? = null
-    lateinit var currentUser: String
+    private lateinit var profileViewModel: ProfileListViewModel
+    private var myAdapter: WritingCvAdapter? = null
+    private lateinit var currentUser: String
 
     override fun onCreateView(
         inflater: LayoutInflater,

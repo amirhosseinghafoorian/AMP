@@ -70,8 +70,6 @@ class ArticleSummaryCvAdapter(
             LayoutInflater.from(parent.context),
             R.layout.summary_cv, parent, false
         )
-//        val textView =
-//            LayoutInflater.from(parent.context).inflate(R.layout.summary_cv, parent, false)
         return MyViewHolder(binding)
     }
 
@@ -79,11 +77,6 @@ class ArticleSummaryCvAdapter(
 
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-//        holder.mainText.text = list[position].text
-//        holder.userFullName.text = list[position].name
-//        holder.days.text = list[position].days
-//        holder.id = list[position].id
-
         holder.binding.flag = false
         holder.binding.summary2 = list[position]
         holder.binding.saved = list[position].isTag

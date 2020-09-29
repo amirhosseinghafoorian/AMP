@@ -63,7 +63,6 @@ class ProfileTabFragment(private val username: String) : Fragment(), MoreClickLi
 
         CoroutineScope(Dispatchers.IO).launch {
             profileViewModel.fillWrite(username)
-            profileViewModel.getArtFavUsername(username)
         }
     }
 
