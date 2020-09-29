@@ -16,7 +16,6 @@ class HomeSummaryCvAdapter(
 ) :
     RecyclerView.Adapter<HomeSummaryCvAdapter.MyViewHolder>() {
 
-
     inner class MyViewHolder(binding: SummaryCvBinding) : RecyclerView.ViewHolder(binding.root) {
         var binding: SummaryCvBinding = binding
 
@@ -47,7 +46,6 @@ class HomeSummaryCvAdapter(
     }
 
     override fun getItemCount() = list.size
-
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 //        holder.mainText.text = list[position].text

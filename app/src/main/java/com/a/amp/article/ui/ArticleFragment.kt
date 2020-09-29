@@ -107,7 +107,6 @@ class ArticleFragment : Fragment() {
             }
         })
 
-
         articleViewModel.singleArticle.observe(viewLifecycleOwner, { list ->
             if (list.size > 0) {
                 binding.articleBind = list[0]
