@@ -51,6 +51,8 @@ class TagFragment : Fragment() {
             }
         })
 
+        tag_appbar_logo.setText(text)
+
 
         CoroutineScope(Dispatchers.IO).launch {
             tagViewModel.fillSummary(text)

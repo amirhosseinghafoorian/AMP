@@ -28,6 +28,11 @@ class UserRemote {
         return getProfile(auth,username)
     }
 
+    suspend fun getArtFavByUsername(username: String): Resource<ProfileArticleResponse>{
+        val  auth = RetrofitBuilder.retrofit.create(AuthApi::class.java)
+        return artFavUsername(auth,username)
+    }
+
     suspend fun followOtherUser(
         username: String,
         email: String
@@ -127,6 +132,15 @@ class UserRemote {
     ): Resource<followResponse> {
         return safeApiCall {
             authApi.unFollow(username = username)
+        }
+    }
+
+    private suspend fun artFavUsername(
+        authApi: AuthApi,
+        username: String
+    ): Resource<ProfileArticleResponse> {
+        return safeApiCall {
+            authApi.getArtFavByUsername(username)
         }
     }
 

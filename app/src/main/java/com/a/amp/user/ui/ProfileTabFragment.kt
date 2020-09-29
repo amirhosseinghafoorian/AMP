@@ -63,6 +63,7 @@ class ProfileTabFragment(private val username: String) : Fragment(), MoreClickLi
 
         CoroutineScope(Dispatchers.IO).launch {
             profileViewModel.fillWrite(username)
+           // profileViewModel.getArtFavUsername(username)
         }
     }
 
@@ -103,7 +104,9 @@ class ProfileTabFragment(private val username: String) : Fragment(), MoreClickLi
 
             buttonSheetDialog.show()
         }else if (text == "like"){
-
+            val unFavClick = profileViewModel.unFavoriteArticle(id)
+        }else if (text == "unlike"){
+            val favClick = profileViewModel.favoriteArticle(id)
         }
     }
 

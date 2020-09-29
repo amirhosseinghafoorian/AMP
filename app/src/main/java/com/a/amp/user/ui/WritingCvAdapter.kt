@@ -41,7 +41,7 @@ class WritingCvAdapter(
             }
             itemView.writing_cv_ic_more.setOnClickListener {
 //                clickCallBack.invoke(2)
-                clickListener?.onClick(list[layoutPosition].id, layoutPosition,"more")
+                clickListener?.onClick(list[layoutPosition].id, layoutPosition, "more")
             }
             itemView.writing_cv_ic_bookmark.setOnClickListener {
                 list[position].isTag = list[position].isTag.not()
@@ -49,14 +49,22 @@ class WritingCvAdapter(
             }
 
             itemView.writing_cv_icon_like.setOnClickListener {
-                clickListener?.onClick(list[layoutPosition].id, layoutPosition , "like")
-                list[position].isFav = list[position].isFav.not()
-                if (list[position].isFav){
-                    list[position].FavCont += 1
-                }else{list[position].FavCont -= 1
+                if (list[position].isFav) {
+                    clickListener?.onClick(list[layoutPosition].id, layoutPosition, "like")
+                    list[position].isFav = list[position].isFav.not()
+                    list[position].FavCont -= 1
+                    notifyItemChanged(position)
+                } else {
+                    itemView.writing_cv_icon_like.setOnClickListener {
+                        clickListener?.onClick(list[layoutPosition].id, layoutPosition, "unlike")
+                        list[position].isFav = list[position].isFav.not()
+                        list[position].FavCont += 1
+                        notifyItemChanged(position)
+                    }
                 }
-                notifyItemChanged(position)
+
             }
+
 
         }
     }

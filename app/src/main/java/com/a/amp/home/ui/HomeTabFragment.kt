@@ -28,9 +28,11 @@ class HomeTabFragment : Fragment() {
         super.onResume()
         val homeViewModel = ViewModelProvider(this).get(HomeListViewModel::class.java)
 
+
         CoroutineScope((Dispatchers.IO)).launch {
             homeViewModel.fillSummary("%")
             homeViewModel.fillRelated()
+            homeViewModel.getTags()
 
             withContext(Dispatchers.Main) {
                 val myAdapter2 = homeViewModel.summaryList.value?.let { HomeSummaryCvAdapter(it) }

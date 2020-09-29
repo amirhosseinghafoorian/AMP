@@ -1,10 +1,8 @@
 package com.a.amp.services
 
 import com.a.amp.article.apimodel2.*
-import com.a.amp.user.apimodel1.Follow
-import com.a.amp.user.apimodel1.LoginRequest
-import com.a.amp.user.apimodel1.LoginResponse
-import com.a.amp.user.apimodel1.followResponse
+import com.a.amp.home.apimodel.tagModel
+import com.a.amp.user.apimodel1.*
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -73,4 +71,10 @@ interface AuthApi {
 
     @DELETE("articles/{slug}/favorite")
     suspend fun unFavoriteArticle(@Path("slug") slug: String): Response<ArticleResponse5>
+
+    @GET("tags")
+    suspend fun getAllTags(): Response<tagModel>
+
+    @GET("articles?favorited={username}")
+    suspend fun getArtFavByUsername(@Path("username") username: String): Response<ProfileArticleResponse>
 }

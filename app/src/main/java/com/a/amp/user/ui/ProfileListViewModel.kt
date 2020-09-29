@@ -157,4 +157,10 @@ class ProfileListViewModel(application: Application) : AndroidViewModel(applicat
     }
 
 
+    fun getArtFavUsername(username: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val res = UserRepository(app).getFavoriteByUsername(username)
+            Log.i("bang2", res.data.toString())
+        }
+    }
 }

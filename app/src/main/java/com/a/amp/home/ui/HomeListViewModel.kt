@@ -1,6 +1,7 @@
 package com.a.amp.home.ui
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.a.amp.home.data.HomeRelatedCvDataItem
@@ -10,6 +11,7 @@ class HomeListViewModel(application: Application) : AndroidViewModel(application
     var summaryList = MutableLiveData<MutableList<HomeRelatedCvDataItem>>()
     var relatedList = MutableLiveData<MutableList<HomeRelatedCvDataItem>>()
     val app = application
+    var tagList: MutableLiveData<MutableList<String>>? = null
 
     init {
         summaryList.value = mutableListOf()
@@ -28,4 +30,9 @@ class HomeListViewModel(application: Application) : AndroidViewModel(application
         relatedList.postValue(home.fillRelatedFromRepo())
     }
 
+    suspend fun getTags(){
+        val response = HomeRepository(app).getAllTagFromServer()
+        Log.i("bang", response.data.toString())
+        tagList?.postValue(response.data as MutableList<String>?)
+    }
 }

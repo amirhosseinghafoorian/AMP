@@ -4,6 +4,7 @@ import android.app.Application
 import com.a.amp.article.apimodel2.ArticleResponse
 import com.a.amp.core.resource.Resource
 import com.a.amp.user.apimodel1.LoginResponse
+import com.a.amp.user.apimodel1.ProfileArticleResponse
 import com.a.amp.user.apimodel1.followResponse
 
 class UserRepository(application: Application) {
@@ -47,6 +48,11 @@ class UserRepository(application: Application) {
     suspend fun unFollowResult(username: String): Resource<followResponse> {
         val  remote = UserRemote()
         return remote.unFollowOtherUser(username)
+    }
+
+    suspend fun getFavoriteByUsername(username: String): Resource<ProfileArticleResponse> {
+        val  remote = UserRemote()
+        return remote.getArtFavByUsername(username)
     }
 
 }

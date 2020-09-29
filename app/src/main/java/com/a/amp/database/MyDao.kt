@@ -5,7 +5,6 @@ import com.a.amp.article.data.ArticleEntity
 import com.a.amp.article.data.ArticleWithCommentsAndTags
 import com.a.amp.article.data.CommentEntity
 import com.a.amp.article.data.TagEntity
-import com.a.amp.user.data.UserFavEntity
 
 @Dao
 interface MyDao {
@@ -13,8 +12,8 @@ interface MyDao {
     @Query("select * from articles")
     suspend fun getArticles(): List<ArticleEntity>
 
-    @Query("select * from articles where IsFeed == :myTrue and Title like :text ")
-    suspend fun getFeed(myTrue: Boolean, text: String): List<ArticleEntity>
+    @Query("select * from articles where IsFeed == :myTrue")
+    suspend fun getFeed(myTrue: Boolean): List<ArticleEntity>
 
     @Query("select * from articles where UserOwnerId == :username")
     suspend fun getArticlesByAuthor(username: String): List<ArticleEntity>
@@ -24,6 +23,9 @@ interface MyDao {
 
     @Query("select * from articles order by FavoritesCount desc limit 10")
     suspend fun getTopArticles(): List<ArticleEntity>
+
+    @Query("select * from articles where ArticleId == :slug")
+    suspend fun getSingleArticleById(slug: String): List<ArticleEntity>
 
     @Query("select * from articles inner join tags as tag on ArticleId == ConnectedArticleId where tag.Body == :myTag")
     suspend fun getArticlesInTag(myTag: String): List<ArticleEntity>
@@ -36,9 +38,6 @@ interface MyDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertComments(vararg comments: CommentEntity)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertUserFavs(vararg userFav: UserFavEntity)
 
     @Delete
     fun deleteArticles(vararg article: ArticleEntity)
