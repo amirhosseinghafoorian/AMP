@@ -6,7 +6,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.a.amp.R
-import com.a.amp.article.ui.ArticleFragmentDirections
 import com.a.amp.databinding.RelatedCvBinding
 import com.a.amp.home.data.HomeRelatedCvDataItem
 import kotlinx.android.synthetic.main.related_cv.view.*
@@ -24,9 +23,7 @@ class HomeRelatedCvAdapter(
                 try {
                     it.findNavController()
                         .navigate(HomeFragmentDirections.actionHomeFragmentToArticleFragment(list[position].id))
-                } catch (E: IllegalArgumentException) {
-                    it.findNavController()
-                        .navigate(ArticleFragmentDirections.actionArticleFragmentSelf(list[position].id))
+                } catch (e: Exception) {
                 }
             }
             itemView.related_bookmark.setOnClickListener {

@@ -39,8 +39,11 @@ class HomeSummaryCvAdapter(
                 }
             }
             itemView.setOnClickListener {
-                it.findNavController()
-                    .navigate(HomeFragmentDirections.actionHomeFragmentToArticleFragment(list[position].id))
+                try {
+                    it.findNavController()
+                        .navigate(HomeFragmentDirections.actionHomeFragmentToArticleFragment(list[position].id))
+                } catch (e: Exception) {
+                }
             }
             itemView.summary_bookmark.setOnClickListener {
                 list[position].isTag = list[position].isTag.not()
