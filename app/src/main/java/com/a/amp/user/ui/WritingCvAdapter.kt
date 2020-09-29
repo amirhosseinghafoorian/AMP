@@ -22,19 +22,25 @@ class WritingCvAdapter(
     RecyclerView.Adapter<WritingCvAdapter.MyViewHolder>() {
 
     @Suppress("DEPRECATION")
-    inner class MyViewHolder(binding: WritingCvBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class MyViewHolder(var binding: WritingCvBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 //        var mainText: TextView = itemView.writing_cv_tv_4
 //        var userFullName: TextView = itemView.writing_cv_tv_1
 //        var days: TextView = itemView.writing_cv_tv_2
 //        var title: TextView = itemView.writing_cv_tv_3
 //        var id : Int = 0
 
-        var binding: WritingCvBinding = binding
-
         init {
             itemView.setOnClickListener {
-                it.findNavController()
-                    .navigate(ProfileFragmentDirections.actionProfileFragmentToArticleFragment(list[position].id))
+                try {
+                    it.findNavController()
+                        .navigate(
+                            ProfileFragmentDirections.actionProfileFragmentToArticleFragment(
+                                list[position].id
+                            )
+                        )
+                } catch (E: Exception) {
+                }
             }
             if (current != username) {
                 itemView.writing_cv_ic_more.visibility = View.GONE

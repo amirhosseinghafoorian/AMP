@@ -28,7 +28,6 @@ class HomeTabFragment : Fragment() {
         super.onResume()
         val homeViewModel = ViewModelProvider(this).get(HomeListViewModel::class.java)
 
-
         CoroutineScope((Dispatchers.IO)).launch {
             homeViewModel.fillSummary("%")
             homeViewModel.fillRelated()

@@ -1,7 +1,7 @@
 package com.a.amp.services
 
 import com.a.amp.article.apimodel2.*
-import com.a.amp.home.apimodel.tagModel
+import com.a.amp.home.apimodel.TagModel
 import com.a.amp.user.apimodel1.*
 import retrofit2.Response
 import retrofit2.http.*
@@ -73,7 +73,7 @@ interface AuthApi {
     suspend fun unFavoriteArticle(@Path("slug") slug: String): Response<ArticleResponse5>
 
     @GET("tags")
-    suspend fun getAllTags(): Response<tagModel>
+    suspend fun getAllTags(): Response<TagModel>
 
     @GET("articles")
     suspend fun getArtFavByUsername(@Query("favorited") username: String): Response<ProfileArticleResponse>

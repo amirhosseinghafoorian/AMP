@@ -9,8 +9,4 @@ import androidx.room.Entity
 )
 data class BookmarkEntity(
     @ColumnInfo(name = "Slg") val slg: String
-) {
-    companion object {
-
-    }
-}
+)
