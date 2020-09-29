@@ -20,6 +20,11 @@ class UserRepository(application: Application) {
         return user.fillLikedFromLocal()
     }
 
+    suspend fun fillOthersLikedFromRepo(username: String): MutableList<WritingCvDataItem> {
+        val user = UserLocal(application = app)
+        return user.fillOthersLikedFromLocal(username)
+    }
+
     suspend fun getArticlesByAuthorFromRepo(username: String): Resource<ArticleResponse> {
         val ur = UserRemote()
         return ur.getArticlesByAuthorFromServer(username)

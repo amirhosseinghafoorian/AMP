@@ -22,13 +22,17 @@ data class UserFavEntity(
 ) {
     companion object {
         fun convertToDataItem(
-            slugList: List<String>,
+            articleList: List<ArticleEntity>,
             username: String
         ): MutableList<UserFavEntity> {
             val resultList: MutableList<UserFavEntity> = mutableListOf()
-            for (i in slugList.indices) {
+            for (i in articleList.indices) {
                 resultList.add(
-                    UserFavEntity(slugList[i], username, "$username:${slugList[i]}")
+                    UserFavEntity(
+                        articleList[i].articleId,
+                        username,
+                        "$username:${articleList[i].articleId}"
+                    )
                 )
             }
             return resultList

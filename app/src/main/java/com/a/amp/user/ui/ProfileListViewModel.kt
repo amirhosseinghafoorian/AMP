@@ -9,11 +9,11 @@ import androidx.lifecycle.viewModelScope
 import com.a.amp.MyApp
 import com.a.amp.article.apimodel2.Article
 import com.a.amp.article.data.ArticleEntity
-import com.a.amp.article.data.ArticleRemote
 import com.a.amp.article.data.ArticleRepository
 import com.a.amp.core.resource.Status
 import com.a.amp.database.AppDataBase
 import com.a.amp.storage.setting
+import com.a.amp.user.data.UserFavEntity
 import com.a.amp.user.data.UserRepository
 import com.a.amp.user.data.WritingCvDataItem
 import kotlinx.coroutines.CoroutineScope
@@ -99,6 +99,42 @@ class ProfileListViewModel(application: Application) : AndroidViewModel(applicat
         }
     }
 
+    fun fillWrite3(username: String) {
+        writeList2.postValue(null)
+        val db = AppDataBase.buildDatabase(context = MyApp.publicApp)
+        val repo = UserRepository(app)
+        CoroutineScope(Dispatchers.IO).launch {
+            val repoResult = repo.getFavoriteByUsername(username)
+            if (repoResult.status == Status.SUCCESS && repoResult.code == 200) {
+                val unformattedList = repoResult.data?.articles
+                val formattedList = mutableListOf<Article>()
+                unformattedList?.let { formattedList.addAll(it) }
+                val resultList = ArticleEntity.convertToDataItem4(formattedList)
+                for (i in 0 until resultList.size) {
+                    db.myDao().insertArticles(resultList[i])
+                }
+                val resultList2 = UserFavEntity.convertToDataItem(resultList, username)
+                for (i in resultList2.indices) {
+                    db.myDao().insertUserFavs(resultList2[i])
+                }
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(MyApp.publicApp, "بروزرسانی انجام شد", Toast.LENGTH_SHORT).show()
+                }
+            } else if (repoResult.status == Status.SUCCESS && repoResult.code != 200) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(MyApp.publicApp, "خطا", Toast.LENGTH_SHORT).show()
+                }
+            } else if (repoResult.status == Status.ERROR) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(MyApp.publicApp, "عدم اتصال به اینترنت", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+            val user = UserRepository(app)
+            writeList2.postValue(user.fillOthersLikedFromRepo(username))
+        }
+    }
+
     fun followOtherProfile(username: String) {
         viewModelScope.launch(Dispatchers.IO) {
             val result = UserRepository(application = Application())
@@ -146,20 +182,12 @@ class ProfileListViewModel(application: Application) : AndroidViewModel(applicat
             val favArt = ArticleRepository(app).unFavoriteArticle(slug)
             if (favArt.code == 200){favorited.postValue(false)}
         }
-
     }
-
-    fun getFavoriteFromServer(slug: String){
-        viewModelScope.launch(Dispatchers.IO) {
-            val resFavorite = ArticleRemote().getSingleArticleBySlug(slug)
-            favorited.postValue(resFavorite.data?.article?.favorited)
-        }
-    }
-
 
     fun getArtFavUsername(username: String) {
         viewModelScope.launch(Dispatchers.IO) {
             val res = UserRepository(app).getFavoriteByUsername(username)
+
             Log.i("bang2", res.data.toString())
         }
     }

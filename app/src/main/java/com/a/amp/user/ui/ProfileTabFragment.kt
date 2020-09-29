@@ -75,38 +75,42 @@ class ProfileTabFragment(private val username: String) : Fragment(), MoreClickLi
 
     @SuppressLint("InflateParams")
     override fun onClick(id: String, layoutPosition: Int,text : String) {
-        if (text == "more") {
-            val buttonSheetDialog = BottomSheetDialog(requireContext())
-            val view = layoutInflater.inflate(R.layout.bottom_sheet, null)
+        when (text) {
+            "more" -> {
+                val buttonSheetDialog = BottomSheetDialog(requireContext())
+                val view = layoutInflater.inflate(R.layout.bottom_sheet, null)
 
-            view.findViewById<MaterialButton>(R.id.botton_sheet_2).setOnClickListener {
-                lifecycleScope.launch(Dispatchers.IO) {
-                    val delResult = ArticleRemote().deleteArticleFormServer(id)
-                    if (delResult.status == Status.SUCCESS) {
-                        buttonSheetDialog.dismiss()
-                        val db = AppDataBase.buildDatabase(context = MyApp.publicApp)
-                        db.myDao().deleteArticles(ArticleEntity(id, "", "", ""))
-                        profileViewModel.fillWrite(username)
+                view.findViewById<MaterialButton>(R.id.botton_sheet_2).setOnClickListener {
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        val delResult = ArticleRemote().deleteArticleFormServer(id)
+                        if (delResult.status == Status.SUCCESS) {
+                            buttonSheetDialog.dismiss()
+                            val db = AppDataBase.buildDatabase(context = MyApp.publicApp)
+                            db.myDao().deleteArticles(ArticleEntity(id, "", "", ""))
+                            profileViewModel.fillWrite(username)
+                        }
                     }
+
+                }
+                view.findViewById<MaterialButton>(R.id.botton_sheet_1).setOnClickListener {
+                    findNavController().navigate(
+                        ProfileFragmentDirections.actionProfileFragmentToWriteFragment(
+                            id
+                        )
+                    )
+                    buttonSheetDialog.dismiss()
                 }
 
-            }
-            view.findViewById<MaterialButton>(R.id.botton_sheet_1).setOnClickListener {
-                findNavController().navigate(
-                    ProfileFragmentDirections.actionProfileFragmentToWriteFragment(
-                        id
-                    )
-                )
-                buttonSheetDialog.dismiss()
-            }
+                buttonSheetDialog.setContentView(view)
 
-            buttonSheetDialog.setContentView(view)
-
-            buttonSheetDialog.show()
-        }else if (text == "like"){
-            val unFavClick = profileViewModel.unFavoriteArticle(id)
-        }else if (text == "unlike"){
-            val favClick = profileViewModel.favoriteArticle(id)
+                buttonSheetDialog.show()
+            }
+            "like" -> {
+                val unFavClick = profileViewModel.unFavoriteArticle(id)
+            }
+            "unlike" -> {
+                val favClick = profileViewModel.favoriteArticle(id)
+            }
         }
     }
 
