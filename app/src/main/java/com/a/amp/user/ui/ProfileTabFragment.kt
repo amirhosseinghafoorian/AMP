@@ -105,10 +105,10 @@ class ProfileTabFragment(private val username: String) : Fragment(), MoreClickLi
                 buttonSheetDialog.show()
             }
             "like" -> {
-                val unFavClick = profileViewModel.unFavoriteArticle(id)
+                val favClick = profileViewModel.favoriteArticle(id)
             }
             "unlike" -> {
-                val favClick = profileViewModel.favoriteArticle(id)
+                val unFavClick = profileViewModel.unFavoriteArticle(id)
             }
         }
     }
