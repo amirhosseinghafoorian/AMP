@@ -135,7 +135,7 @@ class UserRemote {
         }
     }
 
-    private suspend fun artFavUsername(
+    suspend fun artFavUsername(
         authApi: AuthApi,
         username: String
     ): Resource<ProfileArticleResponse> {

@@ -9,7 +9,7 @@ class HomeLocal(application: Application) {
     private val db = AppDataBase.buildDatabase(context = application)
 
     suspend fun fillSummaryFromLocal(text: String): MutableList<HomeRelatedCvDataItem> {
-        return ArticleEntity.convertToDataItem3(db.myDao().getFeed(true,))
+        return ArticleEntity.convertToDataItem3(db.myDao().getFeed(true,text))
     }
 
     suspend fun fillRelatedFromLocal(): MutableList<HomeRelatedCvDataItem> {

@@ -75,6 +75,6 @@ interface AuthApi {
     @GET("tags")
     suspend fun getAllTags(): Response<tagModel>
 
-    @GET("articles?favorited={username}")
-    suspend fun getArtFavByUsername(@Path("username") username: String): Response<ProfileArticleResponse>
+    @GET("articles")
+    suspend fun getArtFavByUsername(@Query("favorited") username: String): Response<ProfileArticleResponse>
 }

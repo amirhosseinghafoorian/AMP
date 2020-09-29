@@ -55,12 +55,11 @@ class WritingCvAdapter(
                     list[position].FavCont -= 1
                     notifyItemChanged(position)
                 } else {
-                    itemView.writing_cv_icon_like.setOnClickListener {
-                        clickListener?.onClick(list[layoutPosition].id, layoutPosition, "unlike")
-                        list[position].isFav = list[position].isFav.not()
-                        list[position].FavCont += 1
-                        notifyItemChanged(position)
-                    }
+                    clickListener?.onClick(list[layoutPosition].id, layoutPosition, "unlike")
+                    list[position].isFav = list[position].isFav.not()
+                    list[position].FavCont += 1
+                    notifyItemChanged(position)
+
                 }
 
             }
