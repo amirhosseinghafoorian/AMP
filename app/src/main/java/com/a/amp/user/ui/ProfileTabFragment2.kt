@@ -68,6 +68,13 @@ class ProfileTabFragment2(private val username: String) : Fragment(), MoreClickL
     }
 
     override fun onClick(id: String, layoutPosition: Int,text : String) {
-
+        when (text) {
+            "like" -> {
+                val favClick = profileViewModel.favoriteArticle(id)
+            }
+            "unlike" -> {
+                val unFavClick = profileViewModel.unFavoriteArticle(id)
+            }
+        }
     }
 }
